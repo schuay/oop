@@ -1,13 +1,17 @@
 JAVAC = javac -g
+JAVA = java
 JAR = jar
-SOURCES = LVA.java LVAManager.java Student.java
+SOURCES = LVA.java LVAManager.java Student.java Test.java
 CLASSES = $(SOURCES:.java=.class)
-MODNAME = LVAManager
+MODNAME = Test
 
 all: $(CLASSES)
 
 %.class: %.java
 	$(JAVAC) $<
+
+test: $(CLASSES)
+	$(JAVA) $(MODNAME)
 
 package: $(SOURCES)
 	$(JAR) -Mcvf $(MODNAME).jar $(SOURCES)
