@@ -1,4 +1,6 @@
-import java.util.LinkedList;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
@@ -11,9 +13,17 @@ public class LVA {
 
 	private final Date unenrollTo;
 
-	/* use a list for now to preserve order */
-	private final LinkedList<Student> students = new LinkedList<Student>();
+	/* use a LinkedHashSet to preserve order */
+	private final LinkedHashSet<Student> students = new LinkedHashSet<Student>();
 
+	/**
+	 * Create a new LVA.
+	 * @param nr The number of the LVA, if used with LVAManager, it should be unique
+	 * @param title The LVA's name
+	 * @param enrollFrom Before this date no students are allowed to enroll
+	 * @param enrollTo After this date no students are allowed to enroll
+	 * @param unenrollTo After this date no students are allowed unenroll
+	 */
 	public LVA(String nr, String title, Date enrollFrom, Date enrollTo,
 			Date unenrollTo) {
 
@@ -24,30 +34,60 @@ public class LVA {
 		this.unenrollTo = unenrollTo;
 	}
 
+	/**
+	 * Get the LVA's name.
+	 * @return The LVA's name
+	 */
 	public String getTitle() {
 		return title;
 	}
 
+	/**
+	 * Get the LVA's number.
+	 * @return The LVA's number
+	 */
 	public String getNr() {
 		return nr;
 	}
 
+	/**
+	 * Get the start date of the enrollment term.
+	 * @return The start date of the enrollment term
+	 */
 	public Date getEnrollFrom() {
 		return enrollFrom;
 	}
 
+	/**
+	 * Get the end date of the enrollment term.
+	 * @return The end date of the enrollment term
+	 */
 	public Date getEnrollTo() {
 		return enrollTo;
 	}
 
+	/**
+	 * Get the date until which students are allowed to unenroll.
+	 * @return Said date
+	 */
 	public Date getUnenrollTo() {
 		return unenrollTo;
 	}
 
-	public LinkedList<Student> getStudents() {
-		return students;
+	/**
+	 * Get a Set containing all enrolled students. An iteration over this Set should
+	 * return the students in the order in which they enrolled. The returned Set
+	 * cannot be modified.
+	 * @return A Set with all enrolled students
+	 */
+	public Set<Student> getStudents() {
+		return Collections.unmodifiableSet(students);
 	}
 
+	/**
+	 * Creates a String representation of the LVA.
+	 * @return A String representation of the LVA
+	 */
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 
