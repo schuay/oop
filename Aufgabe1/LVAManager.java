@@ -1,5 +1,6 @@
 import java.util.HashMap;
 import java.lang.StringBuilder;
+import java.lang.NullPointerException;
 
 public class LVAManager {
 	private final HashMap<String, LVA> lvaList = new HashMap<String, LVA>();
@@ -37,6 +38,11 @@ public class LVAManager {
 	 * @return null if the LVA doesn't exist; the description on success
 	 */
 	public String getStudents(String lvaNr) {
+
+		if (lvaNr == null || lvaNr.trim().equals("")) {
+			throw new NullPointerException();
+		}
+
 		if (!lvaList.containsKey(lvaNr)) {
 			return null;
 		}

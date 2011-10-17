@@ -3,6 +3,8 @@ import java.util.Set;
 import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.lang.NullPointerException;
+import java.lang.IllegalArgumentException;
 
 public class LVA {
 	private final String title;
@@ -26,6 +28,15 @@ public class LVA {
 	 */
 	public LVA(String nr, String title, Date enrollFrom, Date enrollTo,
 			Date unenrollTo) {
+
+		if (nr == null || nr.trim().equals("") ||
+			title == null || title.trim().equals("") ||
+			enrollFrom == null || enrollTo == null || unenrollTo == null) {
+			throw new NullPointerException();
+		}
+		if (enrollTo.before(enrollFrom) || unenrollTo.before(enrollFrom)) {
+			throw new IllegalArgumentException();
+		}
 
 		this.title = title;
 		this.nr = nr;

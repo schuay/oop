@@ -77,6 +77,70 @@ public class Test {
 		test("unregistering Stud2 from LVA1", true, l1.unenroll(stud2));
 		test("comparing student enrollment (LVA1)", "", lm.getStudents("1"));
 
+		boolean result = true;
+		try {
+			new Student(null, null);
+		} catch (NullPointerException e) {
+			result = false;
+		}
+		test("passing null args to Student ctor", false, result);
+
+		result = true;
+		try {
+			new Student("", "");
+		} catch (NullPointerException e) {
+			result = false;
+		}
+		test("passing empty string args to Student ctor", false, result);
+
+		result = true;
+		try {
+			new LVA(null, null, null, null, null);
+		} catch (NullPointerException e) {
+			result = false;
+		}
+		test("passing null args to LVA ctor", false, result);
+
+		result = true;
+		try {
+			new LVA("6", "6", null, null, null);
+		} catch (NullPointerException e) {
+			result = false;
+		}
+		test("passing null args to LVA ctor", false, result);
+
+		result = true;
+		try {
+			new LVA("", "", d110920, d110920, d110920);
+		} catch (NullPointerException e) {
+			result = false;
+		}
+		test("passing empty string args to Student ctor", false, result);
+
+		result = true;
+		try {
+			new LVA("5", "5", d111020, d110920, d110920);
+		} catch (IllegalArgumentException e) {
+			result = false;
+		}
+		test("passing begin > end date args to Student ctor", false, result);
+
+		result = true;
+		try {
+			lm.getStudents(null);
+		} catch (NullPointerException e) {
+			result = false;
+		}
+		test("passing null arg to LVAManager.getStudents()", false, result);
+
+		result = true;
+		try {
+			lm.getStudents("");
+		} catch (NullPointerException e) {
+			result = false;
+		}
+		test("passing empty string arg to LVAManager.getStudents()", false, result);
+
 		System.out.println("Result: " + labels.get(tests));
 	}
 

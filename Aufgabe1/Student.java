@@ -1,3 +1,5 @@
+import java.lang.NullPointerException;
+
 public class Student {
 	private final String matrNr;
 	private final String name;
@@ -8,6 +10,12 @@ public class Student {
 	 * @param name The Student's name
 	 */
 	public Student(String matrNr, String name) {
+
+		if (matrNr == null || matrNr.trim().equals("") ||
+			name == null || name.trim().equals("")) {
+			throw new NullPointerException();
+		}
+
 		this.matrNr = matrNr;
 		this.name = name;
 	}
