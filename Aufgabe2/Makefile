@@ -1,7 +1,8 @@
 JAVAC = javac -g
 JAVA = java
 JAR = jar
-SOURCES = LVA.java LVAManager.java Student.java Test.java
+SOURCES = Course.java CourseManager.java Student.java Test.java \
+		  EnrollmentException.java Person.java
 CLASSES = $(SOURCES:.java=.class)
 MODNAME = Test
 

@@ -1,6 +1,6 @@
 import java.lang.NullPointerException;
 
-public class Student {
+public class Student extends Person {
 	private final String matrNr;
 	private final String name;
 
@@ -12,7 +12,7 @@ public class Student {
 	public Student(String matrNr, String name) {
 
 		if (matrNr == null || matrNr.trim().equals("") ||
-			name == null || name.trim().equals("")) {
+				name == null || name.trim().equals("")) {
 			throw new NullPointerException();
 		}
 
