@@ -16,6 +16,7 @@ public class CourseManager {
 		return sb.toString();
 	}
 
+	/* TODO: define some way to retrieve invisible courses */
 	private HashMap<String, Course> getVisibleCourses() {
 		HashMap<String, Course> result = new HashMap<String, Course>();
 		for (Map.Entry<String, Course> e : courseList.entrySet()) {

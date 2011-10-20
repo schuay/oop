@@ -21,9 +21,9 @@ public class Test {
 		CourseManager lm = new CourseManager();
 
 		Date d110920 = sdf.parse("20.09.2011");
-		Date d111020 = sdf.parse("20.10.2011");
+		Date d111020 = sdf.parse("20.10.2015");
 		Date d111010 = sdf.parse("10.10.2011");
-		Date d111030 = sdf.parse("30.10.2011");
+		Date d111030 = sdf.parse("30.10.2015");
 
 		Course l1 = new Course("1", "Course1", d110920, d111020, d111020);
 		Course l2 = new Course("2", "Course2", d110920, d111010, d111020);
@@ -47,6 +47,11 @@ public class Test {
 				l3, l2, l1, l5, l4);
 		test("comparing lva list output", lvaList, lm.getCourseList());
 
+		lvaList = String.format("%s%n%s%n%s%n%s%n",
+				l3, l2, l1, l5);
+		l4.setVisible(false);
+		test("comparing lva list output (after marking l4 invisible)", lvaList, lm.getCourseList());
+
 		test("unregistering Stud1 from Course1 (not registered yet)", false,
 				l1.unenroll(stud1));
 		test("registering Stud1 to Course1", true,	l1.enroll(stud1));
@@ -66,7 +71,8 @@ public class Test {
 		test("comparing student enrollment (Course1)", studentList1, lm.getStudents("1"));
 		test("comparing student enrollment (Course2)", "", lm.getStudents("2"));
 		test("comparing student enrollment (Course3)", "", lm.getStudents("3"));
-		test("comparing student enrollment (Course4)", "", lm.getStudents("4"));
+		l4.setVisible(true);
+		test("comparing student enrollment (Course4 after marking visible)", "", lm.getStudents("4"));
 		test("comparing student enrollment (Course5)", studentList5, lm.getStudents("5"));
 
 
