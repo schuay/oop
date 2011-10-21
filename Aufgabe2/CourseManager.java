@@ -50,9 +50,7 @@ public class CourseManager {
 	 */
 	public String getStudents(String lvaNr) {
 
-		if (Util.StringIsNullOrEmpty(lvaNr)) {
-			throw new IllegalArgumentException();
-		}
+		Util.validateString(lvaNr);
 
 		if (!getVisibleCourses().containsKey(lvaNr)) {
 			return null;

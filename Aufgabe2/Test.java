@@ -25,12 +25,13 @@ public class Test {
 		Date d111010 = sdf.parse("10.10.2011");
 		Date d111030 = sdf.parse("30.10.2015");
 
-		Course l1 = new Course("1", "Course1", d110920, d111020, d111020);
-		Course l2 = new Course("2", "Course2", d110920, d111010, d111020);
-		Course l3 = new Course("3", "Course3", d110920, d111010, d111010);
-		Course l4 = new Course("4", "Course4", d111020, d111030, d111030);
-		Course l5 = new Course("5", "Course5", d110920, d111020, d111010);
-		Course l5dup = new Course("5", "Course6", d110920, d111020, d111010);
+		CourseType ct = new CourseType("type");
+		Course l1 = new Course("1", "Course1", "WS2011", d110920, d111020, d111020, 50, ct);
+		Course l2 = new Course("2", "Course2", "WS2011", d110920, d111010, d111020, 50, ct);
+		Course l3 = new Course("3", "Course3", "WS2011", d110920, d111010, d111010, 50, ct);
+		Course l4 = new Course("4", "Course4", "WS2011", d111020, d111030, d111030, 50, ct);
+		Course l5 = new Course("5", "Course5", "WS2011", d110920, d111020, d111010, 50, ct);
+		Course l5dup = new Course("5", "Course6", "WS2011", d110920, d111020, d111010, 50, ct);
 
 		Student stud1 = new Student("1", "Stud1");
 		Student stud2 = new Student("2", "Stud2");
@@ -86,7 +87,7 @@ public class Test {
 		boolean result = true;
 		try {
 			new Student(null, null);
-		} catch (NullPointerException e) {
+		} catch (IllegalArgumentException e) {
 			result = false;
 		}
 		test("passing null args to Student ctor", false, result);
@@ -94,30 +95,6 @@ public class Test {
 		result = true;
 		try {
 			new Student("", "");
-		} catch (NullPointerException e) {
-			result = false;
-		}
-		test("passing empty string args to Student ctor", false, result);
-
-		result = true;
-		try {
-			new Course(null, null, null, null, null);
-		} catch (IllegalArgumentException e) {
-			result = false;
-		}
-		test("passing null args to Course ctor", false, result);
-
-		result = true;
-		try {
-			new Course("6", "6", null, null, null);
-		} catch (IllegalArgumentException e) {
-			result = false;
-		}
-		test("passing null args to Course ctor", false, result);
-
-		result = true;
-		try {
-			new Course("", "", d110920, d110920, d110920);
 		} catch (IllegalArgumentException e) {
 			result = false;
 		}
@@ -125,7 +102,31 @@ public class Test {
 
 		result = true;
 		try {
-			new Course("5", "5", d111020, d110920, d110920);
+			new Course(null, null, null, null, null, null, 0, null);
+		} catch (IllegalArgumentException e) {
+			result = false;
+		}
+		test("passing null args to Course ctor", false, result);
+
+		result = true;
+		try {
+			new Course("6", "6", "6", null, null, null, -1, null);
+		} catch (IllegalArgumentException e) {
+			result = false;
+		}
+		test("passing null args to Course ctor", false, result);
+
+		result = true;
+		try {
+			new Course("", "", "1", d110920, d110920, d110920, -1, null);
+		} catch (IllegalArgumentException e) {
+			result = false;
+		}
+		test("passing empty string args to Student ctor", false, result);
+
+		result = true;
+		try {
+			new Course("5", "5", "1", d111020, d110920, d110920, -1, null);
 		} catch (IllegalArgumentException e) {
 			result = false;
 		}
@@ -147,7 +148,7 @@ public class Test {
 		}
 		test("passing empty string arg to CourseManager.getStudents()", false, result);
 
-		System.out.println("Result: " + labels.get(tests));
+		System.out.println("Final result: " + labels.get(tests));
 	}
 
 	/**
@@ -159,7 +160,18 @@ public class Test {
 	private static void test(String test, Object expected, Object got) {
 		boolean succeeded = expected.equals(got);
 		System.out.printf("Test: %s%n%s: expected: %s, got: %s%n%n", test, labels.get(succeeded),
-				expected, got);
+				abbreviate(expected.toString()), abbreviate(got.toString()));
 		tests = tests && succeeded;
+	}
+	
+	private static String abbreviate(String str) {
+		final int cutofflen = 50;
+		
+		if (!str.contains("\n") && str.length() < cutofflen) {
+			return str;
+		}
+		
+		int cutoff = Math.min(cutofflen, str.indexOf('\n'));
+		return str.substring(0, cutoff) + " [...]";
 	}
 }
