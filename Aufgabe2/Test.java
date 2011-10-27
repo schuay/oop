@@ -26,12 +26,12 @@ public class Test {
 		Date d111030 = sdf.parse("30.10.2015");
 
 		CourseType ct = new CourseType("type");
-		Course l1 = new Course("1", "Course1", "WS2011", d110920, d111020, d111020, 50, ct);
-		Course l2 = new Course("2", "Course2", "WS2011", d110920, d111010, d111020, 50, ct);
-		Course l3 = new Course("3", "Course3", "WS2011", d110920, d111010, d111010, 50, ct);
-		Course l4 = new Course("4", "Course4", "WS2011", d111020, d111030, d111030, 50, ct);
-		Course l5 = new Course("5", "Course5", "WS2011", d110920, d111020, d111010, 50, ct);
-		Course l5dup = new Course("5", "Course6", "WS2011", d110920, d111020, d111010, 50, ct);
+		Course l1 = new Course("1", "Course1", d110920, d111020, d111020, 50, ct);
+		Course l2 = new Course("2", "Course2", d110920, d111010, d111020, 50, ct);
+		Course l3 = new Course("3", "Course3", d110920, d111010, d111010, 50, ct);
+		Course l4 = new Course("4", "Course4", d111020, d111030, d111030, 50, ct);
+		Course l5 = new Course("5", "Course5", d110920, d111020, d111010, 50, ct);
+		Course l5dup = new Course("5", "Course6", d110920, d111020, d111010, 50, ct);
 
 		Student stud1 = new Student("1", "Stud1");
 		Student stud2 = new Student("2", "Stud2");
@@ -102,7 +102,7 @@ public class Test {
 
 		result = true;
 		try {
-			new Course(null, null, null, null, null, null, 0, null);
+			new Course(null, null, null, null, null, 0, null);
 		} catch (IllegalArgumentException e) {
 			result = false;
 		}
@@ -110,7 +110,7 @@ public class Test {
 
 		result = true;
 		try {
-			new Course("6", "6", "6", null, null, null, -1, null);
+			new Course("6", "6", null, null, null, -1, null);
 		} catch (IllegalArgumentException e) {
 			result = false;
 		}
@@ -118,7 +118,7 @@ public class Test {
 
 		result = true;
 		try {
-			new Course("", "", "1", d110920, d110920, d110920, -1, null);
+			new Course("", "", d110920, d110920, d110920, -1, null);
 		} catch (IllegalArgumentException e) {
 			result = false;
 		}
@@ -126,7 +126,7 @@ public class Test {
 
 		result = true;
 		try {
-			new Course("5", "5", "1", d111020, d110920, d110920, -1, null);
+			new Course("5", "5", d111020, d110920, d110920, -1, null);
 		} catch (IllegalArgumentException e) {
 			result = false;
 		}

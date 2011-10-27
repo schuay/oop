@@ -1,8 +1,8 @@
-import java.util.*;
+import java.util.ArrayList;
 
 public class Student extends Person {
 	private final String matrNr;
-	private boolean hasSteg = false;
+	private boolean hasSteg = false;	/* TODO turn this into a certificate? */
 	private ArrayList<Certificate> certificates;
 	private ArrayList<Grade> grades;
 

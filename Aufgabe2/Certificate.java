@@ -1,5 +1,8 @@
-import java.util.Date;
+/**
+ * The final grade for a Gradeable object.
+ */
 
+import java.util.Date;
 
 public class Certificate extends Grade {
 	private boolean passed;

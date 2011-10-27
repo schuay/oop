@@ -1,42 +1,36 @@
+/**
+ * The basic class for grading Gradeable events.
+ * Think assignments, quizzes, etc.
+ */
+
 import java.util.Date;
 
 
 public class Grade {
-	private String performance;
-	private Gradeable forGradeable;
-	private Date dateofissue;
-	
-	public Date getDateofissue() {
-		return dateofissue;
-	}
+	private final String performance;
+	private final Gradeable forGradeable;
+	private final Date dateOfIssue;
 
-	public void setDateofissue(Date dateofissue) {
-		this.dateofissue = dateofissue;
+	public Grade(Gradeable forGradeable, String performance, Date dateOfIssue)
+	{
+		this.forGradeable = (Gradeable)Util.validateObject(forGradeable);
+		this.performance = Util.validateString(performance);
+		this.dateOfIssue = (Date)Util.validateObject(dateOfIssue);
+	}
+	
+	public Date getDateOfIssue() {
+		return dateOfIssue;
 	}
 
 	public String getPerformance() {
 		return performance;
 	}
 
-	public void setPerformance(String performance) {
-		this.performance = performance;
-	}
-
 	public Gradeable getForGradeable() {
 		return forGradeable;
 	}
-
-	public void setForGradeable(Gradeable forGradeable) {
-		this.forGradeable = forGradeable;
-	}
-
-	public Grade(Gradeable forGradeable, String performance, Date dateofissue)
-	{
-		this.forGradeable = forGradeable;
-		this.performance = performance;
-	}
 	
 	public String toString(){
-		return "Grade: "+performance+" for "+forGradeable;
+		return String.format("Grade: %s for %s", performance, forGradeable);
 	}
 }

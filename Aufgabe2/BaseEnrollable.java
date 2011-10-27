@@ -4,7 +4,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
 
-public abstract class BasicEvent implements Enrollable {
+public abstract class BaseEnrollable implements Enrollable {
 	private String title;
 	private Date enrollFrom;
 	private Date enrollTo;
@@ -14,7 +14,7 @@ public abstract class BasicEvent implements Enrollable {
 	/* use a LinkedHashSet to preserve order */
 	private final LinkedHashSet<Student> students = new LinkedHashSet<Student>();
 
-	public BasicEvent(String title, Date enrollFrom, Date enrollTo,
+	public BaseEnrollable(String title, Date enrollFrom, Date enrollTo,
 			Date unenrollTo, int maxParticipants) {
 		setTitle(title);
 		setEnrollFrom(enrollFrom);
@@ -23,10 +23,6 @@ public abstract class BasicEvent implements Enrollable {
 		setMaxParticipants(maxParticipants);
 	}
 
-	/**
-	 * Get the Events's name.
-	 * @return The Events's name
-	 */
 	public String getTitle() {
 		return title;
 	}
@@ -44,6 +40,14 @@ public abstract class BasicEvent implements Enrollable {
 		this.maxParticipants = maxParticipants;
 	}
 
+	/**
+	 * Get the start date of the enrollment term.
+	 * @return The start date of the enrollment term
+	 */
+	public Date getEnrollFrom() {
+		return enrollFrom;
+	}
+
 	public void setEnrollFrom(Date enrollFrom) {
 		if (enrollTo != null && enrollFrom.after(enrollTo)) {
 			throw new IllegalArgumentException();
@@ -51,6 +55,14 @@ public abstract class BasicEvent implements Enrollable {
 
 		notifyAll("EnrollFrom", this.enrollFrom, enrollFrom);
 		this.enrollFrom = (Date)Util.validateObject(enrollFrom);
+	}
+
+	/**
+	 * Get the end date of the enrollment term.
+	 * @return The end date of the enrollment term
+	 */
+	public Date getEnrollTo() {
+		return enrollTo;
 	}
 
 	public void setEnrollTo(Date enrollTo) {
@@ -62,41 +74,17 @@ public abstract class BasicEvent implements Enrollable {
 		this.enrollTo = (Date)Util.validateObject(enrollTo);
 	}
 
-	public void setUnenrollTo(Date unenrollTo) {
-		notifyAll("UnenrollTo", this.unenrollTo, unenrollTo);
-		this.unenrollTo = (Date)Util.validateObject(unenrollTo);
-	}
-
-	protected void notifyAll(String changed, Object oldValue, Object newValue) {
-		String msg = String.format("Property '%s' has changed: '%s' -> '%s'",
-				changed, oldValue, newValue);
-		for (Student s : students) {
-			s.notify(title, msg);
-		}
-	}
-
-	/**
-	 * Get the start date of the enrollment term.
-	 * @return The start date of the enrollment term
-	 */
-	public Date getEnrollFrom() {
-		return enrollFrom;
-	}
-
-	/**
-	 * Get the end date of the enrollment term.
-	 * @return The end date of the enrollment term
-	 */
-	public Date getEnrollTo() {
-		return enrollTo;
-	}
-
 	/**
 	 * Get the date until which students are allowed to unenroll.
 	 * @return Said date
 	 */
 	public Date getUnenrollTo() {
 		return unenrollTo;
+	}
+
+	public void setUnenrollTo(Date unenrollTo) {
+		notifyAll("UnenrollTo", this.unenrollTo, unenrollTo);
+		this.unenrollTo = (Date)Util.validateObject(unenrollTo);
 	}
 
 	/**
@@ -109,15 +97,20 @@ public abstract class BasicEvent implements Enrollable {
 		return Collections.unmodifiableSet(students);
 	}
 
+	protected void notifyAll(String changed, Object oldValue, Object newValue) {
+		String msg = String.format("Property '%s' has changed: '%s' -> '%s'",
+				changed, oldValue, newValue);
+		for (Student s : students) {
+			s.notify(title, msg);
+		}
+	}
+
 	/**
 	 * Enroll a student
 	 * @param s The student
 	 * @return false on failure, true on success
 	 */
 	public boolean enroll(Student s) {
-		if (students.contains(s)) {
-			return false;
-		}
 		if (students.size() >= maxParticipants) {
 			return false;
 		}
@@ -127,7 +120,9 @@ public abstract class BasicEvent implements Enrollable {
 			return false;
 		}
 
-		students.add(s);
+		if (!students.add(s)) {
+			return false;
+		}
 		s.notify(title, String.format("Enrolled to %s", title));
 
 		return true;
@@ -139,15 +134,13 @@ public abstract class BasicEvent implements Enrollable {
 	 * @return false on failure, true on success
 	 */
 	public boolean unenroll(Student s) {
-		if (!students.contains(s)) {
-			return false;
-		}
-
 		if (new Date().after(unenrollTo)) {
 			return false;
 		}
 
-		students.remove(s);
+		if (!students.remove(s)) {
+			return false;
+		}
 		s.notify(title, String.format("Unenrolled from %s", title));
 
 		return true;

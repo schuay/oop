@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class ExerciseInterview extends BasicEvent implements Gradeable {
+public class ExerciseInterview extends BaseEnrollable implements Gradeable {
 
 	private Course course;
 	private Date date;

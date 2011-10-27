@@ -1,15 +1,13 @@
 import java.util.Date;
 
-public class Exam extends BasicEvent implements Gradeable {
+public class Exam extends BaseEnrollable implements Gradeable {
 	private Course course;
-	private Date date;
 	private String type;
 
 	public Exam (Date enrollfrom, Date enrollto, Date unenrollto, int maxparticipants, Date date)
 	{
 		/* TODO title */
 		super("Pruefung", enrollfrom, enrollto, unenrollto, maxparticipants);
-		this.date = date;
 	}
 
 	public Course forWhichCourse() {

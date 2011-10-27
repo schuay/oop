@@ -1,15 +1,16 @@
-import java.util.*;
+import java.util.HashSet;
+import java.util.Date;
+import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 
-public class Course extends BasicEvent{
+public class Course extends BaseEnrollable{
 	public static HashSet<CourseType> steop = null;
 	
 	private String nr;
-	private String semester;
 	private boolean visible = true;
-	private boolean requiresSTEG;
+	private boolean requiresSTEG;	/* TODO replace STEG/STEOP with CourseType deps */
 	private boolean requiresSTEOP;
-	private CourseType coursetype;
+	private CourseType courseType;
 	private HashSet<CourseType> dependencies = new HashSet<CourseType>();
 	
 	/**
@@ -27,20 +28,25 @@ public class Course extends BasicEvent{
 	 * @param unenrollTo
 	 *            After this date no students are allowed unenroll
 	 */
-	public Course(String nr, String title, String semester, Date enrollFrom, Date enrollTo,
-			Date unenrollTo, int maxparticipants, CourseType coursetype) {
-		super (title, enrollFrom, enrollTo, unenrollTo, maxparticipants);
-		setSemester(semester);
+	/* TODO reduce nr of args needed in ctor */
+	public Course(String nr, String title, Date enrollFrom, Date enrollTo,
+			Date unenrollTo, int maxParticipants, CourseType courseType) {
+		super (title, enrollFrom, enrollTo, unenrollTo, maxParticipants);
 		setNumber(nr);
-		setCourseType(coursetype);
+		setCourseType(courseType);
+	}
+	
+	public String getNr() {
+		return nr;
 	}
 
 	public void setNumber(String number) {
-		if (Util.stringIsNullOrEmpty(number)) {
-			throw new IllegalArgumentException();
-		}
 		notifyAll("Number", this.nr, number);
-		this.nr = number;
+		this.nr = Util.validateString(number);
+	}
+
+	public boolean getVisible() {
+		return visible;
 	}
 
 	public void setVisible(boolean visible) {
@@ -48,33 +54,13 @@ public class Course extends BasicEvent{
 		this.visible = visible;
 	}
 
-	public String getSemester() {
-		return semester;
-	}
-
-	public void setSemester(String semester) {
-		this.semester = semester;
-	}
-
 	public CourseType getCoursetype() {
-		return coursetype;
+		return courseType;
 	}
 
-	public void setCourseType(CourseType coursetype) {
-		this.coursetype = coursetype;
-	}
-
-	public boolean getVisible() {
-		return visible;
-	}
-
-	/**
-	 * Get the Course's number.
-	 * 
-	 * @return The Course's number
-	 */
-	public String getNr() {
-		return nr;
+	public void setCourseType(CourseType courseType) {
+		notifyAll("CourseType", this.courseType, courseType);
+		this.courseType = (CourseType)Util.validateObject(courseType);
 	}
 	
 	/**
@@ -93,8 +79,6 @@ public class Course extends BasicEvent{
 
 	public boolean addDependency(CourseType courseType)
 	{
-		if (dependencies.contains(courseType))
-			return false;
 		return dependencies.add(courseType);
 	}
 	
@@ -110,10 +94,10 @@ public class Course extends BasicEvent{
 		ArrayList<Certificate> certificates = s.getCertificates(); 
 		boolean passed = false;
 		
-		if (requiresSTEG)
-			if (!s.hasSteg())
+		if (requiresSTEG && !s.hasSteg()) {
 				return false;
-		if (requiresSTEOP)
+		}
+		if (requiresSTEOP)	/* TODO refactor this entire section - maybe let CourseType validate a student? courseType.validate(s) */
 		{
 			for (CourseType ct : steop)
 			{
@@ -122,13 +106,15 @@ public class Course extends BasicEvent{
 				{
 					Certificate c = certificates.get(i);
 					if (ct.equals(c.getForGradeable().forWhichCourse().getCoursetype()))
-						if (!c.hasPassed())
+						if (!c.hasPassed()) {
 							return false;
-						else 
+						} else { 
 							passed = true;
+						}
 				}
-				if (!passed)
+				if (!passed) {
 					return false;
+				}
 			}
 		}	
 		for (CourseType ct : dependencies)
@@ -138,13 +124,15 @@ public class Course extends BasicEvent{
 			{
 				Certificate c = certificates.get(i);
 				if (ct.equals(c.getForGradeable().forWhichCourse().getCoursetype()))
-					if (!c.hasPassed())
+					if (!c.hasPassed()) {
 						return false;
-					else 
+					} else { 
 						passed = true;
+					}
 			}
-			if (!passed)
-				return false;		
+			if (!passed) {
+				return false;
+			}
 		}
 		return true;
 	}
