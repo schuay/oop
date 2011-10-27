@@ -42,6 +42,17 @@ public class CourseManager {
 
 		return true;
 	}
+	
+	public boolean cancelCourse(Course lva) {
+		if (!courseList.containsKey(lva.getNr())) {
+			return false;
+		}
+		
+		courseList.remove(lva.getNr());
+		lva.cancel();
+		
+		return true;
+	}
 
 	/**
 	 * Gets a list of all students enrolled in an Course

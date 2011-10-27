@@ -88,6 +88,10 @@ public class Course extends BaseEnrollable{
 		}
 		return super.enroll(s);
 	}
+	
+	public void cancel() {
+		notifyAll("Status", "open", "cancelled");
+	}
 
 	private boolean checkDependencies(Student s)
 	{

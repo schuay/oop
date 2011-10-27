@@ -16,6 +16,8 @@ public class Test {
 	 * @param args command line arguments
 	 */
 	public static void main(String[] args) throws Exception {
+		
+		/* TODO TODO TODO use dynamic binding!!! */
 
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
 		CourseManager lm = new CourseManager();
@@ -150,6 +152,9 @@ public class Test {
 		
 		l4.setEnrollFrom(d111010);
 		test("changing enrollment date", d111010, l4.getEnrollFrom());
+		
+		result = lm.cancelCourse(l4);
+		test("cancelling course", true, result);
 
 		System.out.println("Final result: " + labels.get(tests));
 	}
