@@ -147,6 +147,9 @@ public class Test {
 			result = false;
 		}
 		test("passing empty string arg to CourseManager.getStudents()", false, result);
+		
+		l4.setEnrollFrom(d111010);
+		test("changing enrollment date", d111010, l4.getEnrollFrom());
 
 		System.out.println("Final result: " + labels.get(tests));
 	}
