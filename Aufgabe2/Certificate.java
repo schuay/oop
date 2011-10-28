@@ -13,10 +13,9 @@ public class Certificate {
 	public Certificate(Course course, Date dateOfIssue, boolean passed, String grade)
 	{
 		this.passed = passed;
-		this.dateOfIssue = dateOfIssue;
-		this.course = course;
-		this.grade = grade;
-		/* TODO validate */
+		this.dateOfIssue = (Date)Util.validateObject(dateOfIssue);
+		this.course = (Course)Util.validateObject(course);
+		this.grade = Util.validateString(grade);
 	}
 
 	public boolean getPassed() {
@@ -25,6 +24,14 @@ public class Certificate {
 
 	public Course getCourse() {
 		return course;
+	}
+
+	public Date getDateOfIssue() {
+		return dateOfIssue;
+	}
+
+	public String getGrade() {
+		return grade;
 	}
 }
 /* vim: set noet ts=4 sw=4: */

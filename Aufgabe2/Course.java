@@ -1,30 +1,16 @@
-import java.util.HashSet;
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.Set;
 import java.util.Date;
-import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 
 public class Course extends BaseEnrollable{
 	private String nr;
 	private boolean visible = true;
-	private Dependencies deps;
+	private Dependencies deps = new Dependencies();
 	private LinkedHashSet<Enrollable> enrollables = new LinkedHashSet<Enrollable>();
 	/* TODO staff list (dynamic binding) of Employable */
 
-	/**
-	 * Create a new Course.
-	 * 
-	 * @param nr
-	 *            The number of the Course, if used with CourseManager, it
-	 *            should be unique
-	 * @param title
-	 *            The Course's name
-	 * @param enrollFrom
-	 *            Before this date no students are allowed to enroll
-	 * @param enrollTo
-	 *            After this date no students are allowed to enroll
-	 * @param unenrollTo
-	 *            After this date no students are allowed unenroll
-	 */
 	/* TODO reduce nr of args needed in ctor */
 	public Course(String nr, String title, Date enrollFrom, Date enrollTo,
 			Date unenrollTo, int maxParticipants) {
@@ -68,8 +54,8 @@ public class Course extends BaseEnrollable{
 
 		return String.format(
 				"%s %s; enroll from %s - %s unenroll until %s; %d enrolled",
-				nr, getTitle(), sdf.format(getEnrollFrom()), sdf.format(getEnrollTo()), sdf
-				.format(getUnenrollTo()), getStudents().size());
+				nr, getTitle(), sdf.format(getEnrollFrom()), sdf.format(getEnrollTo()),
+				sdf.format(getUnenrollTo()), getStudents().size());
 	}
 
 	public boolean enroll(Student s) {
@@ -81,6 +67,14 @@ public class Course extends BaseEnrollable{
 
 	public void cancel() {
 		notifyAll("Status", "open", "cancelled");
+	}
+	
+	public boolean addEnrollable(Enrollable e) {
+		return enrollables.add(e);
+	}
+	
+	public Set<Enrollable> getEnrollables() {
+		return Collections.unmodifiableSet(enrollables);
 	}
 }
 /* vim: set noet ts=4 sw=4: */

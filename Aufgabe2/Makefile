@@ -4,8 +4,7 @@ JAR = jar
 SOURCES = Course.java CourseManager.java Student.java Test.java \
 		  EnrollmentException.java Person.java Employable.java \
 		  Gradeable.java Grade.java Tutor.java Enrollable.java \
-		  BaseEnrollable.java Util.java \
-		  Certificate.java CourseType.java Exam.java \
+		  BaseEnrollable.java Util.java Certificate.java Exam.java \
 		  ExerciseInterview.java Group.java Dependencies.java \
 		  Professor.java
 CLASSES = $(SOURCES:.java=.class)
