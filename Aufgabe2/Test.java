@@ -167,7 +167,7 @@ public class Test {
 		test("registering Stud3 to Course6 (after unregistering a student)", true, l6.enroll(stud3));
 
 		Course l7 = new Course("7", "Course7", d110920, d151020, d151020, 50);
-		Dependencies deps = new Dependencies();
+		Requirements deps = new Requirements();
 		deps.add(l1);
 		deps.add(l2);
 		l7.setDependencies(deps);

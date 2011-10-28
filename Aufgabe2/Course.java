@@ -7,7 +7,7 @@ import java.text.SimpleDateFormat;
 public class Course extends BaseEnrollable{
 	private String nr;
 	private boolean visible = true;
-	private Dependencies deps = new Dependencies();
+	private Requirements deps = new Requirements();
 	private LinkedHashSet<Enrollable> enrollables = new LinkedHashSet<Enrollable>();
 	/* TODO staff list (dynamic binding) of Employable */
 
@@ -22,12 +22,12 @@ public class Course extends BaseEnrollable{
 		return nr;
 	}
 
-	public Dependencies getDependencies() {
+	public Requirements getDependencies() {
 		return deps;
 	}
 
-	public void setDependencies(Dependencies deps) {
-		this.deps = (Dependencies)Util.validateObject(deps);
+	public void setDependencies(Requirements deps) {
+		this.deps = (Requirements)Util.validateObject(deps);
 	}
 
 	public void setNumber(String number) {
