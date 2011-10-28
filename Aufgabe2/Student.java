@@ -56,6 +56,8 @@ public class Student extends Person {
 		grades.add(g);
 	}
 
-	/* TODO getGrades */ 
+	public ArrayList<Grade> getGrades() {
+		return grades;
+	}
 }
 /* vim: set noet ts=4 sw=4: */

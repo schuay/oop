@@ -181,7 +181,8 @@ public class Test {
 		stud4.addCertificate(new Certificate(l2, d151020, true, "A"));
 		test("registering Stud4 to Course7 (dependencies met)", true, l7.enroll(stud4));
 
-		l7.addEnrollable(new Exam(d110920, d151020, d151020, 50, d110920));
+		Exam ex1 = new Exam(d110920, d151020, d151020, 50, d110920);
+		l7.addEnrollable(ex1);
 		l7.addEnrollable(new ExerciseInterview(d110920, d151020, d151020, 50, d110920));
 		l7.addEnrollable(new Group(d110920, d151020, d151020, 50));
 		Set<Enrollable> enrollables = l7.getEnrollables();
@@ -189,6 +190,17 @@ public class Test {
 
 		Enrollable e1 = enrollables.toArray(new Enrollable[0])[0];
 		test("enrolling to first enrollable in l7", true, e1.enroll(stud4));
+		
+		Grade g1 = new Grade(ex1, "supadupa", new Date());
+		stud4.addGrade(g1);
+		test("student stud4 has registered grades correctly", 1, stud4.getGrades().size());
+
+		Tutor stud5 = new Tutor("5", "tut", "12345");
+		Professor prof1 = new Professor("prof1", "12346");
+		test("adding tutor to l7 staff", true, l7.addStaff(stud5));
+		test("adding tutor to l7 staff (duplicate)", false, l7.addStaff(stud5));
+		test("adding prof1 to l7 staff", true, l7.addStaff(prof1));
+		test("staff has been correctly registered in l7", 2, l7.getStaff().size());
 
 
 		System.out.printf("%nFinal result: %s (%d passed, %d failed)%n%n", labels.get(tests),

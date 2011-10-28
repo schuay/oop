@@ -9,7 +9,7 @@ public class Course extends BaseEnrollable{
 	private boolean visible = true;
 	private Requirements deps = new Requirements();
 	private LinkedHashSet<Enrollable> enrollables = new LinkedHashSet<Enrollable>();
-	/* TODO staff list (dynamic binding) of Employable */
+	private LinkedHashSet<Employable> staff = new LinkedHashSet<Employable>();
 
 	/* TODO reduce nr of args needed in ctor */
 	public Course(String nr, String title, Date enrollFrom, Date enrollTo,
@@ -75,6 +75,14 @@ public class Course extends BaseEnrollable{
 	
 	public Set<Enrollable> getEnrollables() {
 		return Collections.unmodifiableSet(enrollables);
+	}
+
+	public Set<Employable> getStaff() {
+		return Collections.unmodifiableSet(staff);
+	}
+
+	public boolean addStaff(Employable e) {
+		return staff.add(e);
 	}
 }
 /* vim: set noet ts=4 sw=4: */
