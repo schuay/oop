@@ -9,3 +9,4 @@ public interface Enrollable {
 	public boolean enroll(Student s);
 	public boolean unenroll(Student s);
 }
+/* vim: set noet ts=4 sw=4: */

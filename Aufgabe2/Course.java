@@ -4,15 +4,12 @@ import java.util.ArrayList;
 import java.text.SimpleDateFormat;
 
 public class Course extends BaseEnrollable{
-	public static HashSet<CourseType> steop = null;
-	
 	private String nr;
 	private boolean visible = true;
-	private boolean requiresSTEG;	/* TODO replace STEG/STEOP with CourseType deps */
-	private boolean requiresSTEOP;
-	private CourseType courseType;
-	private HashSet<CourseType> dependencies = new HashSet<CourseType>();
-	
+	private Dependencies deps;
+	private LinkedHashSet<Enrollable> enrollables = new LinkedHashSet<Enrollable>();
+	/* TODO staff list (dynamic binding) of Employable */
+
 	/**
 	 * Create a new Course.
 	 * 
@@ -30,14 +27,21 @@ public class Course extends BaseEnrollable{
 	 */
 	/* TODO reduce nr of args needed in ctor */
 	public Course(String nr, String title, Date enrollFrom, Date enrollTo,
-			Date unenrollTo, int maxParticipants, CourseType courseType) {
+			Date unenrollTo, int maxParticipants) {
 		super (title, enrollFrom, enrollTo, unenrollTo, maxParticipants);
 		setNumber(nr);
-		setCourseType(courseType);
 	}
-	
+
 	public String getNr() {
 		return nr;
+	}
+
+	public Dependencies getDependencies() {
+		return deps;
+	}
+
+	public void setDependencies(Dependencies deps) {
+		this.deps = (Dependencies)Util.validateObject(deps);
 	}
 
 	public void setNumber(String number) {
@@ -54,15 +58,6 @@ public class Course extends BaseEnrollable{
 		this.visible = visible;
 	}
 
-	public CourseType getCoursetype() {
-		return courseType;
-	}
-
-	public void setCourseType(CourseType courseType) {
-		notifyAll("CourseType", this.courseType, courseType);
-		this.courseType = (CourseType)Util.validateObject(courseType);
-	}
-	
 	/**
 	 * Creates a String representation of the Course.
 	 * 
@@ -74,71 +69,18 @@ public class Course extends BaseEnrollable{
 		return String.format(
 				"%s %s; enroll from %s - %s unenroll until %s; %d enrolled",
 				nr, getTitle(), sdf.format(getEnrollFrom()), sdf.format(getEnrollTo()), sdf
-						.format(getUnenrollTo()), getStudents().size());
+				.format(getUnenrollTo()), getStudents().size());
 	}
 
-	public boolean addDependency(CourseType courseType)
-	{
-		return dependencies.add(courseType);
-	}
-	
 	public boolean enroll(Student s) {
-		if (!checkDependencies(s)) {
+		if (!deps.fulfilled(s)) {
 			return false;
 		}
 		return super.enroll(s);
 	}
-	
+
 	public void cancel() {
 		notifyAll("Status", "open", "cancelled");
 	}
-
-	private boolean checkDependencies(Student s)
-	{
-		ArrayList<Certificate> certificates = s.getCertificates(); 
-		boolean passed = false;
-		
-		if (requiresSTEG && !s.hasSteg()) {
-				return false;
-		}
-		if (requiresSTEOP)	/* TODO refactor this entire section - maybe let CourseType validate a student? courseType.validate(s) */
-		{
-			for (CourseType ct : steop)
-			{
-				passed = false;
-				for (int i=0;i<certificates.size();i++)
-				{
-					Certificate c = certificates.get(i);
-					if (ct.equals(c.getForGradeable().forWhichCourse().getCoursetype()))
-						if (!c.hasPassed()) {
-							return false;
-						} else { 
-							passed = true;
-						}
-				}
-				if (!passed) {
-					return false;
-				}
-			}
-		}	
-		for (CourseType ct : dependencies)
-		{
-			passed = false;
-			for (int i=0;i<certificates.size();i++)
-			{
-				Certificate c = certificates.get(i);
-				if (ct.equals(c.getForGradeable().forWhichCourse().getCoursetype()))
-					if (!c.hasPassed()) {
-						return false;
-					} else { 
-						passed = true;
-					}
-			}
-			if (!passed) {
-				return false;
-			}
-		}
-		return true;
-	}
-	
 }
+/* vim: set noet ts=4 sw=4: */

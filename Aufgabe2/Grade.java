@@ -17,7 +17,7 @@ public class Grade {
 		this.performance = Util.validateString(performance);
 		this.dateOfIssue = (Date)Util.validateObject(dateOfIssue);
 	}
-	
+
 	public Date getDateOfIssue() {
 		return dateOfIssue;
 	}
@@ -29,8 +29,9 @@ public class Grade {
 	public Gradeable getForGradeable() {
 		return forGradeable;
 	}
-	
+
 	public String toString(){
 		return String.format("Grade: %s for %s", performance, forGradeable);
 	}
 }
+/* vim: set noet ts=4 sw=4: */

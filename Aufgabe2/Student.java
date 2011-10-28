@@ -2,7 +2,6 @@ import java.util.ArrayList;
 
 public class Student extends Person {
 	private final String matrNr;
-	private boolean hasSteg = false;	/* TODO turn this into a certificate? */
 	private ArrayList<Certificate> certificates;
 	private ArrayList<Grade> grades;
 
@@ -39,30 +38,24 @@ public class Student extends Person {
 	public String toString() {
 		return String.format("%s (%s)", name, matrNr);
 	}
-	
+
 	public boolean addCertificate(Certificate certificate)
 	{
-		if(certificates.contains(certificate))
+		if (!certificates.add(certificate)) {
 			return false;
-		else
-			certificates.add(certificate);
+		}
 		return true;
 	}
-	
+
 	public ArrayList<Certificate> getCertificates() {
 		return certificates;
 	}
-	
-	public boolean hasSteg() {
-		return hasSteg;
-	}
 
-	public void setHasSteg(boolean hasSteg) {
-		this.hasSteg = hasSteg;
-	}
-	
 	public void addGrade(Grade g)
 	{
 		grades.add(g);
 	}
+
+	/* TODO getGrades */ 
 }
+/* vim: set noet ts=4 sw=4: */

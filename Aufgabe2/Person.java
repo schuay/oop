@@ -21,3 +21,4 @@ public abstract class Person {
 		return name;
 	}
 }
+/* vim: set noet ts=4 sw=4: */

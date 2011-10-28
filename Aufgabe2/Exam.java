@@ -13,7 +13,7 @@ public class Exam extends BaseEnrollable implements Gradeable {
 	public Course forWhichCourse() {
 		return this.course;
 	}
-	
+
 	public String getType() {
 		return type;
 	}
@@ -21,7 +21,7 @@ public class Exam extends BaseEnrollable implements Gradeable {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	public void grade(Student s, Grade g)
 	{
 		if (getStudents().contains(s))
@@ -30,3 +30,4 @@ public class Exam extends BaseEnrollable implements Gradeable {
 		}			
 	}
 }
+/* vim: set noet ts=4 sw=4: */

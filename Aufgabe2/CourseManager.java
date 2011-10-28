@@ -42,15 +42,15 @@ public class CourseManager {
 
 		return true;
 	}
-	
+
 	public boolean cancelCourse(Course lva) {
 		if (!courseList.containsKey(lva.getNr())) {
 			return false;
 		}
-		
+
 		courseList.remove(lva.getNr());
 		lva.cancel();
-		
+
 		return true;
 	}
 
@@ -75,3 +75,4 @@ public class CourseManager {
 		return sb.toString();
 	}
 }
+/* vim: set noet ts=4 sw=4: */

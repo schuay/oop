@@ -31,11 +31,11 @@ public abstract class BaseEnrollable implements Enrollable {
 		notifyAll("Title", this.title, title);
 		this.title = Util.validateString(title);
 	}
-	
+
 	public int getMaxParticipants() {
 		return maxParticipants;
 	}
-	
+
 	public void setMaxParticipants(int maxParticipants) {
 		this.maxParticipants = maxParticipants;
 	}
@@ -69,7 +69,7 @@ public abstract class BaseEnrollable implements Enrollable {
 		if (enrollFrom != null && enrollFrom.after(enrollTo)) {
 			throw new IllegalArgumentException();
 		}
-		
+
 		notifyAll("EnrollTo", this.enrollTo, enrollTo);
 		this.enrollTo = (Date)Util.validateObject(enrollTo);
 	}
@@ -145,7 +145,7 @@ public abstract class BaseEnrollable implements Enrollable {
 
 		return true;
 	}
-	
+
 	/**
 	 * Creates a String representation of the Event.
 	 * @return A String representation of the Event
@@ -158,3 +158,4 @@ public abstract class BaseEnrollable implements Enrollable {
 				sdf.format(unenrollTo), students.size());
 	}
 }
+/* vim: set noet ts=4 sw=4: */
