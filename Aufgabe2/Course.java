@@ -1,7 +1,6 @@
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.Set;
-import java.util.Date;
 import java.text.SimpleDateFormat;
 
 public class Course extends BaseEnrollable{
@@ -11,10 +10,8 @@ public class Course extends BaseEnrollable{
 	private LinkedHashSet<Enrollable> enrollables = new LinkedHashSet<Enrollable>();
 	private LinkedHashSet<Employable> staff = new LinkedHashSet<Employable>();
 
-	/* TODO reduce nr of args needed in ctor */
-	public Course(String nr, String title, Date enrollFrom, Date enrollTo,
-			Date unenrollTo, int maxParticipants) {
-		super (title, enrollFrom, enrollTo, unenrollTo, maxParticipants);
+	public Course(String nr, String title) {
+		super(title);
 		setNumber(nr);
 	}
 

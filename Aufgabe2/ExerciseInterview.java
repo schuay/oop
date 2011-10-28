@@ -1,21 +1,14 @@
 import java.util.*;
 
 public class ExerciseInterview extends BaseEnrollable implements Gradeable {
-
 	private Course course;
 	private Date date;
 
-	public ExerciseInterview (Date enrollfrom, Date enrollto, Date unenrollto, int maxparticipants, Date date)
+	public ExerciseInterview (String title, Course course, Date date)
 	{
-		/* TODO title */
-		super("Interview", enrollfrom, enrollto, unenrollto, maxparticipants);
+		super(title);
 		setDate(date);
-	}
-
-	@Override
-	public Course forWhichCourse() {
-
-		return this.course;
+		setCourse(course);
 	}
 
 	public Date getDate()
@@ -25,15 +18,22 @@ public class ExerciseInterview extends BaseEnrollable implements Gradeable {
 
 	public void setDate(Date date)
 	{
-		this.date = date;
+		this.date = (Date)Util.validateObject(date);
 	}
 
 	public void grade(Student s, Grade g)
 	{
-		if (getStudents().contains(s))
-		{
+		if (getStudents().contains(s)) {
 			s.addGrade(g);
 		}			
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = (Course)Util.validateObject(course);
 	}
 }
 /* vim: set noet ts=4 sw=4: */

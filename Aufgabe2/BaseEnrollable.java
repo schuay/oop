@@ -3,6 +3,7 @@ import java.util.Set;
 import java.util.Collections;
 import java.util.Date;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 public abstract class BaseEnrollable implements Enrollable {
 	private String title;
@@ -14,13 +15,17 @@ public abstract class BaseEnrollable implements Enrollable {
 	/* use a LinkedHashSet to preserve order */
 	private final LinkedHashSet<Student> students = new LinkedHashSet<Student>();
 
-	public BaseEnrollable(String title, Date enrollFrom, Date enrollTo,
-			Date unenrollTo, int maxParticipants) {
+	public BaseEnrollable(String title) {
 		setTitle(title);
-		setEnrollFrom(enrollFrom);
-		setEnrollTo(enrollTo);
-		setUnenrollTo(unenrollTo);
-		setMaxParticipants(maxParticipants);
+		
+		Calendar c = Calendar.getInstance();
+		setEnrollFrom(c.getTime());
+		
+		c.add(Calendar.DATE, 30);
+		setEnrollTo(c.getTime());
+		setUnenrollTo(c.getTime());
+		
+		setMaxParticipants(Integer.MAX_VALUE);
 	}
 
 	public String getTitle() {
@@ -37,6 +42,9 @@ public abstract class BaseEnrollable implements Enrollable {
 	}
 
 	public void setMaxParticipants(int maxParticipants) {
+		if (maxParticipants < 1) {
+			throw new IllegalArgumentException();
+		}
 		this.maxParticipants = maxParticipants;
 	}
 

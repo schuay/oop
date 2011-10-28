@@ -2,24 +2,13 @@ import java.util.Date;
 
 public class Exam extends BaseEnrollable implements Gradeable {
 	private Course course;
-	private String type;
+	private Date date;
 
-	public Exam (Date enrollfrom, Date enrollto, Date unenrollto, int maxparticipants, Date date)
+	public Exam(String title, Course course, Date date)
 	{
-		/* TODO title */
-		super("Pruefung", enrollfrom, enrollto, unenrollto, maxparticipants);
-	}
-
-	public Course forWhichCourse() {
-		return this.course;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+		super(title);
+		setDate(date);
+		setCourse(course);
 	}
 
 	public void grade(Student s, Grade g)
@@ -28,6 +17,22 @@ public class Exam extends BaseEnrollable implements Gradeable {
 		{
 			s.addGrade(g);
 		}			
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = (Date)Util.validateObject(date);
+	}
+
+	public Course getCourse() {
+		return course;
+	}
+
+	public void setCourse(Course course) {
+		this.course = (Course)Util.validateObject(course);
 	}
 }
 /* vim: set noet ts=4 sw=4: */
