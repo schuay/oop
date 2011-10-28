@@ -6,9 +6,11 @@ import java.util.Date;
 public class Test {
 	private static boolean tests = true;
 	private static HashMap<Boolean, String> labels = new HashMap<Boolean, String>();
+	private static int testCount = 0;
+	private static int failedCount = 0;
 
 	static {
-		labels.put(true, "PASS");
+		labels.put(true, "pass");
 		labels.put(false, "FAIL");
 	}
 
@@ -189,7 +191,8 @@ public class Test {
 		test("enrolling to first enrollable in l7", true, e1.enroll(stud4));
 
 
-		System.out.println("Final result: " + labels.get(tests));
+		System.out.printf("%nFinal result: %s (%d passed, %d failed)%n%n", labels.get(tests),
+				testCount - failedCount, failedCount);
 	}
 
 	/**
@@ -200,8 +203,12 @@ public class Test {
 	 */
 	private static void test(String test, Object expected, Object got) {
 		boolean succeeded = expected.equals(got);
-		System.out.printf("Test: %s%n%s: expected: %s, got: %s%n%n", test, labels.get(succeeded),
-				abbreviate(expected.toString()), abbreviate(got.toString()));
+		if (!succeeded) {
+			failedCount++;
+		}
+		System.out.printf("%04d: %s%n%s: expected: %s, got: %s%n%n", testCount++, test,
+				labels.get(succeeded), abbreviate(expected.toString()),
+				abbreviate(got.toString()));
 		tests = tests && succeeded;
 	}
 
