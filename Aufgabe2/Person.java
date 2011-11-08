@@ -1,5 +1,5 @@
 public abstract class Person {
-	protected final String name;
+	private final String name;
 
 	public Person(String name) {
 		this.name = Util.validateString(name);

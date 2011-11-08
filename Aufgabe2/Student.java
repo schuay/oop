@@ -36,7 +36,7 @@ public class Student extends Person {
 	 * @return A String representation of the Student.
 	 */
 	public String toString() {
-		return String.format("%s (%s)", name, matrNr);
+		return String.format("%s (%s)", getName(), matrNr);
 	}
 
 	public boolean addCertificate(Certificate certificate)
