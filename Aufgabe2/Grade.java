@@ -13,9 +13,9 @@ public class Grade {
 
 	public Grade(Gradeable forGradeable, String performance, Date dateOfIssue)
 	{
-		this.forGradeable = (Gradeable)Util.validateObject(forGradeable);
+		this.forGradeable = Util.validateObject(forGradeable);
 		this.performance = Util.validateString(performance);
-		this.dateOfIssue = (Date)Util.validateObject(dateOfIssue);
+		this.dateOfIssue = Util.validateObject(dateOfIssue);
 	}
 
 	public Date getDateOfIssue() {

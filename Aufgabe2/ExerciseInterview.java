@@ -18,7 +18,7 @@ public class ExerciseInterview extends BaseEnrollable implements Gradeable {
 
 	public void setDate(Date date)
 	{
-		this.date = (Date)Util.validateObject(date);
+		this.date = Util.validateObject(date);
 	}
 
 	public void grade(Student s, Grade g)
@@ -33,7 +33,7 @@ public class ExerciseInterview extends BaseEnrollable implements Gradeable {
 	}
 
 	public void setCourse(Course course) {
-		this.course = (Course)Util.validateObject(course);
+		this.course = Util.validateObject(course);
 	}
 }
 /* vim: set noet ts=4 sw=4: */

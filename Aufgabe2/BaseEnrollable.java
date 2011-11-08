@@ -62,7 +62,7 @@ public abstract class BaseEnrollable implements Enrollable {
 		}
 
 		notifyAll("EnrollFrom", this.enrollFrom, enrollFrom);
-		this.enrollFrom = (Date)Util.validateObject(enrollFrom);
+		this.enrollFrom = Util.validateObject(enrollFrom);
 	}
 
 	/**
@@ -79,7 +79,7 @@ public abstract class BaseEnrollable implements Enrollable {
 		}
 
 		notifyAll("EnrollTo", this.enrollTo, enrollTo);
-		this.enrollTo = (Date)Util.validateObject(enrollTo);
+		this.enrollTo = Util.validateObject(enrollTo);
 	}
 
 	/**
@@ -92,7 +92,7 @@ public abstract class BaseEnrollable implements Enrollable {
 
 	public void setUnenrollTo(Date unenrollTo) {
 		notifyAll("UnenrollTo", this.unenrollTo, unenrollTo);
-		this.unenrollTo = (Date)Util.validateObject(unenrollTo);
+		this.unenrollTo = Util.validateObject(unenrollTo);
 	}
 
 	/**

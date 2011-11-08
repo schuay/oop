@@ -24,7 +24,7 @@ public class Course extends BaseEnrollable{
 	}
 
 	public void setDependencies(Requirements deps) {
-		this.deps = (Requirements)Util.validateObject(deps);
+		this.deps = Util.validateObject(deps);
 	}
 
 	public void setNumber(String number) {

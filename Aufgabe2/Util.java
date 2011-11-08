@@ -11,7 +11,7 @@ public class Util {
 		return s;
 	}
 
-	public static Object validateObject(Object o) throws IllegalArgumentException {
+	public static <T> T validateObject(T o) throws IllegalArgumentException {
 		if (o == null) {
 			throw new IllegalArgumentException();
 		}

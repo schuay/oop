@@ -13,8 +13,8 @@ public class Certificate {
 	public Certificate(Course course, Date dateOfIssue, boolean passed, String grade)
 	{
 		this.passed = passed;
-		this.dateOfIssue = (Date)Util.validateObject(dateOfIssue);
-		this.course = (Course)Util.validateObject(course);
+		this.dateOfIssue = Util.validateObject(dateOfIssue);
+		this.course = Util.validateObject(course);
 		this.grade = Util.validateString(grade);
 	}
 

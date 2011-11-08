@@ -24,7 +24,7 @@ public class Exam extends BaseEnrollable implements Gradeable {
 	}
 
 	public void setDate(Date date) {
-		this.date = (Date)Util.validateObject(date);
+		this.date = Util.validateObject(date);
 	}
 
 	public Course getCourse() {
@@ -32,7 +32,7 @@ public class Exam extends BaseEnrollable implements Gradeable {
 	}
 
 	public void setCourse(Course course) {
-		this.course = (Course)Util.validateObject(course);
+		this.course = Util.validateObject(course);
 	}
 }
 /* vim: set noet ts=4 sw=4: */
