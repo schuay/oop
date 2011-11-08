@@ -1,3 +1,6 @@
+/**
+ * A Tutor is a person which can be employed.
+ */
 public class Tutor extends Student implements Employable {
 	
 	private String accountNr;

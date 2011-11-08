@@ -1,3 +1,6 @@
+/**
+ * A Person. Everything which is a person inherits from this class.
+ */
 public abstract class Person {
 	private final String name;
 
@@ -5,6 +8,12 @@ public abstract class Person {
 		this.name = Util.validateString(name);
 	}
 
+	/**
+	 * Notify the person about something.
+	 *
+	 * @param sender Who sent the notification?
+	 * @param message The message.
+	 */
 	public void notify(Object sender, String message) {
 		/* Code for person notifications can be added here. */
 	}

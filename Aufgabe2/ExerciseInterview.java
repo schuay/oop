@@ -1,5 +1,9 @@
 import java.util.*;
 
+/**
+ * A class for ExerciseInterviews.
+ * Students can enroll and can be graded.
+ */
 public class ExerciseInterview extends BaseEnrollable implements Gradeable {
 	private Course course;
 	private Date date;

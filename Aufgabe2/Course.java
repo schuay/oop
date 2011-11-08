@@ -7,7 +7,9 @@ public class Course extends BaseEnrollable{
 	private String nr;
 	private boolean visible = true;
 	private Requirements deps = new Requirements();
+	/* Sub enrollables like tests etc. */
 	private LinkedHashSet<Enrollable> enrollables = new LinkedHashSet<Enrollable>();
+	/* The course staff. */
 	private LinkedHashSet<Employable> staff = new LinkedHashSet<Employable>();
 
 	public Course(String nr, String title) {
@@ -27,6 +29,12 @@ public class Course extends BaseEnrollable{
 		this.deps = Util.validateObject(deps);
 	}
 
+	/**
+	 * Sets the course number.
+	 * Also calls notifyAll to inform all affected users.
+	 * @param number The new number.
+	 * @see notifyAll()
+	 */
 	public void setNumber(String number) {
 		notifyAll("Number", this.nr, number);
 		this.nr = Util.validateString(number);
@@ -36,6 +44,12 @@ public class Course extends BaseEnrollable{
 		return visible;
 	}
 
+	/**
+	 * Sets the visibility of the course.
+	 * Also calls notifyAll to inform all affected users.
+	 * @see notifyAll()
+	 * @param visible The new visibility.
+	 */
 	public void setVisible(boolean visible) {
 		notifyAll("Visible", this.visible, visible);
 		this.visible = visible;
@@ -43,8 +57,7 @@ public class Course extends BaseEnrollable{
 
 	/**
 	 * Creates a String representation of the Course.
-	 * 
-	 * @return A String representation of the Course
+	 * @return A String representation of the Course.
 	 */
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
@@ -62,6 +75,11 @@ public class Course extends BaseEnrollable{
 		return super.enroll(s);
 	}
 
+	/**
+	 * Cancel the course.
+	 * Right now this only calls notifyAll to inform all affected users.
+	 * @see notifyAll()
+	 */
 	public void cancel() {
 		notifyAll("Status", "open", "cancelled");
 	}

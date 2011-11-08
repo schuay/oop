@@ -1,3 +1,6 @@
+/**
+ * A Professor is a Person and can be employed.
+ */
 public class Professor extends Person implements Employable {
 	
 	private String accountNr;

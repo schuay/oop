@@ -1,3 +1,7 @@
+/**
+ * This class contains some static utility functions, which are used to check
+ * function parameters elsewhere.
+ */
 public class Util {
 	public static boolean stringIsNullOrEmpty(String s) {
 		return (s == null || "".equals(s));

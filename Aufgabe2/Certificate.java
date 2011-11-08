@@ -1,15 +1,22 @@
+import java.util.Date;
+
 /**
  * The final grade for a Course object.
  */
-
-import java.util.Date;
-
 public class Certificate {
 	private final boolean passed;
 	private final Date dateOfIssue;
 	private final Course course;
 	private final String grade;
 
+	/**
+	 * Issue a new certificate for course.
+	 *
+	 * @param course The course for which the certificate is issued.
+	 * @param dateOfIssue When it was issued.
+	 * @param passed Did the student pass?
+	 * @param grade What grade did the student achieve?
+	 */
 	public Certificate(Course course, Date dateOfIssue, boolean passed, String grade)
 	{
 		this.passed = passed;

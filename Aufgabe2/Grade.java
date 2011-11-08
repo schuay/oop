@@ -1,11 +1,9 @@
+import java.util.Date;
+
 /**
  * The basic class for grading Gradeable events.
  * Think assignments, quizzes, etc.
  */
-
-import java.util.Date;
-
-
 public class Grade {
 	private final String performance;
 	private final Gradeable forGradeable;

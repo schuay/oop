@@ -1,5 +1,8 @@
 import java.util.LinkedHashSet;
 
+/**
+ * A class to store requirements for a certain course.
+ */
 public class Requirements {
 	private LinkedHashSet<Course> deps = new LinkedHashSet<Course>();
 
@@ -43,6 +46,10 @@ public class Requirements {
 		return (matchingCert != null && matchingCert.getPassed());
 	}
 
+	/**
+	 * Add another dependency.
+	 * @dep The new dependeny.
+	 */
 	public void add(Course dep) {
 		deps.add(dep);
 	}

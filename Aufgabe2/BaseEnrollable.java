@@ -5,6 +5,10 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * The basic enrollable object. This is the super-class of all Objects where students
+ * can enroll.
+ */
 public abstract class BaseEnrollable implements Enrollable {
 	private String title;
 	private Date enrollFrom;
@@ -15,6 +19,12 @@ public abstract class BaseEnrollable implements Enrollable {
 	/* use a LinkedHashSet to preserve order */
 	private final LinkedHashSet<Student> students = new LinkedHashSet<Student>();
 
+	/**
+	 * Create a new BaseEnrollable with the title title.
+	 * Sets the enrollment term from the current time to 30 days in the future.
+	 *
+	 * @param title The title of the BaseEnrollable.
+	 */
 	public BaseEnrollable(String title) {
 		setTitle(title);
 		
@@ -32,6 +42,12 @@ public abstract class BaseEnrollable implements Enrollable {
 		return title;
 	}
 
+	/**
+	 * Set the title of the enrollable.
+	 * This also calls notifyAll to inform affected users.
+	 * @param title The new title.
+	 * @see notifyAll()
+	 */
 	public void setTitle(String title) {
 		notifyAll("Title", this.title, title);
 		this.title = Util.validateString(title);
@@ -48,14 +64,16 @@ public abstract class BaseEnrollable implements Enrollable {
 		this.maxParticipants = maxParticipants;
 	}
 
-	/**
-	 * Get the start date of the enrollment term.
-	 * @return The start date of the enrollment term
-	 */
 	public Date getEnrollFrom() {
 		return enrollFrom;
 	}
 
+	/**
+	 * Set the start date of the enrollment term.
+	 * This also calls notifyAll to inform affected users.
+	 * @param enrollFrom The start date of the enrollment term.
+	 * @see notifyAll()
+	 */
 	public void setEnrollFrom(Date enrollFrom) {
 		if (enrollTo != null && enrollFrom.after(enrollTo)) {
 			throw new IllegalArgumentException();
@@ -65,14 +83,16 @@ public abstract class BaseEnrollable implements Enrollable {
 		this.enrollFrom = Util.validateObject(enrollFrom);
 	}
 
-	/**
-	 * Get the end date of the enrollment term.
-	 * @return The end date of the enrollment term
-	 */
 	public Date getEnrollTo() {
 		return enrollTo;
 	}
 
+	/**
+	 * Set the end date of the enrollment term.
+	 * This also calls notifyAll to inform affected users.
+	 * @param enrollTo The end date of the enrollment term.
+	 * @see notifyAll()
+	 */
 	public void setEnrollTo(Date enrollTo) {
 		if (enrollFrom != null && enrollFrom.after(enrollTo)) {
 			throw new IllegalArgumentException();
@@ -82,14 +102,16 @@ public abstract class BaseEnrollable implements Enrollable {
 		this.enrollTo = Util.validateObject(enrollTo);
 	}
 
-	/**
-	 * Get the date until which students are allowed to unenroll.
-	 * @return Said date
-	 */
 	public Date getUnenrollTo() {
 		return unenrollTo;
 	}
 
+	/**
+	 * Set the date until which students are allowed to unenroll.
+	 * This also calls notifyAll to inform affected users.
+	 * @param enrollTo The new value for said date.
+	 * @see notifyAll()
+	 */
 	public void setUnenrollTo(Date unenrollTo) {
 		notifyAll("UnenrollTo", this.unenrollTo, unenrollTo);
 		this.unenrollTo = Util.validateObject(unenrollTo);
@@ -105,6 +127,13 @@ public abstract class BaseEnrollable implements Enrollable {
 		return Collections.unmodifiableSet(students);
 	}
 
+	/**
+	 * Notify all enrolled students about changes.
+	 * @param changed What has changed?
+	 * @param oldValue The old value.
+	 * @param newValue The new one.
+	 * @see Student.notify()
+	 */
 	protected void notifyAll(String changed, Object oldValue, Object newValue) {
 		String msg = String.format("Property '%s' has changed: '%s' -> '%s'",
 				changed, oldValue, newValue);
@@ -113,11 +142,6 @@ public abstract class BaseEnrollable implements Enrollable {
 		}
 	}
 
-	/**
-	 * Enroll a student
-	 * @param s The student
-	 * @return false on failure, true on success
-	 */
 	public boolean enroll(Student s) {
 		if (students.size() >= maxParticipants) {
 			return false;
@@ -136,11 +160,6 @@ public abstract class BaseEnrollable implements Enrollable {
 		return true;
 	}
 
-	/**
-	 * Unenroll a student
-	 * @param s The student
-	 * @return false on failure, true on success
-	 */
 	public boolean unenroll(Student s) {
 		if (new Date().after(unenrollTo)) {
 			return false;
@@ -156,7 +175,7 @@ public abstract class BaseEnrollable implements Enrollable {
 
 	/**
 	 * Creates a String representation of the Event.
-	 * @return A String representation of the Event
+	 * @return A String representation of the Event.
 	 */
 	public String toString() {
 		SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");

@@ -1,5 +1,9 @@
 import java.util.Date;
 
+/**
+ * A class for Exams.
+ * Students can enroll in an Exam and the Exam can be graded.
+ */
 public class Exam extends BaseEnrollable implements Gradeable {
 	private Course course;
 	private Date date;

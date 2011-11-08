@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * A Student is a Person.
+ * It is also the subject of all enrollment and grading related functions.
+ */
 public class Student extends Person {
 	private final String matrNr;
 	private ArrayList<Certificate> certificates;
@@ -39,6 +43,11 @@ public class Student extends Person {
 		return String.format("%s (%s)", getName(), matrNr);
 	}
 
+	/**
+	 * Add a certificate to the Student.
+	 *
+	 * @param certificate The certificate.
+	 */
 	public boolean addCertificate(Certificate certificate)
 	{
 		if (!certificates.add(certificate)) {
@@ -51,6 +60,11 @@ public class Student extends Person {
 		return certificates;
 	}
 
+	/**
+	 * Add a grade to the Student.
+	 *
+	 * @param g The grade.
+	 */
 	public void addGrade(Grade g)
 	{
 		grades.add(g);

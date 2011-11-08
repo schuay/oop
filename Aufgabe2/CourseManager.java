@@ -1,6 +1,9 @@
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * The management class for courses.
+ */
 public class CourseManager {
 	private final HashMap<String, Course> courseList = new HashMap<String, Course>();
 
@@ -30,6 +33,7 @@ public class CourseManager {
 
 	/**
 	 * Adds a new Course record.
+	 * Also ensures that there are no other courses with the same number.
 	 * @param lva The new Course
 	 * @return false if the Course already exists, true on success
 	 */
@@ -43,6 +47,11 @@ public class CourseManager {
 		return true;
 	}
 
+	/**
+	 * Cancel a course and remove it from the list.
+	 * @param lva The course to cancel.
+	 * @return True if success, false otherwise.
+	 */
 	public boolean cancelCourse(Course lva) {
 		if (!courseList.containsKey(lva.getNr())) {
 			return false;
@@ -55,8 +64,8 @@ public class CourseManager {
 	}
 
 	/**
-	 * Gets a list of all students enrolled in an Course
-	 * @param lvaNr The Course number
+	 * Gets a list of all students enrolled in a Course.
+	 * @param lvaNr The Course number.
 	 * @return null if the Course doesn't exist; the description on success
 	 */
 	public String getStudents(String lvaNr) {
