@@ -1,4 +1,6 @@
+import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * A Student is a Person.
@@ -56,8 +58,8 @@ public class Student extends Person {
 		return true;
 	}
 
-	public ArrayList<Certificate> getCertificates() {
-		return certificates;
+	public List<Certificate> getCertificates() {
+		return Collections.unmodifiableList(certificates);
 	}
 
 	/**
@@ -70,8 +72,8 @@ public class Student extends Person {
 		grades.add(g);
 	}
 
-	public ArrayList<Grade> getGrades() {
-		return grades;
+	public List<Grade> getGrades() {
+		return Collections.unmodifiableList(grades);
 	}
 }
 /* vim: set noet ts=4 sw=4: */

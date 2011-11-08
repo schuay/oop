@@ -84,7 +84,14 @@ public class Course extends BaseEnrollable{
 		notifyAll("Status", "open", "cancelled");
 	}
 	
+	/**
+	 * Add new Enrollables to the Course.
+	 * Also calls notifyAll to inform all affected users.
+	 * @see notifyAll()
+	 * @param e The new Enrollable.
+	 */
 	public boolean addEnrollable(Enrollable e) {
+		notifyAll("Enrollables", e, "Enrollables");
 		return enrollables.add(e);
 	}
 	
@@ -96,7 +103,14 @@ public class Course extends BaseEnrollable{
 		return Collections.unmodifiableSet(staff);
 	}
 
+	/**
+	 * Add new staff members to the Course.
+	 * Also calls notifyAll to inform all affected users.
+	 * @see notifyAll()
+	 * @param e The new staff member.
+	 */
 	public boolean addStaff(Employable e) {
+		notifyAll("Staff", e, "Staff");
 		return staff.add(e);
 	}
 }
