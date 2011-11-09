@@ -1,7 +1,8 @@
 JAVAC = javac -g
 JAVA = java
 JAR = jar
-SOURCES = Polygon.java Test.java
+SOURCES = Polygon.java Test.java EquilateralTriangle.java Rectangle.java \
+		  RegularPolygon.java Scaleable.java Square.java Triangle.java
 CLASSES = $(SOURCES:.java=.class)
 MODNAME = Test
 
