@@ -1,16 +1,36 @@
 public class Rectangle implements Scaleable {
-	public Rectangle(double a, double b) {
+	private double a;
+	private double b;
+	private final int EDGES = 4;
+
+	public Rectangle(double a, double b) throws IllegalArgumentException {
+		if (a <= 0 || b <= 0) {
+			throw new IllegalArgumentException();
+		}
+
+		this.a = a;
+		this.b = b;
 	}
+
 	public int edges() {
-		return 0;
+		return EDGES;
 	}
+
 	public double area() {
-		return 0;
+		return a*b;
 	}
+
 	public double perimeter() {
-		return 0;
+		return (a+b)*2;
 	}
-	public void scale(double factor) {
+
+	public void scale(double factor) throws IllegalArgumentException {
+		if (factor <= 0) {
+			throw new IllegalArgumentException();
+		}
+
+		a *= factor;
+		b *= factor;
 	}
 }
 /* vim: set noet ts=4 sw=4: */

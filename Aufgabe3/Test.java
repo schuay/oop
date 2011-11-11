@@ -1,4 +1,5 @@
 import java.util.HashMap;
+import java.math.BigDecimal;
 
 public class Test {
 	private static boolean tests = true;
@@ -279,12 +280,25 @@ public class Test {
 				true, result);
 	}
 	
+	private static BigDecimal roundTo5(double d) {
+		return new BigDecimal(d).setScale(5, BigDecimal.ROUND_HALF_UP);
+	}
+
+	/* area and perimeter need to be provided with a precision of at least
+	 * 5 decimal places.
+	 */
 	private static void testPolygon(Polygon p, int edges,
 			double area, double perimeter, String description) {
 		
 		int actEdges = p.edges();
 		double actArea = p.area();
 		double actPerimeter = p.perimeter();
+		
+		/* round doubles to a precision of 5 for equals() comparison */ 
+		BigDecimal bdArea = roundTo5(area);
+		BigDecimal bdPerimeter = roundTo5(perimeter);
+		BigDecimal bdActArea = roundTo5(actArea);
+		BigDecimal bdActPerimeter = roundTo5(actPerimeter);
 
 		test(String.format("%s - Polygon edges > 2", description),
 				true, actEdges > 2);
@@ -296,9 +310,9 @@ public class Test {
 		test(String.format("%s - edges() == %d", description, actEdges),
 				edges, actEdges);
 		test(String.format("%s - area() == %f", description, actArea),
-				area, actArea);
+				bdArea, bdActArea);
 		test(String.format("%s - perimeter() == %f", description, actPerimeter),
-				perimeter, actPerimeter);
+				bdPerimeter, bdActPerimeter);
 	}
 
 	/**
@@ -338,22 +352,22 @@ public class Test {
 
 		testTriangleSetters();
 
-		testSquareCtor(0, false, "a == 0");
-		testSquareCtor(-1, false, "a == -1");
-		testSquareCtor(1, true, "a == 1");
+		testSquareCtor(0, true, "a == 0");
+		testSquareCtor(-1, true, "a == -1");
+		testSquareCtor(1, false, "a == 1");
 
-		testEquilateralTriangleCtor(0, false, "a == 0");
-		testEquilateralTriangleCtor(-1, false, "a == -1");
-		testEquilateralTriangleCtor(1, true, "a == 1");
+		testEquilateralTriangleCtor(0, true, "a == 0");
+		testEquilateralTriangleCtor(-1, true, "a == -1");
+		testEquilateralTriangleCtor(1, false, "a == 1");
 
-		testRectangleCtor(0, 1, false, "a == 0");
-		testRectangleCtor(1, 0, false, "a == 0");
+		testRectangleCtor(0, 1, true, "a == 0");
+		testRectangleCtor(1, 0, true, "a == 0");
 
-		testRectangleCtor(-1, 1, false, "a == -1");
-		testRectangleCtor(1, -1, false, "a == -1");
+		testRectangleCtor(-1, 1, true, "a == -1");
+		testRectangleCtor(1, -1, true, "a == -1");
 
-		testRectangleCtor(1, 2, true, "rectangle");
-		testRectangleCtor(2, 1, true, "rectangle");
+		testRectangleCtor(1, 2, false, "rectangle");
+		testRectangleCtor(2, 1, false, "rectangle");
 
 		testScaleable(new Rectangle(1, 2), "Rectangle(1, 2)");
 		testScaleable(new EquilateralTriangle(1), "EquilateralTriangle(1)");
@@ -363,7 +377,7 @@ public class Test {
 		testRegularPolygon(new Square(1), "Square(1)");
 
 		testPolygon(new Rectangle(1, 2), 4, 2, 6, "Rectangle(1, 2");
-		testPolygon(new EquilateralTriangle(1), 3, 0.433013, 3, "EquilateralTriangle(1)");
+		testPolygon(new EquilateralTriangle(1), 3, 0.43301, 3, "EquilateralTriangle(1)");
 		testPolygon(new Square(1), 4, 1, 4, "Square(1)");
 		testPolygon(new Triangle(3, 4, 5), 3, 6, 12, "Triangle(3, 4, 5)");
 		
