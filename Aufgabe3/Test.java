@@ -422,13 +422,15 @@ public class Test {
 	}
 
 	private static String abbreviate(String str) {
-		final int cutofflen = 50;
+		int cutoff = 50;
 
-		if (!str.contains("\n") && str.length() < cutofflen) {
+		if (!str.contains("\n") && str.length() < cutoff) {
 			return str;
 		}
 
-		int cutoff = Math.min(cutofflen, str.indexOf('\n'));
+		if (str.contains("\n")) {
+			cutoff = Math.min(cutoff, str.indexOf('\n'));
+		}
 		return str.substring(0, cutoff) + " [...]";
 	}
 }
