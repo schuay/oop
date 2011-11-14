@@ -14,7 +14,12 @@ public class Triangle implements Polygon {
 
 	private static void checkTriangle(double a, double b, double c)
 		throws IllegalArgumentException {
-		if (a + b <= c || b + c <= a || a +c <= b) {
+		/* already covered by next check, but repeat it here
+		 * to make it explicit */
+		if (a <= 0 || b <= 0 || c <= 0) {
+			throw new IllegalArgumentException();
+		}
+		if (a + b <= c || b + c <= a || a + c <= b) {
 			throw new IllegalArgumentException();
 		}
 	}
