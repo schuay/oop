@@ -32,5 +32,13 @@ public class Rectangle implements Scaleable {
 		a *= factor;
 		b *= factor;
 	}
+
+	protected double getA() {
+		return a;
+	}
+
+	protected double getB() {
+		return b;
+	}
 }
 /* vim: set noet ts=4 sw=4: */
