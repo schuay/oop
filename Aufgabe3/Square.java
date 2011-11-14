@@ -1,4 +1,8 @@
+
 public class Square extends Rectangle implements RegularPolygon {
+
+	/* a > 0
+	 * constructs a square with all side lengths = a */
 	public Square(double a) throws IllegalArgumentException {
 		super(a, a);
 	}
@@ -8,7 +12,8 @@ public class Square extends Rectangle implements RegularPolygon {
 			throw new IllegalArgumentException();
 		}
 
-		/* a == b in super, so we just use a */
+		/* a = b in super, so we can use getA() to calculate
+		 * factor for scale() */
 		scale(a / super.getA());
 	}
 }

@@ -2,6 +2,8 @@ public class EquilateralTriangle implements RegularPolygon {
 	private double a;
 	private final int EDGES = 3;
 
+	/* a is > 0
+	 * constructs an equilateral triangle with all side lengths = a */
 	public EquilateralTriangle(double a) throws IllegalArgumentException {
 		set(a);
 	}
@@ -14,6 +16,7 @@ public class EquilateralTriangle implements RegularPolygon {
 		this.a = a;
 	}
 
+	/* edges = 3 */
 	public int edges() {
 		return EDGES;
 	}

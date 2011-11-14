@@ -408,7 +408,12 @@ public class Test {
 		t.setC(3);
 		testPolygon(t, 3, 1.98431, 7, "Triangle(2, 2, 2) setC to 3");
 
-
+		/* Ersetzbarkeit Triangle <-> EquilateralTriangle ist nicht gegeben: 
+		 * EquilateralTriangle hat keine set{A,B,C} Methoden.
+		 * 
+		 * Triangle t = new EquilateralTriangle(1);
+		 * t.setA(2); <- FAIL
+		 */
 		
 		printSummary();
 	}
