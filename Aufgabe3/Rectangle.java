@@ -3,7 +3,7 @@
 public class Rectangle implements Scaleable {
 	private double a;
 	private double b;
-	private final int EDGES = 4;
+	private static final int EDGES = 4;
 
 	/* a, b > 0
 	 * constructs a rectangle with side lengths a and b */

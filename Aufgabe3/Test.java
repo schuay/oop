@@ -413,7 +413,15 @@ public class Test {
 		 * nachdem Rectangle sonst keine Methoden hat.
 		 */
 
-		/* Ersetzbarkeit Triangle <-> EquilateralTriangle ist nicht gegeben: 
+		/* RegularPolygon verlangt, dass alle Seiten gleich lang sind. Triangle
+		 * verlangt, dass alle Seitenlängen separat verändert werden können
+		 * (mit set{A,B,C}).
+		 * Wenn EquilateralTriangle ein Untertyp von RegularPolygon ist, kann es
+		 * daher keiner von Triangle sein.
+		 *
+		 * Daher:
+		 *
+		 * Ersetzbarkeit Triangle <-> EquilateralTriangle ist nicht gegeben: 
 		 * EquilateralTriangle hat keine set{A,B,C} Methoden.
 		 * 
 		 * Triangle t = new EquilateralTriangle(1);

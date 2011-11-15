@@ -2,7 +2,7 @@ public class Triangle implements Polygon {
 	private double a;
 	private double b;
 	private double c;
-	private final int EDGES = 3;
+	private static final int EDGES = 3;
 
 	/* a, b, c > 0;
 	 * sum of 2 sides is always > the remaining side */
@@ -40,19 +40,22 @@ public class Triangle implements Polygon {
 		return a + b + c;
 	}
 
-	/* triangle must still be valid (see ctor) with new value of a */
+	/* triangle must still be valid (see ctor) with new value of a
+	 * this.a == a, b and c remain the same */
 	public void setA(double a) throws IllegalArgumentException {
 		checkTriangle(a, this.b, this.c);
 		this.a = a;
 	}
 
-	/* triangle must still be valid (see ctor) with new value of b */
+	/* triangle must still be valid (see ctor) with new value of b
+	 * this.b == b, a and c remain the same */
 	public void setB(double b) throws IllegalArgumentException {
 		checkTriangle(this.a, b, this.c);
 		this.b = b;
 	}
 
-	/* triangle must still be valid (see ctor) with new value of c */
+	/* triangle must still be valid (see ctor) with new value of c
+	 * this.c == c, a and b remain the same */
 	public void setC(double c) throws IllegalArgumentException {
 		checkTriangle(this.a, this.b, c);
 		this.c = c;
