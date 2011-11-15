@@ -29,7 +29,7 @@ public class Triangle implements Polygon {
 	}
 
 	public double area() {
-		double s = perimeter() / 2;
+		final double s = perimeter() / 2;
 		return Math.sqrt(s*(s-a)*(s-b)*(s-c));
 	}
 

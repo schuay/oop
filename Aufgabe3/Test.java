@@ -290,15 +290,15 @@ public class Test {
 	private static void testPolygon(Polygon p, int edges,
 			double area, double perimeter, String description) {
 		
-		int actEdges = p.edges();
-		double actArea = p.area();
-		double actPerimeter = p.perimeter();
+		final int actEdges = p.edges();
+		final double actArea = p.area();
+		final double actPerimeter = p.perimeter();
 		
 		/* round doubles to a precision of 5 for equals() comparison */ 
-		BigDecimal bdArea = roundTo5(area);
-		BigDecimal bdPerimeter = roundTo5(perimeter);
-		BigDecimal bdActArea = roundTo5(actArea);
-		BigDecimal bdActPerimeter = roundTo5(actPerimeter);
+		final BigDecimal bdArea = roundTo5(area);
+		final BigDecimal bdPerimeter = roundTo5(perimeter);
+		final BigDecimal bdActArea = roundTo5(actArea);
+		final BigDecimal bdActPerimeter = roundTo5(actPerimeter);
 
 		test(String.format("%s - Polygon edges > 2", description),
 				true, actEdges > 2);
