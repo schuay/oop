@@ -19,8 +19,7 @@ public class EquilateralTriangle implements RegularPolygon {
 	}
 
 	public double area() {
-		double s = perimeter() / 2;
-		return Math.sqrt(s*(s-a)*(s-a)*(s-a));
+		return a * a * Math.sqrt(3) / 4;
 	}
 
 	public double perimeter() {
