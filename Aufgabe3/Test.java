@@ -408,6 +408,11 @@ public class Test {
 		t.setC(3);
 		testPolygon(t, 3, 1.98431, 7, "Triangle(2, 2, 2) setC to 3");
 
+		/* Ersetzbarkeit Rectangle <-> Square bereits durch
+		 * Square <-> Scaleable und Square <-> Polygon abgedeckt
+		 * nachdem Rectangle sonst keine Methoden hat.
+		 */
+
 		/* Ersetzbarkeit Triangle <-> EquilateralTriangle ist nicht gegeben: 
 		 * EquilateralTriangle hat keine set{A,B,C} Methoden.
 		 * 
