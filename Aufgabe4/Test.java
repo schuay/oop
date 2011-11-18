@@ -404,13 +404,20 @@ public class Test {
 	 * @param got Actual test outcome
 	 */
 	private static void test(String test, Object expected, Object got) {
-		boolean succeeded = expected.equals(got);
+		boolean succeeded;
+
+		if (expected == null) {
+			succeeded = (expected == got);
+		} else {
+			succeeded = expected.equals(got);
+		}
+
 		if (!succeeded) {
 			failedCount++;
 		}
 		System.out.printf("%04d: %s%n%s: expected: %s, got: %s%n%n",
 				testCount++, test, labels.get(succeeded),
-				abbreviate(expected.toString()), abbreviate(got.toString()));
+				abbreviate(expected), abbreviate(got));
 		tests = tests && succeeded;
 	}
 	
@@ -419,8 +426,14 @@ public class Test {
 			labels.get(tests), testCount - failedCount, failedCount);
 	}
 
-	private static String abbreviate(String str) {
+	private static String abbreviate(Object o) {
+
+		if (o == null) {
+			return null;
+		}
+
 		int cutoff = 50;
+		String str = o.toString();
 
 		if (!str.contains("\n") && str.length() < cutoff) {
 			return str;
