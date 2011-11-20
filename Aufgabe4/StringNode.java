@@ -1,4 +1,4 @@
-public class StringNode implements Node {
+public class StringNode extends Node {
 	
 	private StringNode left = null;
 
@@ -56,18 +56,6 @@ public class StringNode implements Node {
 	}
 
 	public String toString() {
-		return String.format("%s%s%n",
-				repeat("  ", "- ", level), getValue());
-	}
-
-	/* repeats s (n - 1) times with an appended terminator.
-	 * passing n <= 0 results in an empty string. */
-	private String repeat(String s, String terminator, int n) {
-	    if (n <= 0) {
-		return "";
-	    } else if (n == 1) {
-		return terminator;
-	    }
-	    return s + repeat(s, terminator, n - 1);
+		return Node.formatRow(level, getValue());
 	}
 }

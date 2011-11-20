@@ -1,4 +1,4 @@
-public class IntNode implements Node {
+public class IntNode extends Node {
 	
 	private IntNode left = null;
 	private IntNode right = null;

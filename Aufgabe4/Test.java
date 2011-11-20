@@ -120,10 +120,14 @@ public class Test {
 		test(prefix+"toString", "1\n"+
 				                "- 2\n"+
 							    "  - 4\n"+
+							    "    - \n"+
+							    "    - \n"+
 							    "  - 5\n"+
 							    "- 3\n"+
 								"  - 6\n"+
-								"  - 7\n", t.toString());
+							    "    - \n"+
+								"  - 7\n"+
+							    "    - \n", t.toString());
 
 		try {
 			t.replace(null, "10");
@@ -252,10 +256,18 @@ public class Test {
 		test(prefix+"toString", "replT_a\n"+
 				                "- replT_b\n"+
 							    "  - replT_d\n"+
+							    "    - \n"+
+							    "    - \n"+
 							    "  - replT_e\n"+
+							    "    - \n"+
+							    "    - \n"+
 							    "- replT_c\n"+
 								"  - replT_f\n"+
-								"  - replT_g\n", t.toString());
+							    "    - \n"+
+							    "    - \n"+
+								"  - replT_g\n"+
+							    "    - \n"+
+							    "    - \n", t.toString());
 
 		try {
 			t.replace(null, "replT_x");
@@ -312,17 +324,31 @@ public class Test {
 		try {
 			t.replace("left left", "replT_x\n"+
 					               " - replT_y\n"+
-								   " - replT_z\n");
+					               "   - \n"+
+					               "   - \n"+
+								   " - replT_z\n"+
+					               "   - \n"+
+					               "   - \n");
 		} catch (Exception e) {}
 		test(prefix+"replace with correct args", "replT_a\n"+
 				                                 "- replT_b\n"+
 							                     "  - replT_x\n"+
 												 "    - replT_y\n"+
+												 "      - \n"+
+												 "      - \n"+
 												 "    - replT_z\n"+
+												 "      - \n"+
+												 "      - \n"+
 							                     "  - replT_e\n"+
+												 "    - \n"+
+												 "    - \n"+
 							                     "- replT_c\n"+
 											     "  - replT_f\n"+
-												 "  - replT_g\n", t.toString());
+												 "    - \n"+
+												 "    - \n"+
+												 "  - replT_g\n"+
+												 "    - \n"+
+												 "    - \n", t.toString());
 
 		try {
 			t.replace("", "replT_x\n"+
@@ -332,7 +358,11 @@ public class Test {
 		test(prefix+"replace with correct args (replaces root)",
                  "replT_x\n"+
 				 "- replT_y\n"+
-				 "- replT_z\n", t.toString());
+				 "  - \n"+
+				 "  - \n"+
+				 "- replT_z\n"+
+				 "  - \n"+
+				 "  - \n", t.toString());
 	}
 
 	/**
@@ -375,10 +405,18 @@ public class Test {
 		test(prefix+"toString", "sortT_d\n"+
 				                "- sortT_b\n"+
 							    "  - sortT_a\n"+
+							    "    - \n"+
+							    "    - \n"+
 							    "  - sortT_c\n"+
+							    "    - \n"+
+							    "    - \n"+
 							    "- sortT_d\n"+
+							    "  - \n"+
 								"  - sortT_e\n"+
-								"    - sortT_d\n", t.toString());
+								"    - sortT_d\n"+
+							    "      - \n"+
+							    "      - \n"+
+							    "    - \n", t.toString());
 	}
 
 	/**
@@ -426,7 +464,7 @@ public class Test {
 			test = true;
 
 			if (searchPath.length() == 0) {
-				if (!t.toString().trim().equals("strT_a")) {
+				if (!t.toString().trim().equals("strT_a\n- \n-")) {
 					test = false;
 				}
 			} else {

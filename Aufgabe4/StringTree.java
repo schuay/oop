@@ -85,19 +85,10 @@ public abstract class StringTree extends Tree {
 
 	/* return a string representation of the tree */
 	public String toString() {
-		return printTree(root);
-	}
-
-	private static String printTree(StringNode curNode) {
-		if (curNode == null) {
+		if (root == null) {
 			return emptyString;
 		}
-		
-		String s = curNode.toString();
-		s += printTree(curNode.getLeft());
-		s += printTree(curNode.getRight());
-
-		return s;
+		return root.toStringTree();
 	}
 
 	/* returns null on error */
