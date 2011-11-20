@@ -36,7 +36,7 @@ public class ReplaceableTree extends StringTree implements Replaceable {
 		return bestOfLeft;
 	}
 
-	private StringNode parseTree(String subTree, int baseLevel) {
+	private static StringNode parseTree(String subTree, int baseLevel) {
 		final char dash = '-'; /* TODO */
 
 		final String[] lines = subTree.split("\n");
