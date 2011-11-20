@@ -1,8 +1,11 @@
-public class IntTree {
+public class IntTree extends Tree implements Replaceable {
 	/* binary tree; each node has an integer value */
 
-	protected static final String leftStep = "left";
-	protected static final String rightStep = "right";
+	private IntNode root = null;
+
+	protected IntNode getRoot() {
+		return root;
+	}
 
 	/* returns true if the tree contains node, or false otherwise. */
 	public boolean contains(int node) {

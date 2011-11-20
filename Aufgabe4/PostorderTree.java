@@ -1,8 +1,15 @@
 public class PostorderTree extends SortedTree {
 
-	/* returns the values of contained nodes (postorder) */
-	public String traverse() {
-		return null;
+	/* traverse() returns the values of contained nodes (postorder) */
+	
+	protected void traverseRecursive(StringNode curNode, StringBuilder sb) {
+		if (curNode == null) {
+			return;
+		}
+
+		traverseRecursive(curNode.getLeft(), sb);
+		traverseRecursive(curNode.getRight(), sb);
+		sb.append(curNode.getValue()).append(separator);
 	}
 }
 /* vim: set noet ts=4 sw=4: */

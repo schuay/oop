@@ -3,7 +3,8 @@ JAVA = java
 JAR = jar
 SOURCES = InorderTree.java PostorderTree.java ReplaceableTree.java \
 		  StringTree.java IntTree.java PreorderTree.java \
-		  SortedTree.java Test.java
+		  SortedTree.java Test.java Replaceable.java Tree.java Node.java \
+		  StringNode.java IntNode.java StringStack.java
 CLASSES = $(SOURCES:.java=.class)
 MODNAME = Test
 

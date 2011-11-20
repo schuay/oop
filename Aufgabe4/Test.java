@@ -22,6 +22,27 @@ public class Test {
 		SortedTree sortT;
 		IntTree intT;
 
+		/* TODO remove me */
+		/*
+		replT = new ReplaceableTree();
+		replT.add("a");
+		replT.add("b");
+		replT.add("c");
+		replT.add("d");
+		replT.add("e");
+
+		System.out.println(replT.toString());
+		replT.add("f");
+		System.out.println(replT.toString());
+		replT.add("g");
+		System.out.println(replT.toString());
+		replT.add("h");
+		System.out.println(replT.toString());
+		replT.add("i");
+		System.out.println(replT.toString());
+		*/
+		/* TODO: until here */
+
 		replT = new ReplaceableTree();
 		testStringTree(replT, "(Empty) ReplaceableTree");
 		replT = new ReplaceableTree();
@@ -96,16 +117,16 @@ public class Test {
 		test(prefix+"search 5", "left right", t.search(5));
 		test(prefix+"search 6", "right left", t.search(6));
 		test(prefix+"search 7", "right right", t.search(7));
-		test(prefix+"toString", " 1\n"+
-				                " - 2\n"+
+		test(prefix+"toString", "1\n"+
+				                "- 2\n"+
 							    "  - 4\n"+
 							    "  - 5\n"+
-							    " - 3\n"+
+							    "- 3\n"+
 								"  - 6\n"+
 								"  - 7\n", t.toString());
 
 		try {
-			t.replace(null, " 10");
+			t.replace(null, "10");
 			test = true;
 		} catch (NullPointerException e) {
 			test = false;
@@ -129,7 +150,7 @@ public class Test {
 		test(prefix+"replace with invalid position 1", false, test);
 
 		try {
-			t.replace("x y", " 10");
+			t.replace("x y", "10");
 			test = true;
 		} catch (IllegalArgumentException e) {
 			test = false;
@@ -137,8 +158,8 @@ public class Test {
 		test(prefix+"replace with invalid position 2", false, test);
 
 		try {
-			t.replace("left left", " 10\n"+
-					               " 20\n");
+			t.replace("left left", "10\n"+
+					               "20\n");
 			test = true;
 		} catch (IllegalArgumentException e) {
 			test = false;
@@ -146,10 +167,10 @@ public class Test {
 		test(prefix+"replace with invalid subtree 1", false, test);
 
 		try {
-			t.replace("left left", " 10\n"+
-					               " - 20\n"+
-								   " - 30\n"+
-								   " - 40\n");
+			t.replace("left left", "10\n"+
+					               "- 20\n"+
+								   "- 30\n"+
+								   "- 40\n");
 			test = true;
 		} catch (IllegalArgumentException e) {
 			test = false;
@@ -157,9 +178,9 @@ public class Test {
 		test(prefix+"replace with invalid subtree 2", false, test);
 
 		try {
-			t.replace("left left", " 10\n"+
-					               " - 20\n"+
-								   " - intT_z\n");
+			t.replace("left left", "10\n"+
+					               "- 20\n"+
+								   "- intT_z\n");
 			test = true;
 		} catch (IllegalArgumentException e) {
 			test = false;
@@ -167,19 +188,28 @@ public class Test {
 		test(prefix+"replace with invalid subtree 3", false, test);
 
 		try {
-			t.replace("left left", " 10\n"+
-					               " - 20\n"+
-								   " - 30\n");
+			t.replace("left left", "10\n"+
+					               "- 20\n"+
+								   "- 30\n");
 		} catch (Exception e) {}
-		test(prefix+"replace with correct args", " 1\n"+
-				                                 " - 2\n"+
+		test(prefix+"replace with correct args", "1\n"+
+				                                 "- 2\n"+
 							                     "  - 10\n"+
-												 "   - 20\n"+
-												 "   - 30\n"+
+												 "    - 20\n"+
+												 "    - 30\n"+
 							                     "  - 5\n"+
-							                     " - 3\n"+
-									     "  - 6\n"+
-										 "  - 7\n", t.toString());
+							                     "- 3\n"+
+											     "  - 6\n"+
+												 "  - 7\n", t.toString());
+
+		try {
+			t.replace("", "10\n"+
+					      "- 20\n"+
+						  "- 30\n");
+		} catch (Exception e) {}
+		test(prefix+"replace with correct args (replaces root)", "10\n"+
+												 "- 20\n"+
+												 "- 30\n", t.toString());
 	}
 
 	/**
@@ -219,16 +249,16 @@ public class Test {
 		test(prefix+"search 5", "left right", t.search("replT_e"));
 		test(prefix+"search 6", "right left", t.search("replT_f"));
 		test(prefix+"search 7", "right right", t.search("replT_g"));
-		test(prefix+"toString", " replT_a\n"+
-				                " - replT_b\n"+
+		test(prefix+"toString", "replT_a\n"+
+				                "- replT_b\n"+
 							    "  - replT_d\n"+
 							    "  - replT_e\n"+
-							    " - replT_c\n"+
+							    "- replT_c\n"+
 								"  - replT_f\n"+
 								"  - replT_g\n", t.toString());
 
 		try {
-			t.replace(null, " replT_x");
+			t.replace(null, "replT_x");
 			test = true;
 		} catch (NullPointerException e) {
 			test = false;
@@ -244,7 +274,7 @@ public class Test {
 		test(prefix+"replace with NULL as 2nd arg", false, test);
 
 		try {
-			t.replace("left left left", " replT_x");
+			t.replace("left left left", "replT_x");
 			test = true;
 		} catch (IllegalArgumentException e) {
 			test = false;
@@ -260,8 +290,8 @@ public class Test {
 		test(prefix+"replace with invalid position 2", false, test);
 
 		try {
-			t.replace("left left", " replT_x\n"+
-					               " replT_y\n");
+			t.replace("left left", "replT_x\n"+
+					               "replT_y\n");
 			test = true;
 		} catch (IllegalArgumentException e) {
 			test = false;
@@ -269,7 +299,7 @@ public class Test {
 		test(prefix+"replace with invalid subtree 1", false, test);
 
 		try {
-			t.replace("left left", " replT_w\n"+
+			t.replace("left left", "replT_w\n"+
 					               " - replT_x\n"+
 								   " - replT_y\n"+
 								   " - replT_z\n");
@@ -280,19 +310,29 @@ public class Test {
 		test(prefix+"replace with invalid subtree 2", false, test);
 
 		try {
-			t.replace("left left", " replT_x\n"+
+			t.replace("left left", "replT_x\n"+
 					               " - replT_y\n"+
 								   " - replT_z\n");
 		} catch (Exception e) {}
-		test(prefix+"replace with correct args", " replT_a\n"+
-				                                 " - replT_b\n"+
+		test(prefix+"replace with correct args", "replT_a\n"+
+				                                 "- replT_b\n"+
 							                     "  - replT_x\n"+
-												 "   - replT_y\n"+
-												 "   - replT_z\n"+
+												 "    - replT_y\n"+
+												 "    - replT_z\n"+
 							                     "  - replT_e\n"+
-							                     " - replT_c\n"+
-									     "  - replT_f\n"+
-										 "  - replT_g\n", t.toString());
+							                     "- replT_c\n"+
+											     "  - replT_f\n"+
+												 "  - replT_g\n", t.toString());
+
+		try {
+			t.replace("", "replT_x\n"+
+					               "- replT_y\n"+
+								   "- replT_z\n");
+		} catch (Exception e) {}
+		test(prefix+"replace with correct args (replaces root)",
+                 "replT_x\n"+
+				 "- replT_y\n"+
+				 "- replT_z\n", t.toString());
 	}
 
 	/**
@@ -332,13 +372,13 @@ public class Test {
 		test(prefix+"search 3", "left right", t.search("sortT_c"));
 		test(prefix+"search 4", "right right", t.search("sortT_e"));
 		test(prefix+"search 5", "left left", t.search("sortT_a"));
-		test(prefix+"toString", " sortT_d\n"+
-				                " - sortT_b\n"+
+		test(prefix+"toString", "sortT_d\n"+
+				                "- sortT_b\n"+
 							    "  - sortT_a\n"+
 							    "  - sortT_c\n"+
-							    " - sortT_d\n"+
+							    "- sortT_d\n"+
 								"  - sortT_e\n"+
-								"   - sortT_d\n", t.toString());
+								"    - sortT_d\n", t.toString());
 	}
 
 	/**
@@ -381,18 +421,24 @@ public class Test {
 		t.add("strT_a");
 		test(prefix+"contains existent value", true, t.contains("strT_a"));
 
-		String searchPath[] = {""};
 		try {
-			searchPath = t.search("strT_a").split(" ");
+			String searchPath = t.search("strT_a");
 			test = true;
+
+			if (searchPath.length() == 0) {
+				if (!t.toString().trim().equals("strT_a")) {
+					test = false;
+				}
+			} else {
+				for (String step : searchPath.split(" ")) {
+					if (!step.equals("left") && !step.equals("right")) {
+						test = false;
+						break;
+					}
+				}
+			}
 		} catch (Exception e) {
 			test = false;
-		}
-		for (int i = 0; i < searchPath.length; i++) {
-			if (searchPath[i] != "left" && searchPath[i] != "right") {
-				test = false;
-				break;
-			}
 		}
 		test(prefix+"search for existent value", true, test);
 	}
