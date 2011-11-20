@@ -123,10 +123,14 @@ public class Test {
 							    "    - \n"+
 							    "    - \n"+
 							    "  - 5\n"+
+							    "    - \n"+
+							    "    - \n"+
 							    "- 3\n"+
 								"  - 6\n"+
 							    "    - \n"+
+							    "    - \n"+
 								"  - 7\n"+
+							    "    - \n"+
 							    "    - \n", t.toString());
 
 		try {
@@ -200,20 +204,35 @@ public class Test {
 				                                 "- 2\n"+
 							                     "  - 10\n"+
 												 "    - 20\n"+
+												 "      - \n"+
+												 "      - \n"+
 												 "    - 30\n"+
+												 "      - \n"+
+												 "      - \n"+
 							                     "  - 5\n"+
+												 "    - \n"+
+												 "    - \n"+
 							                     "- 3\n"+
 											     "  - 6\n"+
-												 "  - 7\n", t.toString());
+												 "    - \n"+
+												 "    - \n"+
+												 "  - 7\n"+
+												 "    - \n"+
+												 "    - \n", t.toString());
 
 		try {
 			t.replace("", "10\n"+
 					      "- 20\n"+
 						  "- 30\n");
 		} catch (Exception e) {}
-		test(prefix+"replace with correct args (replaces root)", "10\n"+
-												 "- 20\n"+
-												 "- 30\n", t.toString());
+		test(prefix+"replace with correct args (replaces root)",
+				"10\n"+
+				"- 20\n"+
+				"  - \n"+
+				"  - \n"+
+				"- 30\n"+
+				"  - \n"+
+				"  - \n", t.toString());
 	}
 
 	/**
