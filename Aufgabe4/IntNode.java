@@ -2,16 +2,12 @@ public class IntNode extends Node {
 	
 	private IntNode left = null;
 	private IntNode right = null;
-	private final int value;
+	private final Integer value;
 	private final int level;
 
 	public IntNode(int value, int level) {
 		this.value = value;
 		this.level = level;
-	}
-
-	public boolean isFull() {
-		return (hasLeft() && hasRight());
 	}
 
 	public boolean hasLeft() {
@@ -25,6 +21,10 @@ public class IntNode extends Node {
 	public int compareTo(IntNode anotherNode) {
 		return (value - anotherNode.value);
 	}
+
+	public int compareTo(int i) {
+		return (value - i);
+	}
 	
 	public IntNode getLeft() {
 		return left;
@@ -34,11 +34,23 @@ public class IntNode extends Node {
 		return right;
 	}
 	
-	public int getValue() {
+	public void setLeft(IntNode left) {
+		this.left = left;
+	}
+
+	public void setRight(IntNode right) {
+		this.right = right;
+	}
+	
+	public Integer getValue() {
 		return value;
 	}
 
 	public int getLevel() {
 		return level;
+	}
+
+	public String toString() {
+		return Node.formatRow(level, getValue().toString());
 	}
 }

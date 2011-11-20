@@ -11,10 +11,6 @@ public class StringNode extends Node {
 		this.level = level;
 	}
 
-	public boolean isFull() {
-		return (hasLeft() && hasRight());
-	}
-
 	public boolean hasLeft() {
 		return (left != null);
 	}

@@ -83,14 +83,6 @@ public abstract class StringTree extends Tree {
 	
 	protected abstract void addNode(String node);
 
-	/* return a string representation of the tree */
-	public String toString() {
-		if (root == null) {
-			return emptyString;
-		}
-		return root.toStringTree();
-	}
-
 	/* returns null on error */
 	protected StringNode traversePath(String path) {
 		final String[] paths = path.trim().split(separator);

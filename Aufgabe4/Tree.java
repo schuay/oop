@@ -6,4 +6,12 @@ public abstract class Tree {
 	protected static final String elementNotFound = "Knoten wurde nicht gefunden";
 
 	abstract protected Node getRoot();
+
+	/* return a string representation of the tree */
+	public String toString() {
+		if (getRoot() == null) {
+			return emptyString;
+		}
+		return getRoot().toStringTree();
+	}
 }
