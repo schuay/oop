@@ -27,9 +27,22 @@ public class IntTree implements Replaceable {
 
 	/* replaces tree at position (!= null, path description as formatted
 	 * by search()) with subTree (!= null, subtree description as formatted by
-	 * toString()).
+	 * toString()). all nodes must contain an integer value.
 	 * tree is not modified if an error occurs. */
 	public void replace(String position, String subTree) {
+		
+		/* ensure all nodes have string values */
+		for (String line : subTree.split("\n")) {
+
+			final int dashIndex = line.indexOf("-");
+			final String value = line.substring(dashIndex + 1).trim();
+			try {
+				Integer.parseInt(value);
+			} catch (NumberFormatException e) {
+				throw new IllegalArgumentException();
+			}
+		}
+
 		t.replace(position, subTree);
 	}
 	
