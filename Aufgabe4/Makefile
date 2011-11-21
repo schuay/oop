@@ -1,4 +1,4 @@
-JAVAC = javac -g
+JAVAC = javac -g -Werror -impicit:none
 JAVA = java
 JAR = jar
 SOURCES = InorderTree.java PostorderTree.java ReplaceableTree.java \

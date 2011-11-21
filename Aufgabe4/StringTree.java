@@ -83,7 +83,7 @@ public abstract class StringTree extends Tree {
 	
 	protected abstract void addNode(String node);
 
-	/* returns null on error */
+	/* returns null on error, doesn't alter the tree */
 	protected StringNode traversePath(String path) {
 		final String[] paths = path.trim().split(separator);
 		final StringStack s = new StringStack();

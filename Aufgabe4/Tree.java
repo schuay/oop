@@ -7,6 +7,7 @@ public abstract class Tree {
 	protected static final String emptyString = "";
 	protected static final String elementNotFound = "Knoten wurde nicht gefunden";
 
+	/* return the tree's root, doesn't alter the Tree */
 	abstract protected Node getRoot();
 
 	/* return a string representation of the tree */

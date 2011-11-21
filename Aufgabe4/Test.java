@@ -22,27 +22,6 @@ public class Test {
 		SortedTree sortT;
 		IntTree intT;
 
-		/* TODO remove me */
-		/*
-		replT = new ReplaceableTree();
-		replT.add("a");
-		replT.add("b");
-		replT.add("c");
-		replT.add("d");
-		replT.add("e");
-
-		System.out.println(replT.toString());
-		replT.add("f");
-		System.out.println(replT.toString());
-		replT.add("g");
-		System.out.println(replT.toString());
-		replT.add("h");
-		System.out.println(replT.toString());
-		replT.add("i");
-		System.out.println(replT.toString());
-		*/
-		/* TODO: until here */
-
 		replT = new ReplaceableTree();
 		testStringTree(replT, "(Empty) ReplaceableTree");
 		replT = new ReplaceableTree();

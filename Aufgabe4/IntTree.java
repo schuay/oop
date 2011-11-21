@@ -7,7 +7,7 @@ public class IntTree extends Tree implements Replaceable {
 		return root;
 	}
 	
-	protected void setRoot(IntNode root) {
+	private void setRoot(IntNode root) {
 		this.root = root;
 	}
 
@@ -76,7 +76,7 @@ public class IntTree extends Tree implements Replaceable {
 	
 	/* called by add(int node).
 	 * at this point, it's guaranteed that the current tree is nonempty. */
-	protected void addNode(int node) {
+	private void addNode(int node) {
 		final IntNode parent = getFreeNode(getRoot());
 		final IntNode n = new IntNode(node, parent.getLevel() + 1);
 
@@ -137,7 +137,7 @@ public class IntTree extends Tree implements Replaceable {
 	}
 
 	/* returns null on error */
-	protected IntNode traversePath(String path) {
+	private IntNode traversePath(String path) {
 		final String[] paths = path.trim().split(separator);
 		final IntStack s = new IntStack();
 
@@ -169,7 +169,7 @@ public class IntTree extends Tree implements Replaceable {
 	}
 
 	private static IntNode parseTree(String subTree, int baseLevel) {
-		final char dash = '-'; /* TODO */
+		final char dash = '-';
 
 		final String[] lines = subTree.split("\n");
 		final IntStack s = new IntStack();
