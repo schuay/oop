@@ -1,4 +1,5 @@
 public class StringNode extends Node {
+	/* value is of type Integer */
 	
 	private StringNode left = null;
 
@@ -19,10 +20,14 @@ public class StringNode extends Node {
 		return (right != null);
 	}
 
+	/* returns a value < 0, == 0, >0 if value is, respectively,
+	 * less than, equal to, or greater than anotherNode's value */
 	public int compareTo(StringNode anotherNode) {
 		return value.compareTo(anotherNode.value);
 	}
 
+	/* returns a value < 0, == 0, >0 if value is, respectively,
+	 * less than, equal to, or greater than i */
 	public int compareTo(String s) {
 		return value.compareTo(s);
 	}
@@ -55,3 +60,4 @@ public class StringNode extends Node {
 		return Node.formatRow(level, getValue());
 	}
 }
+/* vim: set noet ts=4 sw=4: */

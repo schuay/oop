@@ -1,6 +1,6 @@
 public class PreorderTree extends SortedTree {
-
-	/* traverse() returns the values of contained nodes (preorder) */
+	/* traverse() returns a space separated string containing
+	 * the values of contained nodes (order: preorder) */
 	
 	protected void traverseRecursive(StringNode curNode, StringBuilder sb) {
 		if (curNode == null) {

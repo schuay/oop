@@ -1,6 +1,6 @@
 public class InorderTree extends SortedTree {
-
-	/* returns the values of contained nodes (inorder) */
+	/* traverse() returns a space separated string containing
+	 * the values of contained nodes (order: inorder) */
 
 	protected void traverseRecursive(StringNode curNode, StringBuilder sb) {
 		if (curNode == null) {

@@ -1,6 +1,6 @@
 public class PostorderTree extends SortedTree {
-
-	/* traverse() returns the values of contained nodes (postorder) */
+	/* traverse() returns a space separated string containing
+	 * the values of contained nodes (order: postorder) */
 	
 	protected void traverseRecursive(StringNode curNode, StringBuilder sb) {
 		if (curNode == null) {

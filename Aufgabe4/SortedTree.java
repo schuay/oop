@@ -60,7 +60,7 @@ public abstract class SortedTree extends StringTree {
 		}
 	}
 
-	/* returns the values of contained nodes
+	/* returns the space separated values of contained nodes
 	 * in a specific order determined by subtypes */
 	public String traverse() {
 		final StringBuilder sb = new StringBuilder();

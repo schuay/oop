@@ -1,4 +1,6 @@
 public abstract class Tree {
+	/* stores values in a tree structure */
+
 	protected static final String leftStep = "left";
 	protected static final String rightStep = "right";
 	protected static final String separator = " ";
@@ -15,3 +17,4 @@ public abstract class Tree {
 		return getRoot().toStringTree();
 	}
 }
+/* vim: set noet ts=4 sw=4: */

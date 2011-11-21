@@ -1,4 +1,5 @@
 public class ReplaceableTree extends StringTree implements Replaceable {
+	/* entire subtrees of ReplaceableTrees can be replaced by other subtrees */
 
 	/* add(String node) adds node (!= null) to the tree.
 	 * does not modify existing tree positions.
@@ -37,7 +38,7 @@ public class ReplaceableTree extends StringTree implements Replaceable {
 	}
 
 	private static StringNode parseTree(String subTree, int baseLevel) {
-		final char dash = '-'; /* TODO */
+		final char dash = '-';
 
 		final String[] lines = subTree.split("\n");
 		final StringStack s = new StringStack();
@@ -95,10 +96,6 @@ public class ReplaceableTree extends StringTree implements Replaceable {
 		return root;
 	}
 
-	/* replaces tree at position (!= null, path description as formatted
-	 * by search()) with subTree (!= null, subtree description as formatted by
-	 * toString()).
-	 * tree is not modified if an error occurs. */
 	public void replace(String position, String subTree) {
 		
 		if (position == null || subTree == null) {
