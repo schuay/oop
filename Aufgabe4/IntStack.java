@@ -2,8 +2,8 @@ public class IntStack {
 	/* a stack containing values of type IntNode */
 
 	private class Entry {
-		Entry next;
-		IntNode node;
+		final Entry next;
+		final IntNode node;
 		public Entry(Entry next, IntNode node) {
 			this.next = next;
 			this.node = node;

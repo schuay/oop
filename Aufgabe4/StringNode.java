@@ -23,7 +23,7 @@ public class StringNode extends Node {
 	/* returns a value < 0, == 0, >0 if value is, respectively,
 	 * less than, equal to, or greater than anotherNode's value */
 	public int compareTo(StringNode anotherNode) {
-		return value.compareTo(anotherNode.value);
+		return compareTo(anotherNode.value);
 	}
 
 	/* returns a value < 0, == 0, >0 if value is, respectively,
@@ -54,10 +54,6 @@ public class StringNode extends Node {
 
 	public int getLevel() {
 		return level;
-	}
-
-	public String toString() {
-		return Node.formatRow(level, getValue());
 	}
 }
 /* vim: set noet ts=4 sw=4: */

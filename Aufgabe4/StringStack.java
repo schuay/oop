@@ -2,8 +2,8 @@ public class StringStack {
 	/* a stack containing values of type StringNode */
 	
 	private class Entry {
-		Entry next;
-		StringNode node;
+		final Entry next;
+		final StringNode node;
 		public Entry(Entry next, StringNode node) {
 			this.next = next;
 			this.node = node;

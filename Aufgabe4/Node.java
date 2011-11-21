@@ -19,6 +19,8 @@ public abstract class Node {
 	/* returns the level of the node within the tree */
 	public abstract int getLevel();
 
+	public abstract Object getValue();
+
 	/* returns a string representation of the node and its subtrees:
 	 * value			// this node's value
 	 * - child 1		// value of the left child
@@ -59,6 +61,15 @@ public abstract class Node {
 			return terminator;
 		}
 		return s + repeat(s, terminator, n - 1);
+	}
+
+	/* returns a string representing the current node's value and level:
+	 * value		// level 0
+	 * - value		// level 1
+	 *   - value	// level 2
+	 */
+	public String toString() {
+		return Node.formatRow(getLevel(), getValue().toString());
 	}
 }
 /* vim: set noet ts=4 sw=4: */
