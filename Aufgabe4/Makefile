@@ -1,10 +1,10 @@
-JAVAC = javac -g -Werror -impicit:none
+JAVAC = javac -g -Werror -implicit:none
 JAVA = java
 JAR = jar
 SOURCES = InorderTree.java PostorderTree.java ReplaceableTree.java \
 		  StringTree.java IntTree.java PreorderTree.java \
-		  SortedTree.java Test.java Replaceable.java Tree.java Node.java \
-		  StringNode.java IntNode.java StringStack.java IntStack.java
+		  SortedTree.java Replaceable.java Test.java \
+		  StringNode.java StringStack.java
 CLASSES = $(SOURCES:.java=.class)
 MODNAME = Test
 
