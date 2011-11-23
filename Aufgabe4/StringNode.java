@@ -10,6 +10,10 @@ public class StringNode {
 	private final int level;
 
 	public StringNode(String value, int level) {
+		if (value == null || value.equals("")) {
+			throw new IllegalArgumentException();
+		}
+
 		this.value = value;
 		this.level = level;
 	}

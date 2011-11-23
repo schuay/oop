@@ -59,8 +59,6 @@ public class ReplaceableTree extends StringTree implements Replaceable {
 			final int level = (dashIndex / 2) + 1; /* '  - a' is level 2, '    - b level 3 */
 			final String value = line.substring(dashIndex + 1).trim();
 			final boolean isEmptyLeaf = (value.length() == 0);
-			final StringNode node =
-					new StringNode(value, baseLevel + level); /* the new child */
 
 			/* invalid input (cannot go down more than 1 level in 1 step) */
 			if (level > prevlevel + 1) {
@@ -72,7 +70,7 @@ public class ReplaceableTree extends StringTree implements Replaceable {
 			if (level == prevlevel + 1) {
 				parent = s.peek();
 				if (!isEmptyLeaf) {
-					parent.setLeft(node);
+					parent.setLeft(new StringNode(value, baseLevel + level));
 				}
 			/* pop stack until we reach parent */
 			} else {
@@ -85,11 +83,17 @@ public class ReplaceableTree extends StringTree implements Replaceable {
 					throw new IllegalArgumentException();
 				}
 				if (!isEmptyLeaf) {
-					parent.setRight(node);
+					parent.setRight(new StringNode(value, baseLevel + level));
 				}
 			}
 
-			s.push(node);
+			/* creating a StringNode with an empty value causes an exception */
+			if (isEmptyLeaf) {
+				s.push(null);
+			} else {
+				s.push(new StringNode(value, baseLevel + level));
+			}
+
 			prevlevel = level;
 		}
 

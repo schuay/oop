@@ -36,6 +36,10 @@ public class IntTree implements Replaceable {
 
 			final int dashIndex = line.indexOf("-");
 			final String value = line.substring(dashIndex + 1).trim();
+			/* empty leaf is not a number */
+			if (value.length() == 0) {
+				continue;
+			}
 			try {
 				Integer.parseInt(value);
 			} catch (NumberFormatException e) {
