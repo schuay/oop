@@ -70,7 +70,7 @@ public abstract class StringTree {
 		return null;
 	}
 
-	/* adds node (!= null) to the tree */
+	/* adds node (!= null && != "") to the tree */
 	public void add(String node) {
 
 		if (node == null) {
