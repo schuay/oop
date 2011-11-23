@@ -4,8 +4,5 @@ public class InorderTree<A extends Comparable<? super A>> extends SortedTree<A> 
 	public TreeIter<A> iterator() {
 		return null;
 	}
-
-	public void add(A value) {
-	}
 }
 /* vim: set noet ts=4 sw=4: */

@@ -10,7 +10,7 @@ public abstract class Person implements Comparable<Person> {
 	}
 
 	public boolean equals(Person o) {
-		return compareTo(o)==0;
+		return (compareTo(o) == 0);
 	}
 
 	public String getName() {
