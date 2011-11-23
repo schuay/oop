@@ -156,8 +156,14 @@ public class Test {
 		try {
 			t.replace("left left", "10\n"+
 					               "- 20\n"+
+								   "  - \n"+
+								   "  - \n"+
 								   "- 30\n"+
-								   "- 40\n");
+								   "  - \n"+
+								   "  - \n"+
+								   "- 40\n"+
+								   "  - \n"+
+								   "  - \n");
 			test = true;
 		} catch (IllegalArgumentException e) {
 			test = false;
@@ -167,7 +173,11 @@ public class Test {
 		try {
 			t.replace("left left", "10\n"+
 					               "- 20\n"+
-								   "- intT_z\n");
+								   "  - \n"+
+								   "  - \n"+
+								   "- intT_z\n"+
+								   "  - \n"+
+								   "  - \n");
 			test = true;
 		} catch (IllegalArgumentException e) {
 			test = false;
@@ -177,7 +187,11 @@ public class Test {
 		try {
 			t.replace("left left", "10\n"+
 					               "- 20\n"+
-								   "- 30\n");
+								   "  - \n"+
+								   "  - \n"+
+								   "- 30\n"+
+								   "  - \n"+
+								   "  - \n");
 		} catch (Exception e) {}
 		test(prefix+"replace with correct args", "1\n"+
 				                                 "- 2\n"+
@@ -310,9 +324,15 @@ public class Test {
 
 		try {
 			t.replace("left left", "replT_w\n"+
-					               " - replT_x\n"+
-								   " - replT_y\n"+
-								   " - replT_z\n");
+					               "- replT_x\n"+
+					               "  - \n"+
+					               "  - \n"+
+								   "- replT_y\n"+
+					               "  - \n"+
+					               "  - \n"+
+								   "- replT_z\n"+
+					               "  - \n"+
+					               "  - \n");
 			test = true;
 		} catch (IllegalArgumentException e) {
 			test = false;
@@ -321,12 +341,12 @@ public class Test {
 
 		try {
 			t.replace("left left", "replT_x\n"+
-					               " - replT_y\n"+
-					               "   - \n"+
-					               "   - \n"+
-								   " - replT_z\n"+
-					               "   - \n"+
-					               "   - \n");
+					               "- replT_y\n"+
+					               "  - \n"+
+					               "  - \n"+
+								   "- replT_z\n"+
+					               "  - \n"+
+					               "  - \n");
 		} catch (Exception e) {}
 		test(prefix+"replace with correct args", "replT_a\n"+
 				                                 "- replT_b\n"+
