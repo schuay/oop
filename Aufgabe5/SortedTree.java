@@ -1,4 +1,4 @@
-public abstract class SortedTree<A extends Comparable<A>> extends Tree<A> {
+public abstract class SortedTree<A extends Comparable<? super A>> extends Tree<A> {
 	/* Represents a sorted tree. */
 
 	/* The tree remains sorted after adding the new node. */

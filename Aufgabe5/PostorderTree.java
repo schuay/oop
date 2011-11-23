@@ -1,4 +1,4 @@
-public class PostorderTree<A extends Comparable<A>> extends SortedTree<A> {
+public class PostorderTree<A extends Comparable<? super A>> extends SortedTree<A> {
 
 	/* Values are iterated in postorder. */
 	public TreeIter<A> iterator() {
