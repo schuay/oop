@@ -26,6 +26,33 @@ public abstract class Tree<A> {
 	 * returns when called with the same value.
 	 * value != null */
 	public Iter<Boolean> search(A value) {
+		return recursiveSearch(value, root);
+	}
+
+	protected LinkedListIter<Boolean> recursiveSearch(A value, Node node) {
+
+		if (node == null) {
+			return null;
+		} else if (node.getValue().equals(value)) {
+			/* found - return empty iter */
+			return new LinkedListIter<Boolean>();
+		}
+
+		LinkedListIter<Boolean> it;
+
+		/* search left subtree */
+		it = recursiveSearch(value, node.getLeft());
+		if (it != null) {
+			return it.prepend(false);
+		}
+
+		/* search right subtree */
+		it = recursiveSearch(value, node.getRight());
+		if (it != null) {
+			return it.prepend(true);
+		}
+
+		/* not found */
 		return null;
 	}
 
