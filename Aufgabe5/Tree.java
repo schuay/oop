@@ -80,6 +80,107 @@ public abstract class Tree<A> {
 		}
 	}
 
+	protected class LinkedListIter<B> implements Iter<B> {
+
+		private class LinkedList {
+			private LinkedList next = null;
+			private LinkedList prev = null;
+			private B value;
+			public LinkedList(B value) {
+				this.value = value;
+			}
+			public LinkedList getNext() {
+				return next;
+			}
+			public LinkedList getPrev() {
+				return prev;
+			}
+			public B getValue() {
+				return value;
+			}
+			public void append(LinkedList next) {
+				this.next = next;
+				next.prev = this;
+			}
+		}
+
+		/* only equals null if iter is empty */
+		LinkedList current = null;
+		LinkedList head = null;
+		LinkedList tail = null;
+
+		public LinkedListIter<B> prepend(B value) {
+			LinkedList l = new LinkedList(value);
+			if (head == null) {
+				tail = head = l;
+			} else {
+				l.append(head);
+				head = l;
+			}
+			return this;
+		}
+
+		private LinkedList pred() {
+			if (head == null) {
+				/* empty iter */
+				return null;
+			} else if (current == null) {
+				/* first call to next */
+				return null;
+			} else if (current.getPrev() != null) {
+				/* prev element exists */
+				return current.getPrev();
+			}
+
+			/* at beginning of iter */
+			return null;
+		}
+
+		private LinkedList succ() {
+			if (head == null) {
+				/* empty iter */
+				return null;
+			} else if (current == null) {
+				/* first call to next */
+				return head;
+			} else if (current.getNext() != null) {
+				/* next element exists */
+				return current.getNext();
+			}
+
+			/* at end of iter */
+			return null;
+		}
+
+		public B next() {
+			LinkedList l = succ();
+
+			if (l == null) {
+				return null;
+			}
+			current = l;
+			return l.getValue();
+		}
+
+		public B previous() {
+			LinkedList l = pred();
+
+			if (l == null) {
+				return null;
+			}
+			current = l;
+			return l.getValue();
+		}
+
+		public boolean hasNext() {
+			return (succ() != null);
+		}
+
+		public boolean hasPrevious() {
+			return (pred() != null);
+		}
+	}
+
 	protected abstract class AbstractTreeIter implements TreeIter<A> {
 
 		/* is null if and only if next() and previous()
