@@ -34,7 +34,7 @@ public abstract class Tree<A> {
 	public abstract void add(A value);
 
 	protected class Stack<B> {
-		/* Creates an empty Stack. */
+		/* The Stack class represents a last-in-first-out (LIFO) stack of objects. */
 
 		private class Entry {
 			final Entry next;
