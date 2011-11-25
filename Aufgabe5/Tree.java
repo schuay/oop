@@ -10,13 +10,47 @@ public abstract class Tree<A> {
 	 * containing value as root.
 	 * value != null */
 	public TreeIter<A> contains(A value) {
-		return null;
+		/* search tree */
+		Iter<Boolean> it = recursiveSearch(value, root);
+		if (it == null) {
+			return null;
+		}
+		/* walk tree */
+		Node n = walk(it);
+		if (n == null) {
+			return null;
+		}
+		return specificIterator(n);
+	}
+
+	/* Returns the node pointed to by position, or null if
+	 * it doesn't exist. */
+	protected Node walk(Iter<Boolean> position) {
+		Node n = root;
+		while (position.hasNext()) {
+			if (n == null) {
+				return null;
+			}
+
+			boolean b = position.next();
+			if (b) {
+				n = n.getRight();
+			} else {
+				n = n.getLeft();
+			}
+		}
+
+		return n;
 	}
 
 	/* Returns an iterator over all values in the tree. */
 	public TreeIter<A> iterator() {
-		return null;
+		return specificIterator(root);
 	}
+
+	/* Returns an iterator over the subtree with node as root;
+	 * The iterator type depends on the type of the tree. */
+	protected abstract TreeIter<A> specificIterator(Node node);
 
 	/* Returns an iterator containing the path from root to
 	 * the node containing value, with false representing
