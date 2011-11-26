@@ -3,7 +3,11 @@ import java.util.EmptyStackException;
 public abstract class Tree<A> {
 	/* Represents a binary tree */
 
-	Node root = null;
+	private Node<A> root = null;
+
+	protected Node<A> getRoot() {
+		return root;
+	}
 
 	/* Returns null if the tree doesn't contain value,
 	 * otherwise a TreeIter over the subtree with the node
@@ -16,7 +20,7 @@ public abstract class Tree<A> {
 			return null;
 		}
 		/* walk tree */
-		Node n = walk(it);
+		Node<A> n = walk(it);
 		if (n == null) {
 			return null;
 		}
@@ -25,8 +29,8 @@ public abstract class Tree<A> {
 
 	/* Returns the node pointed to by position, or null if
 	 * it doesn't exist. */
-	protected Node walk(Iter<Boolean> position) {
-		Node n = root;
+	protected Node<A> walk(Iter<Boolean> position) {
+		Node<A> n = root;
 		while (position.hasNext()) {
 			if (n == null) {
 				return null;
@@ -50,7 +54,7 @@ public abstract class Tree<A> {
 
 	/* Returns an iterator over the subtree with node as root;
 	 * The iterator type depends on the type of the tree. */
-	protected abstract TreeIter<A> specificIterator(Node node);
+	protected abstract TreeIter<A> specificIterator(Node<A> node);
 
 	/* Returns an iterator containing the path from root to
 	 * the node containing value, with false representing
@@ -63,7 +67,7 @@ public abstract class Tree<A> {
 		return recursiveSearch(value, root);
 	}
 
-	protected LinkedListIter<Boolean> recursiveSearch(A value, Node node) {
+	protected LinkedListIter<Boolean> recursiveSearch(A value, Node<A> node) {
 
 		if (node == null) {
 			return null;
@@ -94,7 +98,7 @@ public abstract class Tree<A> {
 	 * value != null */
 	public abstract void add(A value);
 
-	protected class Stack<B> {
+	protected static class Stack<B> {
 		/* The Stack class represents a last-in-first-out (LIFO) stack of objects. */
 
 		private class Entry {
@@ -141,7 +145,7 @@ public abstract class Tree<A> {
 		}
 	}
 
-	protected class LinkedListIter<B> implements Iter<B> {
+	protected static class LinkedListIter<B> implements Iter<B> {
 
 		private class LinkedList {
 			private LinkedList next = null;
@@ -242,41 +246,41 @@ public abstract class Tree<A> {
 		}
 	}
 
-	protected abstract class AbstractTreeIter implements TreeIter<A> {
+	protected abstract static class AbstractTreeIter<B> implements TreeIter<B> {
 
 		/* is null if and only if next() and previous()
 		 * have never been called, or root == null */
-		private Node current = null;
+		private Node<B> current = null;
 
 		/* can be null for empty iter */
-		private final Node root;
+		private final Node<B> root;
 
-		public AbstractTreeIter(Node root) {
+		public AbstractTreeIter(Node<B> root) {
 			this.root = root;
 		}
 
 		/* Returns successor node if it exists, otherwise null. */
-		protected abstract Node succ();
+		protected abstract Node<B> succ();
 
 		/* Returns predecessor node if it exists, otherwise null. */
-		protected abstract Node pred();
+		protected abstract Node<B> pred();
 
-		public A next() {
-			Node n = succ();
+		public B next() {
+			Node<B> n = succ();
 			if (n == null) {
 				return null;
 			}
 			setCurrent(n);
-			return n.value;
+			return n.getValue();
 		}
 
-		public A previous() {
-			Node n = pred();
+		public B previous() {
+			Node<B> n = pred();
 			if (n == null) {
 				return null;
 			}
 			setCurrent(n);
-			return n.value;
+			return n.getValue();
 		}
 
 		public boolean hasNext() {
@@ -294,29 +298,41 @@ public abstract class Tree<A> {
 			}
 			return new AbstractTreeIter(current);
 		 */
-		public abstract TreeIter<A> down();
+		public abstract TreeIter<B> down();
 
-		protected Node getRoot() {
+		protected Node<B> getRoot() {
 			return root;
 		}
 
-		protected Node getCurrent() {
+		protected Node<B> getCurrent() {
 			return current;
 		}
 
-		protected void setCurrent(Node current) {
+		protected void setCurrent(Node<B> current) {
 			this.current = current;
 		}
 	}
 
-	protected class Node {
-		private Node left;
-		private Node right;
+	protected static class Node<C> {
+		private Node<C> left;
+		private Node<C> right;
 
-		private final A value;
+		private final C value;
 
-		public Node(A value) {
+		public Node(C value) {
 			this.value = value;
+		}
+
+		public Node(Node<? extends C> node) {
+			this(node.value);
+
+			if (node.hasLeft()) {
+				setLeft(new Node<C>(node.getLeft()));
+			}
+
+			if (node.hasRight()) {
+				setRight(new Node<C>(node.getRight()));
+			}
 		}
 
 		public boolean hasLeft() {
@@ -327,23 +343,23 @@ public abstract class Tree<A> {
 			return (getRight() != null);
 		}
 
-		public Node getLeft() {
+		public Node<C> getLeft() {
 			return left;
 		}
 
-		public void setLeft(Node left) {
+		public void setLeft(Node<C> left) {
 			this.left = left;
 		}
 
-		public Node getRight() {
+		public Node<C> getRight() {
 			return right;
 		}
 
-		public void setRight(Node right) {
+		public void setRight(Node<C> right) {
 			this.right = right;
 		}
 
-		public A getValue() {
+		public C getValue() {
 			return value;
 		}
 	}
