@@ -9,6 +9,10 @@ public abstract class Tree<A> {
 		return root;
 	}
 
+	protected void setRoot(Node<A> root) {
+		this.root = root;
+	}
+
 	/* Returns null if the tree doesn't contain value,
 	 * otherwise a TreeIter over the subtree with the node
 	 * containing value as root.
