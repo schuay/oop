@@ -1,0 +1,46 @@
+Indendation as follows:
+
+class A {
+	public void M() {
+		int i;
+		for (i = 0; i < c; i++) {
+			System.out.println(i);
+		}
+
+		if (i == c) {
+			...
+		} else {
+			i--;
+		}
+	}
+}
+
+Tabs are used to indent, and tabwidth is set to 4. We use the following vim modeline:
+
+/* vim: set noet ts=4 sw=4: */
+
+Unix line endings are used. Lines should not be longer than 80 columns.
+
+Operators, commas and similar symbols should be spaced for easy reading, for example:
+
+if (o == null) {
+	and not
+if(o==null)
+
+for (i = 0; i < c; i++)
+	and not
+for(i=0;i<c;i++)
+
+longCtor(a, b, c, d, e, f, g)
+	and not
+longCtor(a,b,c,d,e,f,g,h)
+
+Even if/else branches consisting only of a single statement should be bracketed:
+
+if (a) {
+	x;
+} else if (b) {
+	y;
+} else {
+	z
+}
