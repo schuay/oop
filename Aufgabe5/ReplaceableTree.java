@@ -43,6 +43,66 @@ public class ReplaceableTree<A> extends Tree<A> {
 	 * minimal depth. Except for the additional node, the tree's
 	 * structure is not modified. */
 	public void add(A value) {
+
+		/* empty tree */
+		if (getRoot() == null) {
+			setRoot(new Node<A>(value));
+			return;
+		}
+
+		/* contains all nodes of level i from left to right (the first next()
+		 * call returns the leftmost node) */
+		Stack<Node<A>> level = new Stack<Node<A>>();
+
+		level.push(getRoot());
+
+		/* recursively step through levels until the value is added */
+		do {
+			level = getNextLevelOrAdd(level, value);
+		} while (level != null && !level.empty());
+	}
+
+	/* prevLevel is a stack with all nodes of the previous level. the first call to next()
+	 * returns the leftmost node.
+	 * value is the value to be added at the first available position.
+	 * if the value has been added, return null.
+	 * else return an ordered stack of the next level nodes.
+	 */
+	private Stack<Node<A>> getNextLevelOrAdd(Stack<Node<A>> prevLevel, A value) {
+
+		/* reached end of level -> terminate recursion */
+		if (prevLevel.empty()) {
+			return new Stack<Node<A>>();
+		}
+
+		Node<A> n = prevLevel.pop();
+		Node<A> l = n.getLeft();
+		Node<A> r = n.getRight();
+
+		/* found empty spot -> add value and terminate recursion */
+		if (l == null) {
+			n.setLeft(new Node<A>(value));
+			return null;
+		} else if (r == null) {
+			n.setRight(new Node<A>(value));
+			return null;
+		}
+
+		Stack<Node<A>> nextLevel = getNextLevelOrAdd(prevLevel, value);
+		if (nextLevel == null) {
+			/* value was added somewhere on this level */
+			return null;
+		}
+
+		/* add nodes in reverse order (because we're dealing with a LIFO structure */
+		if (r != null) {
+			nextLevel.push(r);
+		}
+		if (l != null) {
+			nextLevel.push(l);
+		}
+
+		return nextLevel;
 	}
 
 	protected TreeIter<A> specificIterator(Node<A> node) {
@@ -81,7 +141,8 @@ public class ReplaceableTree<A> extends Tree<A> {
 					Node<A> prev, rightChild;
 					do {
 						prev = cur;
-						cur = stack.pop();
+						stack.pop(); /* remove current */
+						cur = stack.peek(); /* and look at parent */
 						rightChild = cur.getRight();
 					} while (!stack.empty() && (prev == rightChild || rightChild == null));
 					/* and process it */
