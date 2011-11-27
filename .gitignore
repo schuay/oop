@@ -4,3 +4,4 @@ Aufgabe*/doc
 .metadata
 *.class
 *.swp
+.ssh-cfg
