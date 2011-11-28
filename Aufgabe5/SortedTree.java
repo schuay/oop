@@ -3,6 +3,8 @@ public abstract class SortedTree<A extends Comparable<? super A>> extends Tree<A
 
 	/* The tree remains sorted after adding the new node. */
 	public void add(A value) {
+		checkNullArg(value);
+
 		Node<A> cur = getRoot();
 		Node<A> newNode = new Node<A>(value);
 

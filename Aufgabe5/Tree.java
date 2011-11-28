@@ -13,11 +13,19 @@ public abstract class Tree<A> {
 		this.root = root;
 	}
 
+	protected static void checkNullArg(Object a) {
+		if (a == null) {
+			throw new IllegalArgumentException();
+		}
+	}
+
 	/* Returns null if the tree doesn't contain value,
 	 * otherwise a TreeIter over the subtree with the node
 	 * containing value as root.
 	 * value != null */
 	public TreeIter<A> contains(A value) {
+		checkNullArg(value);
+
 		/* search tree */
 		Iter<Boolean> it = recursiveSearch(value, root);
 		if (it == null) {
@@ -68,6 +76,8 @@ public abstract class Tree<A> {
 	 * returns when called with the same value.
 	 * value != null */
 	public Iter<Boolean> search(A value) {
+		checkNullArg(value);
+
 		return recursiveSearch(value, root);
 	}
 
@@ -324,6 +334,8 @@ public abstract class Tree<A> {
 		private final C value;
 
 		public Node(C value) {
+			checkNullArg(value);
+
 			this.value = value;
 		}
 
