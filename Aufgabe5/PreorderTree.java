@@ -25,18 +25,18 @@ public class PreorderTree<A extends Comparable<? super A>> extends SortedTree<A>
 			Stack<Node<A>> state = getCurrentStack();
 			cur = state.pop();
 			
-			if (cur.getLeft() != null) {
+			if (cur.hasLeft()) {
 				return cur.getLeft();
 			}
 
-			if (cur.getRight() != null) {
+			if (cur.hasRight()) {
 				return cur.getRight();
 			}
 
 			Node<A> parent;
 			while (!state.empty()) {
 				parent = state.pop();
-				if (parent.getRight() != null && parent.getRight() != cur) {
+				if (parent.hasRight() && parent.getRight() != cur) {
 					return parent.getRight();
 				}
 
@@ -65,12 +65,12 @@ public class PreorderTree<A extends Comparable<? super A>> extends SortedTree<A>
 			}
 
 			Node<A> parent = state.pop();
-			if (parent.getLeft() == null || parent.getLeft() == cur) {
+			if (!parent.hasLeft() || parent.getLeft() == cur) {
 				return parent;
 			}
 
 			cur = parent.getLeft();
-			while (cur.getRight() != null) {
+			while (cur.hasRight()) {
 				cur = cur.getRight();
 			}
 

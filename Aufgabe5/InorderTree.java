@@ -22,7 +22,7 @@ public class InorderTree<A extends Comparable<? super A>> extends SortedTree<A> 
 			 * first element is leftmost element of tree */
 			if (getCurrent() == null) {
 				cur = getRoot();
-				while(cur.getLeft() != null) {
+				while(cur.hasLeft()) {
 					cur = cur.getLeft();
 				}
 
@@ -34,9 +34,9 @@ public class InorderTree<A extends Comparable<? super A>> extends SortedTree<A> 
 
 			/* right subtree exists:
 			 * return leftmost element of right subtree */
-			if (cur.getRight() != null) {
+			if (cur.hasRight()) {
 				cur = cur.getRight();
-				while(cur.getLeft() != null) {
+				while(cur.hasLeft()) {
 					cur = cur.getLeft();
 				}
 
@@ -69,9 +69,9 @@ public class InorderTree<A extends Comparable<? super A>> extends SortedTree<A> 
 			Stack<Node<A>> state = getCurrentStack();
 			Node<A> cur = state.pop();
 
-			if (cur.getLeft() != null) {
+			if (cur.hasLeft()) {
 				cur = cur.getLeft();
-				while(cur.getRight() != null) {
+				while(cur.hasRight()) {
 					cur = cur.getRight();
 				}
 

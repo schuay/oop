@@ -21,9 +21,9 @@ public class PostorderTree<A extends Comparable<? super A>> extends SortedTree<A
 			if (getCurrent() == null) {
 				cur = getRoot();
 				while (true) {
-					if (cur.getLeft() != null) {
+					if (cur.hasLeft()) {
 						cur = cur.getLeft();
-					} else if (cur.getRight() != null) {
+					} else if (cur.hasRight()) {
 						cur = cur.getRight();
 					} else {
 						return cur;
@@ -40,15 +40,15 @@ public class PostorderTree<A extends Comparable<? super A>> extends SortedTree<A
 
 			Node<A> parent = state.pop();
 
-			if (parent.getRight() == null || parent.getRight() == cur) {
+			if (!parent.hasRight() || parent.getRight() == cur) {
 				return parent;
 			}
 
 			cur = parent.getRight();
 			while (true) {
-				if (cur.getLeft() != null) {
+				if (cur.hasLeft()) {
 					cur = cur.getLeft();
-				} else if (cur.getRight() != null) {
+				} else if (cur.hasRight()) {
 					cur = cur.getRight();
 				} else {
 					break;
@@ -72,18 +72,18 @@ public class PostorderTree<A extends Comparable<? super A>> extends SortedTree<A
 			Stack<Node<A>> state = getCurrentStack();
 			cur = state.pop();
 
-			if (cur.getRight() != null) {
+			if (cur.hasRight()) {
 				return cur.getRight();
 			}
 
-			if (cur.getLeft() !=null) {
+			if (cur.hasLeft()) {
 				return cur.getLeft();
 			}
 			
 			Node<A> parent;
 			while (!state.empty()) {
 				parent = state.pop();
-				if (parent.getLeft() != null && parent.getLeft() != cur) {
+				if (parent.hasLeft() && parent.getLeft() != cur) {
 					return parent.getLeft();
 				}
 

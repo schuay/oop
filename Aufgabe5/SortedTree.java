@@ -15,13 +15,13 @@ public abstract class SortedTree<A extends Comparable<? super A>> extends Tree<A
 
 		while (true) {
 			if (value.compareTo(cur.getValue()) < 0) {
-				if (cur.getLeft() == null) {
+				if (!cur.hasLeft()) {
 					cur.setLeft(newNode);
 					return;
 				}
 				cur = cur.getLeft();
 			} else {
-				if (cur.getRight() == null) {
+				if (!cur.hasRight()) {
 					cur.setRight(newNode);
 					return;
 				}
