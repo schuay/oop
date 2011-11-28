@@ -11,7 +11,12 @@ public class ReplaceableTree<A> extends Tree<A> {
 		checkNullArg(subTree);
 
 		/* clone tree */
-		Node<A> n = new Node<A>(subTree.getRoot());
+		final Node<? extends A> r = subTree.getRoot();
+		Node<A> n = null;
+
+		if (r != null) {
+			n = new Node<A>(r);
+		}
 
 		/* empty position, replace root. */
 		if (!position.hasNext()) {
