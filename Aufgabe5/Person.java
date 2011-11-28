@@ -9,12 +9,20 @@ public abstract class Person implements Comparable<Person> {
 		return name.compareToIgnoreCase(o.name);
 	}
 
-	public boolean equals(Person o) {
-		return (compareTo(o) == 0);
+	public boolean equals(Object o) {
+		if (o instanceof Person) {
+			Person p = (Person)o;
+			return (compareTo(p) == 0);
+		}
+		return super.equals(o);
 	}
 
 	public String getName() {
 		return name;
+	}
+
+	public String toString() {
+		return getName();
 	}
 }
 /* vim: set noet ts=4 sw=4: */
