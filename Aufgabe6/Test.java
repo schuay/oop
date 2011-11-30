@@ -1,7 +1,7 @@
 import java.util.HashMap;
 
 public class Test {
-	private static boolean tests = true;
+	private static boolean result = true;
 	private final static HashMap<Boolean, String> labels =
 		new HashMap<Boolean, String>();
 	private static int testCount = 0;
@@ -49,12 +49,12 @@ public class Test {
 		System.out.printf("%04d: %s%n%s: expected: %s, got: %s%n%n",
 				testCount++, test, labels.get(succeeded), abbreviate(expected),
 				abbreviate(got));
-		tests = tests && succeeded;
+		result = result && succeeded;
 	}
 
 	private static void printSummary() {
 		System.out.printf("%nFinal result: %s (%d passed, %d failed)%n%n",
-				labels.get(tests), testCount - failedCount, failedCount);
+				labels.get(result), testCount - failedCount, failedCount);
 	}
 
 	private static String abbreviate(Object o) {
