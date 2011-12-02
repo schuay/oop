@@ -1,15 +1,22 @@
 public class Bender extends Robot {
+	private int rotations;
 	
 	public Bender(int id) {
 		super(id);
 	}
 	
 	public void incRotations(int delta) {
-		
+		if (delta > 0) {
+			rotations += delta;
+		}
 	}
 	
 	public int getRotations() {
-		return -1;
+		return rotations;
+	}
+
+	public String getType() {
+		return "Bender";
 	}
 }
 
