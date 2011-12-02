@@ -1,14 +1,19 @@
 public class Sprayer implements Role {
+	private final double cap;
 
 	public Sprayer(double capacity) {
+		if (capacity < 0) {
+			throw new IllegalArgumentException();
+		}
+		cap = capacity;
 	}
 	
 	public String getRole() {
-		return null;
+		return "Sprayer";
 	}
 	
 	public double getCapacity() {
-		return -1;
+		return cap;
 	}
 }
 

@@ -1,15 +1,16 @@
 public class Welder implements Role {
+	private final int temp;
 	
 	public Welder(int temperature) {
-		
+		temp = temperature;
 	}
 	
 	public String getRole() {
-		return null;
+		return "Welder";
 	}
 	
 	public int getWorkingTemp() {
-		return -1;
+		return temp;
 	}
 }
 
