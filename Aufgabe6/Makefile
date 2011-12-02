@@ -2,7 +2,7 @@ JAVAC = javac -g -Werror -implicit:none -Xlint:unchecked
 JAVA = java
 SOURCES = Bender.java Crawler.java Dictionary.java Factory.java \
 		  Robot.java Role.java Sprayer.java Test.java Welder.java \
-		  Iter.java
+		  Iter.java Util.java
 CLASSES = $(SOURCES:.java=.class)
 MODNAME = Test
 
