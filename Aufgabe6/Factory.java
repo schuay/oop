@@ -46,10 +46,7 @@ public class Factory {
 	public void benderIncRotations(int id, int delta) {
 		Robot r = (Robot) robots.get(id);
 		Util.checkNullArg(r);
-
-		if (!(r instanceof Bender)) {
-			throw new IllegalArgumentException();
-		}
+		Util.checkInstanceOf(r, "Bender");
 
 		((Bender) r).incRotations(delta);
 	}
@@ -57,10 +54,7 @@ public class Factory {
 	public int benderGetRotations(int id) {
 		Robot r = (Robot) robots.get(id);
 		Util.checkNullArg(r);
-
-		if (!(r instanceof Bender)) {
-			throw new IllegalArgumentException();
-		}
+		Util.checkInstanceOf(r, "Bender");
 
 		return ((Bender) r).getRotations();
 	}
@@ -68,10 +62,7 @@ public class Factory {
 	public void crawlerIncTravelled(int id, double delta) {
 		Robot r = (Robot) robots.get(id);
 		Util.checkNullArg(r);
-
-		if (!(r instanceof Crawler)) {
-			throw new IllegalArgumentException();
-		}
+		Util.checkInstanceOf(r, "Crawler");
 
 		((Crawler) r).incTravelledDistance(delta);
 	}
@@ -79,10 +70,7 @@ public class Factory {
 	public double crawlerGetTravelled(int id) {
 		Robot r = (Robot) robots.get(id);
 		Util.checkNullArg(r);
-
-		if (!(r instanceof Crawler)) {
-			throw new IllegalArgumentException();
-		}
+		Util.checkInstanceOf(r, "Crawler");
 
 		return ((Crawler) r).getTravelledDistance();
 	}
