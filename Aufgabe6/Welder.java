@@ -1,6 +1,9 @@
 public class Welder implements Role {
+	/* The temperature cannot be changed. */
 	private final int temp;
 	
+	/* Create a Welder role with the given working temperature.
+	 * The temperature cannot be changed afterwards. */
 	public Welder(int temperature) {
 		temp = temperature;
 	}
