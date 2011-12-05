@@ -149,8 +149,8 @@ public class Factory {
 
 	/* A class to calculate the average of the hoursUsed counter of the robots. */
 	private class AvgHoursUsed extends RobotAvg {
-		protected Object getData(Robot r) {
-			return (double) r.getHoursUsed();
+		protected Number getData(Robot r) {
+			return r.getHoursUsed();
 		}
 
 		protected boolean regard(Robot r) {
@@ -167,7 +167,7 @@ public class Factory {
 		
 		/* Returns the data used in the statistic from the given robot.
 		 * (r != null) */
-		protected abstract Object getData(Robot r);
+		protected abstract Number getData(Robot r);
 
 		/* Determines whether the given robot should be used in the statistic.
 		 * (r != null) */
@@ -221,13 +221,13 @@ public class Factory {
 			}
 
 			if (!stats.containsKey(key)) {
-				stats.put(key, (Double) getData(r));
+				stats.put(key, getData(r).doubleValue());
 				counts.put(key, 1.0);
 			} else {
 				avg = ((Double) stats.get(key));
 				count = ((Double) counts.get(key));
 
-				avg = ((avg * count) + (Double)getData(r))/++count;
+				avg = ((avg * count) + getData(r).doubleValue())/++count;
 
 				stats.put(key, avg);
 				counts.put(key, count);
@@ -260,8 +260,8 @@ public class Factory {
 
 	/* A class to calculate the average of the rotations counter of all benders. */
 	private class AvgRotations extends RobotAvg {
-		protected Object getData(Robot r) {
-			return (double) ((Bender) r).getRotations();
+		protected Number getData(Robot r) {
+			return ((Bender) r).getRotations();
 		}
 
 		protected boolean regard(Robot r) {
@@ -295,8 +295,8 @@ public class Factory {
 	/* A class to calculate the average of the travelled distance counter of all
 	 * crawlers. */
 	private class AvgTravelled extends RobotAvg {
-		protected Object getData(Robot r) {
-			return (double) ((Crawler) r).getTravelledDistance();
+		protected Number getData(Robot r) {
+			return ((Crawler) r).getTravelledDistance();
 		}
 
 		protected boolean regard(Robot r) {
@@ -317,7 +317,7 @@ public class Factory {
 				return;
 			}
 
-			int current = (Integer) getData(r);
+			int current = getData(r).intValue();
 			if (!stats.containsKey(key)) {
 				stats.put(key, current);
 			} else {
@@ -367,7 +367,7 @@ public class Factory {
 	/* A class calculate the minimum/maximum of the working temperature of all
 	 * welders. */
 	private abstract class MinMaxWorkingTemp extends RobotMinMax {
-		protected Object getData(Robot r) {
+		protected Number getData(Robot r) {
 			Role role = r.getRole();
 			return ((Welder) role).getWorkingTemp();
 		}
