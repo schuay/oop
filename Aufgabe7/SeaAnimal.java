@@ -1,4 +1,4 @@
-public abstract class SeaAnimal extends Animal implements TransportObject {
+public abstract class SeaAnimal extends Animal {
 	
 	/*
 	 * Creates a new SeaAnimal with the passed name 

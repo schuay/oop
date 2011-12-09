@@ -26,7 +26,7 @@ public class Transporter extends Loadable {
 	 * (l != null)
 	 * */
 	public TransportObject unload(Loadable l) {
-		return l.unloadObject(this);
+		return l.unloadObject();
 	}
 	
 	/*
@@ -190,9 +190,8 @@ public class Transporter extends Loadable {
 
 	/* Unloads the loadable object and returns a reference to
 	 * the previously loaded transport object (or null if empty). 
-	 * (t != null)
-	 * */
-	public TransportObject unloadObject(Transporter t) {
+	 */
+	public TransportObject unloadObject() {
 		Trailer trailer = next;
 		next = null;
 		return trailer;

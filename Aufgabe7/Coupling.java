@@ -1,9 +1,9 @@
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Set;
+import java.util.List;
+import java.util.LinkedList;
+import java.util.Collections;
 
-/* A coupling connects transporter cars and can have
- * big game tied to it. */
+/* A coupling and can have big game tied to it. */
 
 public class Coupling extends Loadable {
 	
@@ -14,13 +14,12 @@ public class Coupling extends Loadable {
 	 * */
 	
 	public Coupling(Set<LargeGame> tiedLargeGame) {
-		this.tiedLargeGame = tiedLargeGame;
+		this.tiedLargeGame = Collections.unmodifiableSet(tiedLargeGame);
 	}
 
 	/* Big game cannot be untied. 
-	 * (t != null)
-	 * */
-	public TransportObject unloadObject(Transporter t) {
+	 */
+	public TransportObject unloadObject() {
 		return null;
 	}
 

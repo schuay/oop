@@ -9,9 +9,8 @@ public abstract class Tank extends Loadable {
 	
 	/*
 	 * Unloads the Animal inside the passed Transporter and returns it
-	 * (t != null)
 	 */
-	public TransportObject unloadObject(Transporter t) {
+	public TransportObject unloadObject() {
 		SeaAnimal sa = getLoad();
 		setLoad(null);
 		return sa;

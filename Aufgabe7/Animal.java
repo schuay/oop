@@ -1,6 +1,6 @@
 
 /* Every animal has a name. */
-public abstract class Animal {
+public abstract class Animal implements TransportObject {
 	
 	private final String name;
 	

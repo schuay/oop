@@ -1,4 +1,4 @@
-public abstract class Reptile extends Animal implements TransportObject {
+public abstract class Reptile extends Animal {
 	
 	/*
 	 * Creates a new Reptile with the passed name 

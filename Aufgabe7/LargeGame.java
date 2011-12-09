@@ -1,4 +1,4 @@
-public abstract class LargeGame extends Animal implements TransportObject {
+public abstract class LargeGame extends Animal {
 	
 	/*
 	 * Creates a new LargeGame with the passed name 
