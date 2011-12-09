@@ -1,4 +1,9 @@
 public class GiantTortoiseTerrarium extends Terrarium {
+	
+	/*
+	 * Loads the passed GiantTortoise into this Loadable
+	 * (o != null)
+	 */
 	public boolean loadLoadable(GiantTortoise o) {
 		if (getLoad() != null) {
 			return false;
@@ -6,6 +11,12 @@ public class GiantTortoiseTerrarium extends Terrarium {
 		setLoad(o);
 		return true;
 	}
+	
+	/*
+	 * Loads the passed DwarfTortoise into this Loadable
+	 * DwarfTortoise can be loaded into this Loadable as well
+	 * (o != null)
+	 */
 	public boolean loadLoadable(DwarfTortoise o) {
 		if (getLoad() != null) {
 			return false;

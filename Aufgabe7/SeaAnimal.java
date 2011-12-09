@@ -1,5 +1,9 @@
 public abstract class SeaAnimal extends Animal implements TransportObject {
 	
+	/*
+	 * Creates a new SeaAnimal with the passed name 
+	 * (name != null)
+	 */
 	public SeaAnimal(String name) {
 		super(name);
 	}

@@ -3,7 +3,9 @@
 public interface TransportObject {
 	
 	/* Loads this object onto the given transporter and returns
-	 * true if successful, false otherwise. */
+	 * true if successful, false otherwise. 
+	 * (t != null)
+	 * */
 	boolean loadObject(Transporter t);
 }
 

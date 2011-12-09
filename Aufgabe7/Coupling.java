@@ -9,12 +9,17 @@ public class Coupling extends Loadable {
 	
 	private final Set<LargeGame> tiedLargeGame; 
 	
-	/* The tied animals are not changed at runtime. */
+	/* The tied animals are not changed at runtime. 
+	 * (tiedLargeGame != null)
+	 * */
+	
 	public Coupling(Set<LargeGame> tiedLargeGame) {
 		this.tiedLargeGame = tiedLargeGame;
 	}
 
-	/* Big game cannot be untied. */
+	/* Big game cannot be untied. 
+	 * (t != null)
+	 * */
 	public TransportObject unloadObject(Transporter t) {
 		return null;
 	}

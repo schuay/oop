@@ -14,17 +14,24 @@ public class Transporter extends Loadable {
 	}
 	
 	/* Loads the TransportObject onto the transporter.
-	 * Returns true if loading was successful, and false otherwise. */
+	 * Returns true if loading was successful, and false otherwise. 
+	 * (to != null)
+	 * */
 	public boolean load(TransportObject to) {
 		return to.loadObject(this);
 	}
 	
 	/* Unloads the specified Loadable object and returns
-	 * the object previously contained by it. */
+	 * the object previously contained by it. 
+	 * (l != null)
+	 * */
 	public TransportObject unload(Loadable l) {
 		return l.unloadObject(this);
 	}
 	
+	/*
+	 * Returns a List of the Names of Animals loaded in this Transporter
+	 */
 	public List<String> list() {
 		List<String> l = new LinkedList<String>();
 		for (Loadable loadable : load) {
@@ -36,6 +43,10 @@ public class Transporter extends Loadable {
 		return l;
 	}
 	
+	/*
+	 * Tries to load the passed DwarfTortoise into the Transporter and returns whether it was possible.
+	 * (o != null)
+	 */
 	public boolean loadDwarfTortoise(DwarfTortoise o) {
 		Iterator<Loadable> it = load.iterator();
 		Loadable i = null, prev = null;
@@ -51,6 +62,10 @@ public class Transporter extends Loadable {
 		return (i != prev);
 	}
 	
+	/*
+	 * Tries to load the passed GiantTortoise into the Transporter and returns whether it was possible.
+	 * (o != null)
+	 */
 	public boolean loadGiantTortoise(GiantTortoise o) {
 		Iterator<Loadable> it = load.iterator();
 		Loadable i = null, prev = null;
@@ -66,6 +81,10 @@ public class Transporter extends Loadable {
 		return (i != prev);
 	}
 	
+	/*
+	 * Tries to load the passed Mamba into the Transporter and returns whether it was possible.
+	 * (o != null)
+	 */
 	public boolean loadMamba(Mamba o) {
 		Iterator<Loadable> it = load.iterator();
 		Loadable i = null, prev = null;
@@ -81,6 +100,10 @@ public class Transporter extends Loadable {
 		return (i != prev);
 	}
 	
+	/*
+	 * Tries to load the passed Python into the Transporter and returns whether it was possible.
+	 * (o != null)
+	 */
 	public boolean loadPython(Python o) {
 		Iterator<Loadable> it = load.iterator();
 		Loadable i = null, prev = null;
@@ -96,6 +119,10 @@ public class Transporter extends Loadable {
 		return (i != prev);
 	}
 	
+	/*
+	 * Tries to load the passed Dolphin into the Transporter and returns whether it was possible.
+	 * (o != null)
+	 */
 	public boolean loadDolphin(Dolphin o) {
 		Iterator<Loadable> it = load.iterator();
 		Loadable i = null, prev = null;
@@ -111,6 +138,10 @@ public class Transporter extends Loadable {
 		return (i != prev);
 	}
 	
+	/*
+	 * Tries to load the passed Seal into the Transporter and returns whether it was possible.
+	 * (o != null)
+	 */
 	public boolean loadSeal(Seal o) {
 		Iterator<Loadable> it = load.iterator();
 		Loadable i = null, prev = null;
@@ -126,6 +157,10 @@ public class Transporter extends Loadable {
 		return (i != prev);
 	}
 	
+	/*
+	 * Tries to load the passed Swordfish into the Transporter and returns whether it was possible.
+	 * (o != null)
+	 */
 	public boolean loadSwordfish(Swordfish o) {
 		Iterator<Loadable> it = load.iterator();
 		Loadable i = null, prev = null;
@@ -142,7 +177,9 @@ public class Transporter extends Loadable {
 	}
 
 	/* Connects a trailer. This fails and returns false if
-	 * there is already one connected; otherwise true is returned. */
+	 * there is already one connected; otherwise true is returned. 
+	 * (o != null)
+	 * */
 	public boolean loadTrailer(Trailer o) {
 		if (next != null) {
 			return false;
@@ -151,6 +188,10 @@ public class Transporter extends Loadable {
 		return true;
 	}
 
+	/* Unloads the loadable object and returns a reference to
+	 * the previously loaded transport object (or null if empty). 
+	 * (t != null)
+	 * */
 	public TransportObject unloadObject(Transporter t) {
 		Trailer trailer = next;
 		next = null;

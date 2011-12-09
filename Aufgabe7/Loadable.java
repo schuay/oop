@@ -4,7 +4,9 @@ import java.util.List;
 public abstract class Loadable {
 	
 	/* Unloads the loadable object and returns a reference to
-	 * the previously loaded transport object (or null if empty). */
+	 * the previously loaded transport object (or null if empty). 
+	 * (t != null)
+	 * */
 	public abstract TransportObject unloadObject(Transporter t);
 	
 	/* Returns a list of all contained objects. */
