@@ -1,12 +1,12 @@
 public class WaterTank extends Tank {
-	public boolean loadDolphin(Dolphin o) {
+	public boolean loadLoadable(Dolphin o) {
 		if (getLoad() != null) {
 			return false;
 		}
 		setLoad(o);
 		return true;
 	}	
-	public boolean loadSwordfish(Swordfish o) {
+	public boolean loadLoadable(Swordfish o) {
 		if (getLoad() != null) {
 			return false;
 		}

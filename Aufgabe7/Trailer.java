@@ -2,8 +2,8 @@ import java.util.Set;
 
 public class Trailer extends Transporter implements TransportObject {
 
-	public Trailer(Set<LargeGame> tiedBigGame) {
-		super(tiedBigGame);
+	public Trailer(Set<Loadable> load) {
+		super(load);
 	}
 
 	public boolean loadObject(Transporter t) {

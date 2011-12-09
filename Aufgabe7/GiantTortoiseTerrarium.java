@@ -1,12 +1,12 @@
 public class GiantTortoiseTerrarium extends Terrarium {
-	public boolean loadGiantTortoise(GiantTortoise o) {
+	public boolean loadLoadable(GiantTortoise o) {
 		if (getLoad() != null) {
 			return false;
 		}
 		setLoad(o);
 		return true;
 	}
-	public boolean loadDwarfTortoise(DwarfTortoise o) {
+	public boolean loadLoadable(DwarfTortoise o) {
 		if (getLoad() != null) {
 			return false;
 		}

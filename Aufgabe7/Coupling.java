@@ -5,7 +5,7 @@ import java.util.Set;
 /* A coupling connects transporter cars and can have
  * big game tied to it. */
 
-public class Coupling implements Loadable {
+public class Coupling extends Loadable {
 	
 	private Trailer next = null;
 	private final Set<LargeGame> tiedLargeGame; 
@@ -24,7 +24,7 @@ public class Coupling implements Loadable {
 	
 	/* Connects a trailer. This fails and returns false if
 	 * there is already one connected; otherwise true is returned. */
-	public boolean connectTrailer(Trailer t) {
+	public boolean loadLoadable(Trailer t) {
 		if (next != null) {
 			return false;
 		}

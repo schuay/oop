@@ -1,12 +1,12 @@
 JAVAC = javac -g -Werror -implicit:none -Xlint:unchecked
 JAVA = java
-SOURCES = BigGame.java Dolphin.java DwarfTortoise.java \
+SOURCES = Animal.java Coupling.java Dolphin.java DwarfTortoise.java \
 		  DwarfTortoiseTerrarium.java Elephant.java GiantTortoise.java \
-		  GiantTortoiseTerrarium.java Giraffe.java Listable.java Loadable.java \
+		  GiantTortoiseTerrarium.java Giraffe.java LargeGame.java Loadable.java \
 		  Mamba.java MambaTerrarium.java Python.java PythonTerrarium.java \
 		  Reptile.java SeaAnimal.java Seal.java Swordfish.java Tank.java \
-		  Terrarium.java Test.java Transporter.java TransportObject.java \
-		  WaterLandTank.java WaterTank.java Animal.java
+		  Terrarium.java Test.java Trailer.java Transporter.java \
+		  TransportObject.java WaterLandTank.java WaterTank.java
 CLASSES = $(SOURCES:.java=.class)
 MODNAME = Test
 

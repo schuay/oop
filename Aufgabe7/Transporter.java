@@ -1,19 +1,15 @@
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
-public class Transporter implements Loadable {
+public class Transporter extends Loadable {
 	
-	private final Coupling coupling;
+	private final Set<Loadable> load;
 	
-	/* TODO move all this stuff to one collection of Loadable */
-	private final GiantTortoiseTerrarium gtt = new GiantTortoiseTerrarium();
-	private final PythonTerrarium pt = new PythonTerrarium();
-	private final WaterLandTank wlt = new WaterLandTank();
-	private final WaterTank wt = new WaterTank();
-	
-	public Transporter(Set<LargeGame> tiedBigGame) {
-		coupling = new Coupling(tiedBigGame);
+	public Transporter(Set<Loadable> load) {
+		this.load = Collections.unmodifiableSet(load);
 	}
 	
 	/* Loads the TransportObject onto the transporter.
@@ -30,59 +26,138 @@ public class Transporter implements Loadable {
 	
 	public List<String> list() {
 		List<String> l = new LinkedList<String>();
-		l.addAll(coupling.list());
-		l.addAll(gtt.list());
-		l.addAll(pt.list());
-		l.addAll(wlt.list());
-		l.addAll(wt.list());
+		for (Loadable loadable : load) {
+			l.addAll(loadable.list());
+		}
 		return l;
 	}
 	
 	public boolean loadDwarfTortoise(DwarfTortoise o) {
-		return gtt.loadDwarfTortoise(o);
-		
-		/* concept:
-		 * 
-		 * i = loadables.first;
-		 * while (!i.load(o)) {
-		 * 		i = loadables.next;
-		 * }
-		 * return (i != null);
+		Iterator<Loadable> it = load.iterator();
+		Loadable i = null, prev = null;
+
+		/* Case 1: empty list, i = prev = null, returns false
+		 * Case 2: inserted successfully, i != prev, returns true
+		 * Case 3: not inserted, i == prev, return false
 		 */
+		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
+			prev = i;
+		}
+
+		return (i != prev);
 	}
 	
 	public boolean loadGiantTortoise(GiantTortoise o) {
-		return gtt.loadGiantTortoise(o);
+		Iterator<Loadable> it = load.iterator();
+		Loadable i = null, prev = null;
+
+		/* Case 1: empty list, i = prev = null, returns false
+		 * Case 2: inserted successfully, i != prev, returns true
+		 * Case 3: not inserted, i == prev, return false
+		 */
+		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
+			prev = i;
+		}
+
+		return (i != prev);
 	}
 	
 	public boolean loadMamba(Mamba o) {
-		return pt.loadMamba(o);
+		Iterator<Loadable> it = load.iterator();
+		Loadable i = null, prev = null;
+
+		/* Case 1: empty list, i = prev = null, returns false
+		 * Case 2: inserted successfully, i != prev, returns true
+		 * Case 3: not inserted, i == prev, return false
+		 */
+		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
+			prev = i;
+		}
+
+		return (i != prev);
 	}
 	
 	public boolean loadPython(Python o) {
-		return pt.loadPython(o);
+		Iterator<Loadable> it = load.iterator();
+		Loadable i = null, prev = null;
+
+		/* Case 1: empty list, i = prev = null, returns false
+		 * Case 2: inserted successfully, i != prev, returns true
+		 * Case 3: not inserted, i == prev, return false
+		 */
+		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
+			prev = i;
+		}
+
+		return (i != prev);
 	}
 	
 	public boolean loadDolphin(Dolphin o) {
-		/* TODO check both WaterLand and WaterTanks */
-		return wt.loadDolphin(o);
+		Iterator<Loadable> it = load.iterator();
+		Loadable i = null, prev = null;
+
+		/* Case 1: empty list, i = prev = null, returns false
+		 * Case 2: inserted successfully, i != prev, returns true
+		 * Case 3: not inserted, i == prev, return false
+		 */
+		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
+			prev = i;
+		}
+
+		return (i != prev);
 	}
 	
 	public boolean loadSeal(Seal o) {
-		return wlt.loadSeal(o);		
+		Iterator<Loadable> it = load.iterator();
+		Loadable i = null, prev = null;
+
+		/* Case 1: empty list, i = prev = null, returns false
+		 * Case 2: inserted successfully, i != prev, returns true
+		 * Case 3: not inserted, i == prev, return false
+		 */
+		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
+			prev = i;
+		}
+
+		return (i != prev);
 	}
 	
 	public boolean loadSwordfish(Swordfish o) {
-		/* TODO check both WaterLand and WaterTanks */
-		return wt.loadSwordfish(o);		
+		Iterator<Loadable> it = load.iterator();
+		Loadable i = null, prev = null;
+
+		/* Case 1: empty list, i = prev = null, returns false
+		 * Case 2: inserted successfully, i != prev, returns true
+		 * Case 3: not inserted, i == prev, return false
+		 */
+		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
+			prev = i;
+		}
+
+		return (i != prev);	
 	}
 	
 	public boolean loadTrailer(Trailer o) {
-		return coupling.connectTrailer(o);
+		Iterator<Loadable> it = load.iterator();
+		Loadable i = null, prev = null;
+
+		/* Case 1: empty list, i = prev = null, returns false
+		 * Case 2: inserted successfully, i != prev, returns true
+		 * Case 3: not inserted, i == prev, return false
+		 */
+		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
+			prev = i;
+		}
+
+		return (i != prev);
 	}
 
 	public TransportObject unloadObject(Transporter t) {
+		return null;
+		
+		/* TODO: move reference to next trailer to Transporter
 		return coupling.unloadObject(t);
+		*/
 	}
 }
 

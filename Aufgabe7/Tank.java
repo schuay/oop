@@ -3,7 +3,7 @@ import java.util.List;
 
 /* A tank holds sea animals. */
 
-public abstract class Tank implements Loadable {
+public abstract class Tank extends Loadable {
 	
 	private SeaAnimal load = null;
 	

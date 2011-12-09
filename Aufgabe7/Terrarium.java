@@ -3,7 +3,7 @@ import java.util.List;
 
 /* A terrarium holds reptiles. */
 
-public abstract class Terrarium implements Loadable {
+public abstract class Terrarium extends Loadable {
 	
 	private Reptile load = null;
 
