@@ -7,6 +7,7 @@ import java.util.Set;
 public class Transporter extends Loadable {
 	
 	private final Set<Loadable> load;
+	private Trailer next = null;
 	
 	public Transporter(Set<Loadable> load) {
 		this.load = Collections.unmodifiableSet(load);
@@ -28,6 +29,9 @@ public class Transporter extends Loadable {
 		List<String> l = new LinkedList<String>();
 		for (Loadable loadable : load) {
 			l.addAll(loadable.list());
+		}
+		if (next != null) {
+			l.addAll(next.list());
 		}
 		return l;
 	}
@@ -136,28 +140,21 @@ public class Transporter extends Loadable {
 
 		return (i != prev);	
 	}
-	
+
+	/* Connects a trailer. This fails and returns false if
+	 * there is already one connected; otherwise true is returned. */
 	public boolean loadTrailer(Trailer o) {
-		Iterator<Loadable> it = load.iterator();
-		Loadable i = null, prev = null;
-
-		/* Case 1: empty list, i = prev = null, returns false
-		 * Case 2: inserted successfully, i != prev, returns true
-		 * Case 3: not inserted, i == prev, return false
-		 */
-		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
-			prev = i;
+		if (next != null) {
+			return false;
 		}
-
-		return (i != prev);
+		next = o;
+		return true;
 	}
 
 	public TransportObject unloadObject(Transporter t) {
-		return null;
-		
-		/* TODO: move reference to next trailer to Transporter
-		return coupling.unloadObject(t);
-		*/
+		Trailer trailer = next;
+		next = null;
+		return trailer;
 	}
 }
 

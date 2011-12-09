@@ -7,7 +7,6 @@ import java.util.Set;
 
 public class Coupling extends Loadable {
 	
-	private Trailer next = null;
 	private final Set<LargeGame> tiedLargeGame; 
 	
 	/* The tied animals are not changed at runtime. */
@@ -15,21 +14,9 @@ public class Coupling extends Loadable {
 		this.tiedLargeGame = tiedLargeGame;
 	}
 
-	/* Only unloads connected cars, big game cannot be untied. */
+	/* Big game cannot be untied. */
 	public TransportObject unloadObject(Transporter t) {
-		Trailer trailer = next;
-		next = null;
-		return trailer;
-	}
-	
-	/* Connects a trailer. This fails and returns false if
-	 * there is already one connected; otherwise true is returned. */
-	public boolean loadLoadable(Trailer t) {
-		if (next != null) {
-			return false;
-		}
-		next = t;
-		return true;
+		return null;
 	}
 
 	/* Lists all tied animals, then recursively steps through connected
@@ -38,9 +25,6 @@ public class Coupling extends Loadable {
 		List<String> l = new LinkedList<String>();
 		for (LargeGame bg: tiedLargeGame) {
 			l.add(bg.getName());
-		}
-		if (next != null) {
-			l.addAll(next.list());
 		}
 		return l;
 	}
