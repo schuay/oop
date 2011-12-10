@@ -3,11 +3,12 @@ import java.util.List;
 import java.util.LinkedList;
 import java.util.Collections;
 
-/* A coupling and can have big game tied to it. */
+/* A coupling and can have big game tied and one Trailer connected to it. */
 
 public class Coupling extends Loadable {
 	
 	private final Set<LargeGame> tiedLargeGame; 
+	private Trailer trailer;
 	
 	/* The tied animals are not changed at runtime. 
 	 * (tiedLargeGame != null)
@@ -17,10 +18,13 @@ public class Coupling extends Loadable {
 		this.tiedLargeGame = Collections.unmodifiableSet(tiedLargeGame);
 	}
 
-	/* Big game cannot be untied. 
-	 */
+	/* Disconnect the Trailer.*/
 	public TransportObject unloadObject() {
-		return null;
+		Trailer t = trailer;
+
+		trailer = null;
+
+		return t;
 	}
 
 	/* Lists all tied animals, then recursively steps through connected
@@ -30,7 +34,23 @@ public class Coupling extends Loadable {
 		for (LargeGame bg: tiedLargeGame) {
 			l.add(bg.getName());
 		}
+
+		if (trailer != null) {
+			l.addAll(trailer.list());
+		}
+
 		return l;
+	}
+
+	/* Connect a Trailer. */
+	public boolean loadLoadable(Trailer o) {
+		if (trailer != null) {
+			return false;
+		}
+
+		trailer = o;
+
+		return true;
 	}
 }
 

@@ -2,14 +2,14 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
-public class Transporter extends Loadable {
+public class Transporter {
 	
 	private final Set<Loadable> load;
-	private Trailer next = null;
 	
-	public Transporter(Set<Loadable> load) {
+	public Transporter(LinkedHashSet<Loadable> load) {
 		this.load = Collections.unmodifiableSet(load);
 	}
 	
@@ -18,6 +18,10 @@ public class Transporter extends Loadable {
 	 * (to != null)
 	 * */
 	public boolean load(TransportObject to) {
+		if (to == null) {
+			return false;
+		}
+
 		return to.loadObject(this);
 	}
 	
@@ -26,6 +30,10 @@ public class Transporter extends Loadable {
 	 * (l != null)
 	 * */
 	public TransportObject unload(Loadable l) {
+		if (l == null) {
+			return null;
+		}
+
 		return l.unloadObject();
 	}
 	
@@ -36,9 +44,6 @@ public class Transporter extends Loadable {
 		List<String> l = new LinkedList<String>();
 		for (Loadable loadable : load) {
 			l.addAll(loadable.list());
-		}
-		if (next != null) {
-			l.addAll(next.list());
 		}
 		return l;
 	}
@@ -181,20 +186,18 @@ public class Transporter extends Loadable {
 	 * (o != null)
 	 * */
 	public boolean loadTrailer(Trailer o) {
-		if (next != null) {
-			return false;
-		}
-		next = o;
-		return true;
-	}
+		Iterator<Loadable> it = load.iterator();
+		Loadable i = null, prev = null;
 
-	/* Unloads the loadable object and returns a reference to
-	 * the previously loaded transport object (or null if empty). 
-	 */
-	public TransportObject unloadObject() {
-		Trailer trailer = next;
-		next = null;
-		return trailer;
+		/* Case 1: empty list, i = prev = null, returns false
+		 * Case 2: inserted successfully, i != prev, returns true
+		 * Case 3: not inserted, i == prev, return false
+		 */
+		while (it.hasNext() && !(i=it.next()).loadLoadable(o)) {
+			prev = i;
+		}
+
+		return (i != prev);
 	}
 }
 

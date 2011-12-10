@@ -1,11 +1,11 @@
-import java.util.Set;
+import java.util.LinkedHashSet;
 
 public class Trailer extends Transporter implements TransportObject {
 
 	/* Creates a new Trailer with the passed Loadables
 	 * (load != null)
 	 */
-	public Trailer(Set<Loadable> load) {
+	public Trailer(LinkedHashSet<Loadable> load) {
 		super(load);
 	}
 
