@@ -34,21 +34,43 @@ public class VerschenknixAG {
 		Quarry s3 = new Quarry(config.quarryCapacity);
 		VillageSquare s4 = new VillageSquare(config.villageSquareCapacity);
 
+		Hunter w0 = new Hunter("Hunter 1", config.hunter1Duration, s1);
+		Hunter w1 = new Hunter("Hunter 2", config.hunter2Duration, s1);
+		Cook w2 = new Cook("Cook", config.cookDuration, s1, s2);
+		Lumberjack w3 = new Lumberjack("Lumberjack 1", config.lumberjack1Duration, s2, s3);
+		Lumberjack w4 = new Lumberjack("Lumberjack 2", config.lumberjack2Duration, s2, s3);
+		Lumberjack w5 = new Lumberjack("Lumberjack 3", config.lumberjack3Duration, s2, s3);
+		Lumberjack w6 = new Lumberjack("Lumberjack 4", config.lumberjack4Duration, s2, s3);
+		Lumberjack w7 = new Lumberjack("Lumberjack 5", config.lumberjack5Duration, s2, s3);
+		Logistician w8 = new Logistician("Logistician 1", config.logistician1Duration, s3, s4);
+		Logistician w9 = new Logistician("Logistician 2", config.logistician2Duration, s3, s4);
+
+		s1.registerWorker(w0);
+		s1.registerWorker(w1);
+		s2.registerWorker(w2);
+		s3.registerWorker(w3);
+		s3.registerWorker(w4);
+		s3.registerWorker(w5);
+		s3.registerWorker(w6);
+		s3.registerWorker(w7);
+		s4.registerWorker(w8);
+		s4.registerWorker(w9);
+
 		storage.add(s1);
 		storage.add(s2);
 		storage.add(s3);
 		storage.add(s4);
 
-		workers.add(new Hunter("Hunter 1", config.hunter1Duration, s1));
-		workers.add(new Hunter("Hunter 2", config.hunter2Duration, s1));
-		workers.add(new Cook("Cook", config.cookDuration, s1, s2));
-		workers.add(new Lumberjack("Lumberjack 1", config.lumberjack1Duration, s2, s3));
-		workers.add(new Lumberjack("Lumberjack 2", config.lumberjack2Duration, s2, s3));
-		workers.add(new Lumberjack("Lumberjack 3", config.lumberjack3Duration, s2, s3));
-		workers.add(new Lumberjack("Lumberjack 4", config.lumberjack4Duration, s2, s3));
-		workers.add(new Lumberjack("Lumberjack 5", config.lumberjack5Duration, s2, s3));
-		workers.add(new Logistician("Logistician 1", config.logistician1Duration, s3, s4));
-		workers.add(new Logistician("Logistician 2", config.logistician2Duration, s3, s4));
+		workers.add(w0);
+		workers.add(w1);
+		workers.add(w2);
+		workers.add(w3);
+		workers.add(w4);
+		workers.add(w5);
+		workers.add(w6);
+		workers.add(w7);
+		workers.add(w8);
+		workers.add(w9);
 	}
 
 	private void simulateInternal() {

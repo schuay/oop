@@ -1,7 +1,13 @@
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
+
 public abstract class Storage {
 
 	private final int capacity;
 	private int count = 0;
+	private final Set<Worker> workers =
+			Collections.synchronizedSet(new HashSet<Worker>());
 
 	public Storage(int capacity) {
 
@@ -10,6 +16,20 @@ public abstract class Storage {
 		}
 
 		this.capacity = capacity;
+	}
+
+	/* All workers need to be registered before threads are run. */
+	public void registerWorker(Worker worker) {
+		workers.add(worker);
+	}
+
+	/* Workers must unregister once they are done with their workload. */
+	public void unregisterWorker(Worker worker) {
+		workers.remove(worker);
+	}
+
+	private boolean workersDone() {
+		return workers.isEmpty();
 	}
 
 	/* Returns false if count is invalid or capacity would be exceeded,
