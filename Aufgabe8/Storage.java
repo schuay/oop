@@ -39,7 +39,7 @@ public abstract class Storage {
 	protected abstract String getName();
 
 	public String toString() {
-		return String.format("%s resource count: %d%n", getName(), count);
+		return String.format("%s resource count: %d", getName(), count);
 	}
 }
 

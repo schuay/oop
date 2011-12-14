@@ -24,7 +24,7 @@ public abstract class Worker implements Runnable {
 	}
 
 	public String toString() {
-		return String.format("%s resources produced: %d%n", name, produced);
+		return String.format("%s resources produced: %d", name, produced);
 	}
 }
 
