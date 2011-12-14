@@ -1,5 +1,9 @@
 public class Quarry extends Storage {
 
+	public Quarry(int capacity) {
+		super(capacity);
+	}
+
 	protected String getName() {
 		return "Quarry";
 	}

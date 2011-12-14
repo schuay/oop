@@ -1,5 +1,9 @@
 public class Table extends Storage {
 
+	public Table(int capacity) {
+		super(capacity);
+	}
+
 	protected String getName() {
 		return "Table";
 	}

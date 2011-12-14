@@ -1,14 +1,31 @@
 public abstract class Storage {
 
-	int count = 0;
+	private final int capacity;
+	private int count = 0;
 
-	public synchronized void inc(int count) {
-		if (count < 1) {
-			return;
+	public Storage(int capacity) {
+
+		if (capacity < 1) {
+			throw new IllegalArgumentException();
 		}
-		this.count += count;
+
+		this.capacity = capacity;
 	}
 
+	/* Returns false if count is invalid or capacity would be exceeded,
+	 * otherwise true. */
+	public synchronized boolean inc(int count) {
+		if (count < 1) {
+			return false;
+		} else if (count + this.count > capacity) {
+			return false;
+		}
+		this.count += count;
+		return true;
+	}
+
+	/* Returns false if count is invalid or request cannot be fulfilled,
+	 * otherwise true. */
 	public synchronized boolean dec(int count) {
 		if (count < 1) {
 			return false;

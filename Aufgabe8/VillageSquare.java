@@ -1,5 +1,9 @@
 public class VillageSquare extends Storage {
 
+	public VillageSquare(int capacity) {
+		super(capacity);
+	}
+
 	protected String getName() {
 		return "VillageSquare";
 	}
