@@ -10,8 +10,25 @@ public class Lumberjack extends Worker {
 	}
 
 	public void run() {
-		// TODO Auto-generated method stub
+		final int d = getDuration();
+		final int origCount = 1;
+		final int destCount = 1;
 
+		try {
+			while (!orig.workersDone()) {
+
+				orig.dec(origCount);
+
+				try {
+					Thread.sleep(d);
+				} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
+
+				dest.inc(destCount);
+				incProduced(destCount);
+			}
+		} finally {
+			dest.unregisterWorker(this);
+		}
 	}
 
 }
