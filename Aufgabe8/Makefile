@@ -1,6 +1,9 @@
 JAVAC = javac -g -Werror -implicit:none -Xlint:unchecked
 JAVA = java
-SOURCES = 
+SOURCES = ColdStorage.java Cook.java Hunter.java Logistician.java \
+		  Lumberjack.java Quarry.java Storage.java Table.java \
+		  Test.java VerschenknixAG.java VillageSquare.java \
+		  Worker.java
 CLASSES = $(SOURCES:.java=.class)
 MODNAME = Test
 
