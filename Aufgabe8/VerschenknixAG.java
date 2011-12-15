@@ -10,7 +10,9 @@ public class VerschenknixAG {
 	private final Set<Thread> threads = new LinkedHashSet<Thread>();
 
 	public static class Config {
+		public int hunter1Count = 20;
 		public int hunter1Duration = 5;
+		public int hunter2Count = 25;
 		public int hunter2Duration = 7;
 		public int cookDuration = 15;
 		public int lumberjack1Duration = 2;
@@ -34,8 +36,8 @@ public class VerschenknixAG {
 		Quarry s3 = new Quarry(config.quarryCapacity);
 		VillageSquare s4 = new VillageSquare(config.villageSquareCapacity);
 
-		Hunter w0 = new Hunter("Hunter 1", config.hunter1Duration, s1);
-		Hunter w1 = new Hunter("Hunter 2", config.hunter2Duration, s1);
+		Hunter w0 = new Hunter("Hunter 1", config.hunter1Count, config.hunter1Duration, s1);
+		Hunter w1 = new Hunter("Hunter 2", config.hunter2Count, config.hunter2Duration, s1);
 		Cook w2 = new Cook("Cook", config.cookDuration, s1, s2);
 		Lumberjack w3 = new Lumberjack("Lumberjack 1", config.lumberjack1Duration, s2, s3);
 		Lumberjack w4 = new Lumberjack("Lumberjack 2", config.lumberjack2Duration, s2, s3);
