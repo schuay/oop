@@ -84,8 +84,7 @@ public class VerschenknixAG {
 		}		
 	}
 
-	public void simulate() {
-		simulateInternal();
+	private void joinAll() {
 		for (Thread t : threads) {
 			while (true) {
 				try {
@@ -94,6 +93,11 @@ public class VerschenknixAG {
 				} catch (InterruptedException e) { }
 			}
 		}
+	}
+
+	public void simulate() {
+		simulateInternal();
+		joinAll();
 		Util.debug("All done.");
 	}
 
@@ -106,9 +110,16 @@ public class VerschenknixAG {
 			e.printStackTrace();
 		}
 
+		for (Worker w : workers) {
+			w.setQuit();
+		}
+
 		for (Thread t : threads) {
 			t.interrupt();
 		}
+		joinAll();
+
+		Util.debug("All done.");
 	}
 
 	public List<String> getSummary() {

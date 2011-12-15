@@ -15,18 +15,17 @@ public class Lumberjack extends Worker {
 		final int destCount = 1;
 
 		try {
-			while (true) {
-
-				if (!orig.dec(origCount)) {
-					return;
-				}
+			while (!getQuit()) {
 
 				try {
+					if (!orig.dec(origCount)) {
+						return;
+					}
 					Thread.sleep(d);
-				} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
 
-				dest.inc(destCount);
-				incProduced(destCount);
+					dest.inc(destCount);
+					incProduced(destCount);
+				} catch (InterruptedException e) { }
 			}
 		} finally {
 			Util.debug("TERMINATING: " + toString());

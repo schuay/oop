@@ -16,14 +16,14 @@ public class Hunter extends Worker {
 		final int d = getDuration();
 
 		try {
-			while (getProduced() < count) {
+			while (getProduced() < count && !getQuit()) {
 
 				try {
 					Thread.sleep(d);
-				} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
 
-				dest.inc(1);
-				incProduced(1);
+					dest.inc(1);
+					incProduced(1);
+				} catch (InterruptedException e) { }
 			}
 		} finally {
 			Util.debug("TERMINATING: " + toString());

@@ -18,18 +18,17 @@ public class Logistician extends Worker {
 		 * but only 1 resource is available. */
 
 		try {
-			while (true) {
-
-				if (!orig.dec(origCount)) {
-					return;
-				}
-
+			while (!getQuit()) {
 				try {
-					Thread.sleep(d);
-				} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
+					if (!orig.dec(origCount)) {
+						return;
+					}
 
-				dest.inc(destCount);
-				incProduced(destCount);
+					Thread.sleep(d);
+
+					dest.inc(destCount);
+					incProduced(destCount);
+				} catch (InterruptedException e) { }
 			}
 		} finally {
 			Util.debug("TERMINATING: " + toString());

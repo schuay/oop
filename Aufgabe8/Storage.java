@@ -35,16 +35,14 @@ public abstract class Storage {
 	}
 
 	/* Returns false if count is invalid, otherwise true. */
-	public synchronized boolean inc(int count) {
+	public synchronized boolean inc(int count) throws InterruptedException {
 		if (count < 1) {
 			return false;
 		}
 
 		while (count + this.count > capacity) {
-			try {
-				Util.debug(String.format("%s full: blocking in inc()", getName()));
-				wait();
-			} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
+			Util.debug(String.format("%s full: blocking in inc()", getName()));
+			wait();
 		}
 
 		this.count += count;
@@ -55,20 +53,18 @@ public abstract class Storage {
 
 	/* Returns false if count is invalid or request cannot be fulfilled,
 	 * otherwise true. */
-	public synchronized boolean dec(int count) {
+	public synchronized boolean dec(int count) throws InterruptedException {
 		if (count < 1) {
 			return false;
 		}
 
 		while (count > this.count) {
-			try {
-				if (workersDone()) {
-					Util.debug(String.format("%s empty and workers are done: returning from dec()", getName()));
-					return false;
-				}
-				Util.debug(String.format("%s empty: blocking in dec()", getName()));
-				wait();
-			} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
+			if (workersDone()) {
+				Util.debug(String.format("%s empty and workers are done: returning from dec()", getName()));
+				return false;
+			}
+			Util.debug(String.format("%s empty: blocking in dec()", getName()));
+			wait();
 		}
 
 		this.count -= count;

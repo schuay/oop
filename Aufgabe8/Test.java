@@ -26,6 +26,14 @@ public class Test {
 			v.simulate();
 			v.printSummary();
 
+			System.out.println();
+			System.out.println();
+			System.out.println();
+
+			v = new VerschenknixAG(new VerschenknixAG.Config());
+			v.simulateAbort(50);
+			v.printSummary();
+
 			printSummary();
 		} catch (Exception e) {
 			e.printStackTrace();

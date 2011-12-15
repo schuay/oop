@@ -5,6 +5,8 @@ public abstract class Worker implements Runnable {
 
 	private int produced = 0;
 
+	private Boolean quit = false;
+
 	public Worker(String name, int duration) {
 
 		if (duration < 1) {
@@ -26,6 +28,18 @@ public abstract class Worker implements Runnable {
 
 	protected int getProduced() {
 		return produced;
+	}
+
+	protected boolean getQuit() {
+		synchronized (quit) {
+			return quit;
+		}
+	}
+
+	public void setQuit() {
+		synchronized (quit) {
+			quit = true;
+		}
 	}
 
 	public String toString() {
