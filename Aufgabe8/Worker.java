@@ -21,6 +21,7 @@ public abstract class Worker implements Runnable {
 
 	protected void incProduced(int count) {
 		produced += count;
+		Util.debug(toString());
 	}
 
 	protected int getProduced() {

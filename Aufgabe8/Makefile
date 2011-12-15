@@ -3,7 +3,7 @@ JAVA = java
 SOURCES = ColdStorage.java Cook.java Hunter.java Logistician.java \
 		  Lumberjack.java Quarry.java Storage.java Table.java \
 		  Test.java VerschenknixAG.java VillageSquare.java \
-		  Worker.java
+		  Worker.java Util.java
 CLASSES = $(SOURCES:.java=.class)
 MODNAME = Test
 
