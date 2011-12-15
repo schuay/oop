@@ -10,9 +10,9 @@ public class VerschenknixAG {
 	private final Set<Thread> threads = new LinkedHashSet<Thread>();
 
 	public static class Config {
-		public int hunter1Count = 20;
+		public int hunter1Count = 2;
 		public int hunter1Duration = 5;
-		public int hunter2Count = 25;
+		public int hunter2Count = 3;
 		public int hunter2Duration = 7;
 		public int cookDuration = 15;
 		public int lumberjack1Duration = 2;

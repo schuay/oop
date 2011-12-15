@@ -15,7 +15,7 @@ public class Cook extends Worker {
 		final int destCount = 5;
 
 		try {
-			while (!orig.workersDone()) {
+			while (true) {
 
 				if (!orig.dec(origCount)) {
 					return;

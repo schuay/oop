@@ -15,7 +15,7 @@ public class Lumberjack extends Worker {
 		final int destCount = 1;
 
 		try {
-			while (!orig.workersDone()) {
+			while (true) {
 
 				if (!orig.dec(origCount)) {
 					return;

@@ -18,7 +18,7 @@ public class Logistician extends Worker {
 		 * but only 1 resource is available. */
 
 		try {
-			while (!orig.workersDone()) {
+			while (true) {
 
 				if (!orig.dec(origCount)) {
 					return;
