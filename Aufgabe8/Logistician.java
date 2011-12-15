@@ -17,6 +17,15 @@ public class Logistician extends Worker {
 		/* TODO: handle situation where orig workers are done,
 		 * but only 1 resource is available. */
 
+		/* TODO: (this concerns all workers)
+		 * if interrupted between getting resources and adding them
+		 * to the next storage, what should be the result?
+		 * a) output "carried" resources per worker?
+		 * b) place them back in orig? (might not be possible because it
+		 *    might've been filled by another worker in the meantime??)
+		 * c) place them into dest? (might not be possible because dest is full?)
+		 */
+
 		try {
 			while (!getQuit()) {
 				try {
