@@ -13,8 +13,21 @@ public class Hunter extends Worker {
 	}
 
 	public void run() {
-		// TODO Auto-generated method stub
+		final int d = getDuration();
 
+		try {
+			while (getProduced() < count) {
+
+				try {
+					Thread.sleep(d);
+				} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
+
+				dest.inc(1);
+				incProduced(1);
+			}
+		} finally {
+			dest.unregisterWorker(this);
+		}
 	}
 
 }

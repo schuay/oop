@@ -23,6 +23,10 @@ public abstract class Worker implements Runnable {
 		produced += count;
 	}
 
+	protected int getProduced() {
+		return produced;
+	}
+
 	public String toString() {
 		return String.format("%s resources produced: %d", name, produced);
 	}
