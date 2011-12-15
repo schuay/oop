@@ -26,6 +26,7 @@ public class Hunter extends Worker {
 				incProduced(1);
 			}
 		} finally {
+			Util.debug("TERMINATING: " + toString());
 			dest.unregisterWorker(this);
 		}
 	}

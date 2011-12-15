@@ -32,6 +32,7 @@ public class Logistician extends Worker {
 				incProduced(destCount);
 			}
 		} finally {
+			Util.debug("TERMINATING: " + toString());
 			dest.unregisterWorker(this);
 		}
 	}

@@ -86,7 +86,6 @@ public class VerschenknixAG {
 
 	public void simulate() {
 		simulateInternal();
-
 		for (Thread t : threads) {
 			while (true) {
 				try {
@@ -95,7 +94,7 @@ public class VerschenknixAG {
 				} catch (InterruptedException e) { }
 			}
 		}
-
+		Util.debug("All done.");
 	}
 
 	public void simulateAbort(int duration) {

@@ -29,6 +29,7 @@ public class Cook extends Worker {
 				incProduced(destCount);
 			}
 		} finally {
+			Util.debug("TERMINATING: " + toString());
 			dest.unregisterWorker(this);
 		}
 	}

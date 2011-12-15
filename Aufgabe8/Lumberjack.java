@@ -29,6 +29,7 @@ public class Lumberjack extends Worker {
 				incProduced(destCount);
 			}
 		} finally {
+			Util.debug("TERMINATING: " + toString());
 			dest.unregisterWorker(this);
 		}
 	}
