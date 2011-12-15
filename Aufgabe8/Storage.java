@@ -26,6 +26,7 @@ public abstract class Storage {
 	/* Workers must unregister once they are done with their workload. */
 	public void unregisterWorker(Worker worker) {
 		workers.remove(worker);
+		synchronized (this) { notifyAll(); }
 	}
 
 	private boolean workersDone() {
@@ -37,10 +38,18 @@ public abstract class Storage {
 	public synchronized boolean inc(int count) {
 		if (count < 1) {
 			return false;
-		} else if (count + this.count > capacity) {
-			return false;
 		}
+
+		while (count + this.count > capacity) {
+			try {
+				Util.debug(String.format("%s: blocking in inc()", getName()));
+				wait();
+			} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
+		}
+
 		this.count += count;
+		notifyAll();
+
 		return true;
 	}
 
@@ -49,10 +58,18 @@ public abstract class Storage {
 	public synchronized boolean dec(int count) {
 		if (count < 1) {
 			return false;
-		} else if (count > this.count) {
-			return false;
 		}
+
+		while (count > this.count) {
+			try {
+				Util.debug(String.format("%s: blocking in dec()", getName()));
+				wait();
+			} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
+		}
+
 		this.count -= count;
+		notifyAll();
+
 		return true;
 	}
 
