@@ -22,6 +22,10 @@ public class Test {
 
 		try {
 
+			VerschenknixAG v = new VerschenknixAG(new VerschenknixAG.Config());
+			v.simulate();
+			v.printSummary();
+
 			printSummary();
 		} catch (Exception e) {
 			e.printStackTrace();
