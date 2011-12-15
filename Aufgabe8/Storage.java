@@ -25,6 +25,7 @@ public abstract class Storage {
 
 	/* Workers must unregister once they are done with their workload. */
 	public void unregisterWorker(Worker worker) {
+		Util.debug(String.format("%s: unregistering worker", getName()));
 		workers.remove(worker);
 		synchronized (this) { notifyAll(); }
 	}
@@ -33,8 +34,7 @@ public abstract class Storage {
 		return workers.isEmpty();
 	}
 
-	/* Returns false if count is invalid or capacity would be exceeded,
-	 * otherwise true. */
+	/* Returns false if count is invalid, otherwise true. */
 	public synchronized boolean inc(int count) {
 		if (count < 1) {
 			return false;
@@ -42,7 +42,7 @@ public abstract class Storage {
 
 		while (count + this.count > capacity) {
 			try {
-				Util.debug(String.format("%s: blocking in inc()", getName()));
+				Util.debug(String.format("%s full: blocking in inc()", getName()));
 				wait();
 			} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
 		}
@@ -62,7 +62,11 @@ public abstract class Storage {
 
 		while (count > this.count) {
 			try {
-				Util.debug(String.format("%s: blocking in dec()", getName()));
+				if (workersDone()) {
+					Util.debug(String.format("%s empty and workers are done: returning from dec()", getName()));
+					return false;
+				}
+				Util.debug(String.format("%s empty: blocking in dec()", getName()));
 				wait();
 			} catch (InterruptedException e) { /* TODO: handle Thread.interrupt() */ }
 		}

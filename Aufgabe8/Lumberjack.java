@@ -17,7 +17,9 @@ public class Lumberjack extends Worker {
 		try {
 			while (!orig.workersDone()) {
 
-				orig.dec(origCount);
+				if (!orig.dec(origCount)) {
+					return;
+				}
 
 				try {
 					Thread.sleep(d);

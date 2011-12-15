@@ -14,10 +14,15 @@ public class Logistician extends Worker {
 		final int origCount = 2;
 		final int destCount = 2;
 
+		/* TODO: handle situation where orig workers are done,
+		 * but only 1 resource is available. */
+
 		try {
 			while (!orig.workersDone()) {
 
-				orig.dec(origCount);
+				if (!orig.dec(origCount)) {
+					return;
+				}
 
 				try {
 					Thread.sleep(d);
