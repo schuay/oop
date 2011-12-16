@@ -29,6 +29,7 @@ public class Cook extends Worker {
 					Thread.sleep(d);
 
 					dest.inc(destCount);
+					orig.transferDone(origCount);
 					incProduced(destCount);
 					working = false;
 				} catch (InterruptedException e) { }

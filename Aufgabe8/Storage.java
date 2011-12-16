@@ -9,6 +9,9 @@ public abstract class Storage {
 	private final Set<Worker> workers =
 			Collections.synchronizedSet(new HashSet<Worker>());
 
+	/* These are the resources currently beeing worked on. */
+	private int reserved = 0;
+
 	public Storage(int capacity) {
 
 		if (capacity < 1) {
@@ -40,7 +43,7 @@ public abstract class Storage {
 			return false;
 		}
 
-		while (count + this.count > capacity) {
+		while (count + this.count + reserved > capacity) {
 			Util.debug(String.format("%s full: blocking in inc()", getName()));
 			wait();
 		}
@@ -68,15 +71,21 @@ public abstract class Storage {
 		}
 
 		this.count -= count;
+		reserved += count;
 		notifyAll();
 
 		return true;
 	}
 
+	public synchronized void transferDone(int count) throws InterruptedException {
+		reserved -= count;
+		notifyAll();
+	}
+
 	protected abstract String getName();
 
 	public String toString() {
-		return String.format("%s resource count: %d", getName(), count);
+		return String.format("%s resource count: %d", getName(), count + reserved);
 	}
 }
 
