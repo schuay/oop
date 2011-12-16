@@ -27,16 +27,22 @@ public class Logistician extends Worker {
 		 */
 
 		try {
+			boolean working = false;
 			while (!getQuit()) {
 				try {
-					if (!orig.dec(origCount)) {
+					/* if working is set, the last loop iteration was interrupted
+					 * during sleep() or inc(); in both cases, we didn't get a
+					 * chance to inc(), so do it here without dec() */
+					if (!working && !orig.dec(origCount)) {
 						return;
 					}
+					working = true;
 
 					Thread.sleep(d);
 
 					dest.inc(destCount);
 					incProduced(destCount);
+					working = false;
 				} catch (InterruptedException e) { }
 			}
 		} finally {
