@@ -14,9 +14,6 @@ public class Logistician extends Worker {
 		final int origCount = 2;
 		final int destCount = 2;
 
-		/* TODO: handle situation where orig workers are done,
-		 * but only 1 resource is available. */
-
 		/* TODO: (this concerns all workers)
 		 * if interrupted between getting resources and adding them
 		 * to the next storage, what should be the result?
