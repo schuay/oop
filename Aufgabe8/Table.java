@@ -2,6 +2,9 @@ public class Table extends Storage {
 
 	public Table(int capacity) {
 		super(capacity);
+		if (capacity < 5) {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	protected String getName() {
