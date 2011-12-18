@@ -30,6 +30,9 @@ public class VerschenknixAG {
 	}
 
 	public VerschenknixAG(VerschenknixAG.Config config) {
+		if (config == null) {
+			throw new IllegalArgumentException();
+		}
 
 		ColdStorage s1 = new ColdStorage(config.coldStorageCapacity);
 		Table s2 = new Table(config.tableCapacity);
@@ -102,6 +105,10 @@ public class VerschenknixAG {
 	}
 
 	public void simulateAbort(int duration) {
+		if (duration < 1) {
+			throw new IllegalArgumentException();
+		}
+
 		simulateInternal();
 
 		try {
