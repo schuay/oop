@@ -21,6 +21,9 @@ public abstract class Worker implements Runnable {
 	}
 
 	protected void incProduced(int count) {
+		if (count < 1) {
+			throw new IllegalArgumentException();
+		}
 		produced += count;
 		Util.debug(toString());
 	}
