@@ -37,10 +37,11 @@ public abstract class Storage {
 		return workers.isEmpty();
 	}
 
-	/* Returns false if count is invalid, otherwise true. */
-	public synchronized boolean inc(int count) throws InterruptedException {
+	/* Adds count (> 0) resources to the storage. Workers are blocked
+	 * if storage cannot receive resources and woken up once it can. */
+	public synchronized void inc(int count) throws InterruptedException {
 		if (count < 1) {
-			return false;
+			throw new IllegalArgumentException();
 		}
 
 		while (count + this.count + reserved > capacity) {
@@ -50,20 +51,20 @@ public abstract class Storage {
 
 		this.count += count;
 		notifyAll();
-
-		return true;
 	}
 
-	/* Returns false if count is invalid or request cannot be fulfilled,
-	 * otherwise true. */
+	/* Reserves count (> 0) resources for a worker. Workers are blocked
+	 * if storage does not contain sufficient resources until it does.
+	 * Returns false if the request cannot be fulfilled, otherwise true. */
 	public synchronized boolean dec(int count) throws InterruptedException {
 		if (count < 1) {
-			return false;
+			throw new IllegalArgumentException();
 		}
 
 		while (count > this.count) {
 			if (workersDone()) {
-				Util.debug(String.format("%s empty and workers are done: returning from dec()", getName()));
+				Util.debug(String.format(
+					"%s empty and workers are done: returning from dec()", getName()));
 				return false;
 			}
 			Util.debug(String.format("%s empty: blocking in dec()", getName()));
@@ -78,6 +79,10 @@ public abstract class Storage {
 	}
 
 	public synchronized void transferDone(int count) throws InterruptedException {
+		if (count < 1) {
+			throw new IllegalArgumentException();
+		}
+
 		reserved -= count;
 		notifyAll();
 	}
