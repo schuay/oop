@@ -22,15 +22,6 @@ public class Logistician extends Worker {
 		final int origCount = 2;
 		final int destCount = 2;
 
-		/* TODO: (this concerns all workers)
-		 * if interrupted between getting resources and adding them
-		 * to the next storage, what should be the result?
-		 * a) output "carried" resources per worker?
-		 * b) place them back in orig? (might not be possible because it
-		 *    might've been filled by another worker in the meantime??)
-		 * c) place them into dest? (might not be possible because dest is full?)
-		 */
-
 		try {
 			boolean working = false;
 			while (!getQuit()) {
