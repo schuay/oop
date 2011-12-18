@@ -1,6 +1,9 @@
 public class Util {
+	private static boolean verbose = false;
 	public static void debug(String s) {
-		System.err.println(s);
+		if (verbose) {
+			System.err.println(s);
+		}
 	}
 }
 
