@@ -213,41 +213,44 @@ public class Test {
 			test("Testing configuration with rather fast workers, high capacity and lots of work",
 					true, testSimulation(v, testresult));
 			
-			config = new VerschenknixAG.Config();
-			config.hunter1Duration = 60;
-			config.hunter2Duration = 60;
-			testresult = new TestResult(0, 0, 0, 0, 0, 0, 0, 0);
+			config = new VerschenknixAG.Config();	
+			config.hunter1Duration = 100;
+			config.hunter2Duration = 100;
 			v = new VerschenknixAG(config);
-			test("Testing abort before hunters can finish", true, testAbort(v, testresult));
+			test("Testing abort before hunters can finish", true, testAbort(v));
 			
 			config = new VerschenknixAG.Config();
-			config.hunter1Duration = 40;
-			config.hunter2Duration = 40;
-			config.cookDuration = 60;
-			testresult = new TestResult(2, 0, 0, 0, 2, 0, 0, 0);
+			config.hunter1Count = 1;
+			config.hunter2Count = 1;
+			config.hunter1Duration = 1;
+			config.hunter2Duration = 1;
+			config.cookDuration = 100;
 			v = new VerschenknixAG(config);
-			test("Testing abort before cook can finish", true, testAbort(v, testresult));
+			test("Testing abort before cook can finish", true, testAbort(v));
 			
 			config = new VerschenknixAG.Config();
 			config.hunter1Duration = 1;
 			config.hunter2Duration = 1;
+			config.hunter1Count = 1;
+			config.hunter2Count = 1;
 			config.cookDuration = 1;
-			config.lumberjack1Duration = 60;
-			config.lumberjack2Duration = 60;
-			config.lumberjack3Duration = 60;
-			config.lumberjack4Duration = 60;
-			config.lumberjack5Duration = 60;
+			config.lumberjack1Duration = 100;
+			config.lumberjack2Duration = 100;
+			config.lumberjack3Duration = 100;
+			config.lumberjack4Duration = 100;
+			config.lumberjack5Duration = 100;
 			config.coldStorageCapacity = 50;
 			config.tableCapacity = 50;
 			config.quarryCapacity = 50;
-			testresult = new TestResult(5, 25, 0, 0, 0, 25, 0, 0);
 			v = new VerschenknixAG(config);
-			test("Testing abort before lumberjacks can finish", true, testAbort(v, testresult));
+			test("Testing abort before lumberjacks can finish", true, testAbort(v));
 			
 			config = new VerschenknixAG.Config();
 			config.hunter1Duration = 1;
 			config.hunter2Duration = 1;
 			config.cookDuration = 1;
+			config.hunter1Count = 1;
+			config.hunter2Count = 1;
 			config.lumberjack1Duration = 1;
 			config.lumberjack2Duration = 1;
 			config.lumberjack3Duration = 1;
@@ -256,11 +259,10 @@ public class Test {
 			config.coldStorageCapacity = 50;
 			config.tableCapacity = 50;
 			config.quarryCapacity = 50;
-			config.logistician1Duration = 60;
-			config.logistician2Duration = 60;
-			testresult = new TestResult(5, 25, 25, 0, 0, 0, 25, 0);
+			config.logistician1Duration = 100;
+			config.logistician2Duration = 100;
 			v = new VerschenknixAG(config);
-			test("Testing abort before logisticians can finish", true, testAbort(v, testresult));
+			test("Testing abort before logisticians can finish", true, testAbort(v));
 			
 			printSummary();
 		} catch (Exception e) {
@@ -277,10 +279,11 @@ public class Test {
 		return res.equals(tr);
 	}
 	
-	public static boolean testAbort(VerschenknixAG v, TestResult tr) {
+	public static boolean testAbort(VerschenknixAG v) {
 		v.simulateAbort(50);
 		TestResult res = summary2TestResult(v.getSummary());
-		return res.equals(tr);
+		int sum = res.coldstoragecount + (res.quarrycount + res.villagesquarecount + res.tablecount)/5;
+		return (sum == res.huntercombined);
 	}
 	
 	/**
