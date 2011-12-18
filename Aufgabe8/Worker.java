@@ -8,8 +8,7 @@ public abstract class Worker implements Runnable {
 	private Boolean quit = false;
 
 	public Worker(String name, int duration) {
-
-		if (duration < 1) {
+		if (duration < 1 || name == null) {
 			throw new IllegalArgumentException();
 		}
 
