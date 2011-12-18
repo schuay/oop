@@ -1,5 +1,6 @@
 public class Quarry extends Storage {
 
+	/* capacity > 1 */
 	public Quarry(int capacity) {
 		super(capacity);
 		if (capacity < 2) {

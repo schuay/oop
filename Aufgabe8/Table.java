@@ -1,5 +1,6 @@
 public class Table extends Storage {
 
+	/* capacity > 4 */
 	public Table(int capacity) {
 		super(capacity);
 		if (capacity < 5) {

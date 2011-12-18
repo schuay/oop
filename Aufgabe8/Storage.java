@@ -2,18 +2,18 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+/* Storage stores an amount (0 <= amount <= capacity)
+ * of some resource. */
 public abstract class Storage {
 
 	private final int capacity;
 	private int count = 0;
+	private int reserved = 0;
 	private final Set<Worker> workers =
 			Collections.synchronizedSet(new HashSet<Worker>());
 
-	/* These are the resources currently beeing worked on. */
-	private int reserved = 0;
-
+	/* Constructs a new storage with specified capacity (> 0). */
 	public Storage(int capacity) {
-
 		if (capacity < 1) {
 			throw new IllegalArgumentException();
 		}
@@ -21,18 +21,19 @@ public abstract class Storage {
 		this.capacity = capacity;
 	}
 
-	/* All workers need to be registered before threads are run. */
+	/* All workers (!= null) need to be registered before threads are run. */
 	public void registerWorker(Worker worker) {
 		workers.add(worker);
 	}
 
-	/* Workers must unregister once they are done with their workload. */
+	/* Workers (!= null) must unregister once they are done with their workload. */
 	public void unregisterWorker(Worker worker) {
 		Util.debug(String.format("%s: unregistering worker", getName()));
 		workers.remove(worker);
 		synchronized (this) { notifyAll(); }
 	}
 
+	/* Returns whether there are still active workers registered. */
 	private boolean workersDone() {
 		return workers.isEmpty();
 	}
@@ -78,6 +79,8 @@ public abstract class Storage {
 		return true;
 	}
 
+	/* Completes a transaction by removing the requested count (> 0)
+	 * from the requested set. */
 	public synchronized void transferDone(int count) throws InterruptedException {
 		if (count < 1) {
 			throw new IllegalArgumentException();
@@ -87,6 +90,7 @@ public abstract class Storage {
 		notifyAll();
 	}
 
+	/* Returns the specific name of the storage subtype. */
 	protected abstract String getName();
 
 	public String toString() {

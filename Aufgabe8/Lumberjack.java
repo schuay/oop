@@ -3,12 +3,20 @@ public class Lumberjack extends Worker {
 	private final Table orig;
 	private final Quarry dest;
 
+	/* Creates a lumberjack with the specified name, duration, origin and
+	 * destination storage areas.
+	 * name, orig, dest != null
+	 * duration > 0 */
 	public Lumberjack(String name, int duration, Table orig, Quarry dest) {
 		super(name, duration);
 		this.orig = orig;
 		this.dest = dest;
 	}
 
+	/* Take resources from orig, process them and place the results into
+	 * dest as long as we haven't been asked to terminate and orig can still
+	 * provide us with resources. Before exiting, unregister from dest.
+	 * On interruption, all resources are either in dest or orig. */
 	public void run() {
 		final int d = getDuration();
 		final int origCount = 1;

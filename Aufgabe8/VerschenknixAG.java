@@ -3,12 +3,15 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
+/* VerschenknixAG simulates resource production with a configurable
+ *  set of workers and storage areas. */
 public class VerschenknixAG {
 
 	private final Set<Worker> workers = new LinkedHashSet<Worker>();
 	private final Set<Storage> storage = new LinkedHashSet<Storage>();
 	private final Set<Thread> threads = new LinkedHashSet<Thread>();
 
+	/* Configuration options for the worker and storage sets. */
 	public static class Config {
 		public int hunter1Count = 2;
 		public int hunter1Duration = 5;
@@ -29,6 +32,7 @@ public class VerschenknixAG {
 		public int villageSquareCapacity = Integer.MAX_VALUE;
 	}
 
+	/* Sets up the worker and storage sets as specified by config (!= null). */
 	public VerschenknixAG(VerschenknixAG.Config config) {
 		if (config == null) {
 			throw new IllegalArgumentException();
@@ -98,12 +102,15 @@ public class VerschenknixAG {
 		}
 	}
 
+	/* Simulates a resource production run. */
 	public void simulate() {
 		simulateInternal();
 		joinAll();
 		Util.debug("All done.");
 	}
 
+	/* Simulates an interrupted resource production run of
+	 * a specific duration (> 0). */
 	public void simulateAbort(int duration) {
 		if (duration < 1) {
 			throw new IllegalArgumentException();
@@ -129,6 +136,7 @@ public class VerschenknixAG {
 		Util.debug("All done.");
 	}
 
+	/* Returns list of all worker and storage stati. */
 	public List<String> getSummary() {
 		List<String> l = new ArrayList<String>();
 
@@ -142,6 +150,7 @@ public class VerschenknixAG {
 		return l;
 	}
 
+	/* Prints list of all worker and storage stati to stdout. */
 	public void printSummary() {
 		for (String s : getSummary()) {
 			System.out.println(s.toString());
