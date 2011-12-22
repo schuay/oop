@@ -8,6 +8,7 @@ public abstract class Worker implements Runnable {
 	private int produced = 0;
 
 	private Boolean quit = false;
+	private final Object quitMonitor = new Object();
 
 	/* Creates a worker with name (!= null) and a
 	 * work duration (> 0). */
@@ -41,14 +42,14 @@ public abstract class Worker implements Runnable {
 
 	/* Returns whether termination has been requested. */
 	protected boolean getQuit() {
-		synchronized (quit) {
+		synchronized (quitMonitor) {
 			return quit;
 		}
 	}
 
 	/* Request worker termination. */
 	public void setQuit() {
-		synchronized (quit) {
+		synchronized (quitMonitor) {
 			quit = true;
 		}
 	}
