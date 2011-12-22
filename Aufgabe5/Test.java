@@ -62,11 +62,6 @@ public class Test {
 			return false;
 		}
 
-		String expected = "";
-		for (int i = 0; i < results.length; i++) {
-			expected += " " + results[i];
-		}
-		String got = "";
 		boolean error = false;
 		String[] fsteps = steps.split(" ");
 		try {
@@ -88,8 +83,6 @@ public class Test {
 						error = true;
 					}
 				}
-
-				got += " " + o;
 			}
 		} catch (Exception e) {
 			return false;
